@@ -1,12 +1,8 @@
 #pragma once
+#include <string>
 #include "UStruct.h"
 
-//
-// UnrealScript intrinsic return value declaration.
-//
-#define RESULT_DECL void*const Result
-typedef long long ScriptPointerType;
-
+class UObject;
 
 //
 // Information about script execution at one stack level.
@@ -41,6 +37,8 @@ struct FFrame
 	UObject* ReadObject();
 	INT ReadWord();
 
+	void Log(const std::string& str) const;
+
 	/**
 	* Reads a value from the bytestream, which represents the number of bytes to advance
 	* the code pointer for certain expressions.
@@ -67,5 +65,3 @@ struct FFrame
 
 /** The type of a native function callable by script */
 typedef void (UObject::*Native)(FFrame& TheStack, RESULT_DECL);
-
-Native GNatives[1000];

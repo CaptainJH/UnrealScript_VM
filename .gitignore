@@ -38,3 +38,4 @@
 *.db
 *.ilk
 UE3_VM/.vs/UE3_VM/v14/.suo
+*.opendb

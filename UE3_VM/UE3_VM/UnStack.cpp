@@ -1,4 +1,9 @@
+#include <iostream>
+#include <array>
 #include "UnStack.h"
+#include "UObject.h"
+
+std::array<Native, 1000> GNatives;
 
 FFrame::FFrame(UObject* InObject)
 	: Node(nullptr)
@@ -15,6 +20,11 @@ FFrame::FFrame(UObject* InObject, UStruct* InNode, INT CodeOffset, void* InLocal
 	, Locals((BYTE*)InLocals)
 	, PreviousFrame(InPreviousFrame)
 {}
+
+void FFrame::Log(const std::string& str) const
+{
+	std::cout << str << std::endl;
+}
 
 INT FFrame::ReadInt()
 {

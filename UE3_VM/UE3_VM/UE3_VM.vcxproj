@@ -143,9 +143,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="UnScript.cpp" />
     <ClCompile Include="UnStack.cpp" />
+    <ClCompile Include="UObject.cpp" />
+    <ClCompile Include="UStruct.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Types.h" />
+    <ClInclude Include="UnScript.h" />
     <ClInclude Include="UnStack.h" />
     <ClInclude Include="UObject.h" />
     <ClInclude Include="UStruct.h" />
