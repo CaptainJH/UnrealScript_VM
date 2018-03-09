@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+*.log
+*.tlog
+*.idb
+*.pdb
+*.filters
+*.db
+*.ilk
+UE3_VM/.vs/UE3_VM/v14/.suo
