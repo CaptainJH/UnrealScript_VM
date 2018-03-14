@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "UStruct.h"
+#include "ReflectionInfo.h"
 
 class UObject;
 

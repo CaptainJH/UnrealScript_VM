@@ -4,11 +4,19 @@ typedef unsigned char BYTE;
 typedef int	INT;
 typedef float FLOAT;
 
+typedef unsigned long       DWORD;
+typedef int                 BOOL;
+typedef unsigned short      WORD;
+typedef unsigned __int64	QWORD;		// 64-bit unsigned.
+typedef float               FLOAT;
+
+typedef WORD				CodeSkipSizeType;
+typedef	QWORD				ScriptPointerType;
+
 //
 // UnrealScript intrinsic return value declaration.
 //
 #define RESULT_DECL void*const Result
-typedef long long ScriptPointerType;
 
 enum { INDEX_NONE = -1 };
 

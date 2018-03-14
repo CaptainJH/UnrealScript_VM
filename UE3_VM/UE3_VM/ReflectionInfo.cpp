@@ -1,4 +1,4 @@
-#include "UStruct.h"
+#include "ReflectionInfo.h"
 
 void UProperty::CopyCompleteValue(void* Dest, void* Src)
 {

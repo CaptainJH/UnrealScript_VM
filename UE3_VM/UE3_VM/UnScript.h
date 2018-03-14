@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include "Types.h"
 #include "UnStack.h"
 
@@ -108,3 +109,28 @@ enum EExprToken
 };
 
 BYTE GRegisterNative(INT iNative, const Native& Func);
+
+std::vector<BYTE> ScriptSerialize(std::vector<BYTE>& scriptIn);
+
+class FName
+{
+public:
+	std::wstring text;
+};
+
+struct FScriptArchive
+{
+	FScriptArchive(std::vector<BYTE>& scriptIn);
+
+	FScriptArchive& operator<< (UObject*& obj);
+	FScriptArchive& operator<< (BYTE& b);
+	FScriptArchive& operator<< (WORD& w);
+	FScriptArchive& operator<< (INT& i);
+	FScriptArchive& operator<< (FLOAT& f);
+
+	std::vector<BYTE> script;
+
+	size_t pos = 0;
+
+	void Serialize(void* ptr, size_t size);
+};

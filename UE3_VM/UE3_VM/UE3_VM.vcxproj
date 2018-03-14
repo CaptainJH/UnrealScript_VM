@@ -146,14 +146,14 @@
     <ClCompile Include="UnScript.cpp" />
     <ClCompile Include="UnStack.cpp" />
     <ClCompile Include="UObject.cpp" />
-    <ClCompile Include="UStruct.cpp" />
+    <ClCompile Include="ReflectionInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Types.h" />
     <ClInclude Include="UnScript.h" />
     <ClInclude Include="UnStack.h" />
     <ClInclude Include="UObject.h" />
-    <ClInclude Include="UStruct.h" />
+    <ClInclude Include="ReflectionInfo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

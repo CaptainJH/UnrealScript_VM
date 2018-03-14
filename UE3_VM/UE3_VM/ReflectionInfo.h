@@ -8,14 +8,19 @@ class UField : public UObject
 
 };
 
-class UStruct : UField
+class UStruct : public UField
 {
 public:
 
 	std::vector<BYTE> Script;
 };
 
-class UProperty : UField
+class UClass : public UStruct
+{
+public:
+};
+
+class UProperty : public UField
 {
 public:
 
