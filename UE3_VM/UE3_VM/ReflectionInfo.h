@@ -12,6 +12,8 @@ class UStruct : public UField
 {
 public:
 
+	int PropertiesSize;
+	std::vector<BYTE> ScriptStorage;
 	std::vector<BYTE> Script;
 };
 
@@ -28,7 +30,18 @@ public:
 	INT ArrayDim;
 	INT ElementSize;
 
+	int PropertySize;
+
 	virtual void CopyCompleteValue(void* Dest, void* Src); 
 	virtual void DestroyValue(void* Dest) const;
 
+};
+
+class UFunction : public UStruct
+{
+public:
+	int NumParams;
+	int ParamSize;
+	int ReturnValueOffset;
+	int BytecodeScriptSize;
 };

@@ -13,6 +13,9 @@ extern UObject*		GPropObject;
 	extern "C" { Native int##cls##func = (Native)&cls::func; } \
 	static BYTE cls##func##Temp = GRegisterNative( num, int##cls##func );
 
+#define P_GET_INT(var)                     INT   var=0;                                            Stack.Step( Stack.Object, &var    );
+#define P_FINISH                           Stack.Code++;
+
 
 //////////////////////////////
 // Undefined native handler //
@@ -310,3 +313,13 @@ void UObject::execNoObject(FFrame& Stack, RESULT_DECL)
 	*(UObject**)Result = NULL;
 }
 IMPLEMENT_FUNCTION(UObject, EX_NoObject, execNoObject);
+
+void UObject::execAdd_IntInt(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_INT(A);
+	P_GET_INT(B);
+	P_FINISH;
+
+	*(INT*)Result = A + B;
+}
+IMPLEMENT_FUNCTION(UObject, 146, execAdd_IntInt);

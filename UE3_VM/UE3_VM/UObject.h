@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include "Types.h"
 
 
@@ -35,5 +36,9 @@ public:
 	DECLARE_FUNCTION(execTrue);
 	DECLARE_FUNCTION(execFalse);
 	DECLARE_FUNCTION(execNoObject);
+
+	DECLARE_FUNCTION(execAdd_IntInt);
+
+	std::string Name;
 	
 };

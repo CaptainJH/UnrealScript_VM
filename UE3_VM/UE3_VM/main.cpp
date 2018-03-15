@@ -6,6 +6,7 @@
 
 #include "UnStack.h"
 #include "UnScript.h"
+#include "Utils.h"
 
 std::vector<BYTE> ReadByteCode(const std::string& path, const std::string& symbol)
 {
@@ -46,18 +47,21 @@ int main()
 {
 	std::cout << "==============UE3_VM==============" << std::endl;
 
-	auto byteCode = ReadByteCode("D:\\Repo\\UnrealScript_VM\\UnrealScript_Wiki\\bytecode\\CompiledCode.txt", "HelloJHQ0");
+	//auto byteCode = ReadByteCode("D:\\Repo\\UnrealScript_VM\\UnrealScript_Wiki\\bytecode\\CompiledCode.txt", "HelloJHQ0");
 
-	UStruct ustruct;
-	ustruct.Script = byteCode;
-	UObject uobject;
-	void* temp = malloc(128);
-	FFrame stack(&uobject, &ustruct, 0, temp);
+	//UStruct ustruct;
+	//ustruct.Script = byteCode;
+	//UObject uobject;
+	//void* temp = malloc(128);
+	//FFrame stack(&uobject, &ustruct, 0, temp);
 
-	std::array<int, 1024> Buffer = { 0 };
-	while (*stack.Code != EX_Return)
-	{
-		stack.Step(stack.Object, &Buffer[0]);
-	}
-	++stack.Code;
+	//std::array<int, 1024> Buffer = { 0 };
+	//while (*stack.Code != EX_Return)
+	//{
+	//	stack.Step(stack.Object, &Buffer[0]);
+	//}
+	//++stack.Code;
+
+	ScriptRuntimeContext::LoadFromFile("D:\\Repo\\UnrealScript_VM\\UnrealScript_Wiki\\bytecode\\UnLinker_Export.txt");
+	ScriptRuntimeContext::Get()->RunFunction(1307);
 }

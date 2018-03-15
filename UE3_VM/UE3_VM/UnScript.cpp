@@ -1,7 +1,9 @@
 #include <array>
 #include <assert.h>
+#include <fstream>
 #include "UnScript.h"
 #include "UObject.h"
+#include "Utils.h"
 
 extern std::array<Native, 1000> GNatives;
 INT GNativeDuplicate = 0;
@@ -46,6 +48,34 @@ FScriptArchive& FScriptArchive::operator<<(UObject*& obj)
 	return *this;
 }
 
+FScriptArchive& FScriptArchive::operator<<(UClass*& cls)
+{
+	return *this;
+}
+
+FScriptArchive& FScriptArchive::operator<<(UProperty*& prop)
+{
+	INT Index;
+	FScriptArchive& Ar = *this;
+	Ar << Index;
+
+	UObject* Temporary = NULL;
+	Temporary = ScriptRuntimeContext::Get()->IndexToObject(Index);
+	memcpy(&prop, &Temporary, sizeof(UProperty*));
+
+	return *this;
+}
+
+FScriptArchive& FScriptArchive::operator<<(UStruct*& st)
+{
+	return *this;
+}
+
+FScriptArchive& FScriptArchive::operator<<(UField*& field)
+{
+	return *this;
+}
+
 FScriptArchive& FScriptArchive::operator<<(BYTE& b)
 {
 	Serialize(&b, sizeof(b));
@@ -77,13 +107,20 @@ void FScriptArchive::Serialize(void* ptr, size_t size)
 }
 
 BYTE* Script = nullptr;
+EExprToken SerializeExpr(INT& iCode, FScriptArchive& Ar);
 std::vector<BYTE> ScriptSerialize(std::vector<BYTE>& scriptIn)
 {
-	const auto BytecodeSize = scriptIn.size();
+	const auto BytecodeStorageSize = scriptIn.size();
+	size_t BytecodeSize = 36;
 	std::vector<BYTE> out(BytecodeSize);
 	Script = &out[0];
 	FScriptArchive Ar(scriptIn);
+
 	auto iCode = 0;
+	while (iCode < BytecodeSize)
+	{
+		SerializeExpr(iCode, Ar);
+	}
 
 	return out;
 }
@@ -538,4 +575,98 @@ EExprToken SerializeExpr(INT& iCode, FScriptArchive& Ar)
 	}
 
 	return Expr;
+}
+
+ScriptRuntimeContext* ScriptRuntimeContext::m_spContext = nullptr;
+ScriptRuntimeContext* ScriptRuntimeContext::Get()
+{
+	return m_spContext;
+}
+
+UObject* ScriptRuntimeContext::IndexToObject(INT index)
+{
+	return m_reflectionInfo[index];
+}
+
+void ScriptRuntimeContext::LoadFromFile(const std::string& path)
+{
+	const char sep = '|';
+	m_spContext = new ScriptRuntimeContext;
+
+	std::ifstream ifile(path);
+	std::string line;
+	while (std::getline(ifile, line))
+	{
+		size_t begin = 0;
+		auto str0 = StringSlice(line, sep, begin);
+		auto str1 = StringSlice(line, sep, begin);
+
+		UObject* obj = nullptr;
+
+		if (str0 == "IntProperty")
+		{
+			obj = new UProperty;
+			obj->Name = str1;
+
+			auto str2 = StringSlice(line, sep, begin);
+			auto str3 = StringSlice(line, sep, begin);
+			auto str4 = StringSlice(line, sep, begin);
+
+			UProperty* prop = static_cast<UProperty*>(obj);
+			prop->ArrayDim = std::stoi(str2);
+			prop->ElementSize = std::stoi(str3);
+			prop->Offset = std::stoi(str4);
+
+		}
+		else if (str0 == "Function")
+		{
+			obj = new UFunction;
+			obj->Name = str1;
+
+			UFunction* func = static_cast<UFunction*>(obj);
+			auto str2 = StringSlice(line, sep, begin);
+			auto str3 = StringSlice(line, sep, begin);
+			auto str4 = StringSlice(line, sep, begin);
+			auto str5 = StringSlice(line, sep, begin);
+
+			func->PropertiesSize = stoi(str2);
+			func->BytecodeScriptSize = stoi(str3);
+
+			const char sepSpace = ' ';
+			size_t p = 0;
+			while (p != str5.length())
+			{
+				auto s = StringSlice(str5, sepSpace, p);
+				func->ScriptStorage.push_back((BYTE)strtol(s.c_str(), NULL, 16));
+			}
+			
+		}
+		else
+		{
+			obj = new UObject;
+			obj->Name = str1;
+		}
+
+		m_spContext->m_reflectionInfo.push_back(obj);
+	}
+}
+
+void ScriptRuntimeContext::RunFunction(int index)
+{
+	auto obj = IndexToObject(index);
+	UFunction* func = static_cast<UFunction*>(obj);
+	func->Script = ScriptSerialize(func->ScriptStorage);
+
+	int result = 0;
+	UObject uobject;
+	std::vector<BYTE> stackLocal(func->PropertiesSize);
+	FFrame stack(&uobject, func, 0, &stackLocal[0]);
+
+	std::array<BYTE, 8> buffer;
+	while (*stack.Code != EX_Return)
+	{
+		stack.Step(stack.Object, &buffer[0]);
+	}
+	++stack.Code;
+	stack.Step(stack.Object, &result);
 }

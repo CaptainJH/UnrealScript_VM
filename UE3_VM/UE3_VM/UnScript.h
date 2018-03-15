@@ -122,15 +122,37 @@ struct FScriptArchive
 {
 	FScriptArchive(std::vector<BYTE>& scriptIn);
 
-	FScriptArchive& operator<< (UObject*& obj);
 	FScriptArchive& operator<< (BYTE& b);
 	FScriptArchive& operator<< (WORD& w);
 	FScriptArchive& operator<< (INT& i);
 	FScriptArchive& operator<< (FLOAT& f);
+
+	FScriptArchive& operator<< (UObject*& obj);
+	FScriptArchive& operator<< (UClass*& cls);
+	FScriptArchive& operator<< (UProperty*& prop);
+	FScriptArchive& operator<< (UStruct*& st);
+	FScriptArchive& operator<< (UField*& field);
 
 	std::vector<BYTE> script;
 
 	size_t pos = 0;
 
 	void Serialize(void* ptr, size_t size);
+};
+
+class ScriptRuntimeContext
+{
+public:
+
+	static void LoadFromFile(const std::string& path);
+	static ScriptRuntimeContext* Get();
+
+	UObject* IndexToObject(INT index);
+
+	void RunFunction(int index);
+
+private:
+	std::vector<UObject*> m_reflectionInfo;
+
+	static ScriptRuntimeContext* m_spContext;
 };
