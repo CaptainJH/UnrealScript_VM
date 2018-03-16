@@ -1,6 +1,7 @@
 #include <array>
 #include <assert.h>
 #include <fstream>
+#include <algorithm>
 #include "UnScript.h"
 #include "UObject.h"
 #include "Utils.h"
@@ -100,6 +101,21 @@ FScriptArchive& FScriptArchive::operator<<(FLOAT& f)
 	return *this;
 }
 
+FScriptArchive& FScriptArchive::operator<<(FName& name)
+{
+	int NameIndex;
+	FScriptArchive& Ar = *this;
+	Ar << NameIndex;
+
+	{
+		INT Number;
+		Ar << Number;
+		// simply create the name from the NameMap's name index and the serialized instance number
+		name = FName(NameIndex);
+	}
+	return *this;
+}
+
 void FScriptArchive::Serialize(void* ptr, size_t size)
 {
 	memcpy(ptr, &this->script[pos], size);
@@ -108,10 +124,9 @@ void FScriptArchive::Serialize(void* ptr, size_t size)
 
 BYTE* Script = nullptr;
 EExprToken SerializeExpr(INT& iCode, FScriptArchive& Ar);
-std::vector<BYTE> ScriptSerialize(std::vector<BYTE>& scriptIn)
+std::vector<BYTE> ScriptSerialize(std::vector<BYTE>& scriptIn, size_t BytecodeSize)
 {
 	const auto BytecodeStorageSize = scriptIn.size();
-	size_t BytecodeSize = 36;
 	std::vector<BYTE> out(BytecodeSize);
 	Script = &out[0];
 	FScriptArchive Ar(scriptIn);
@@ -140,7 +155,8 @@ std::vector<BYTE> ScriptSerialize(std::vector<BYTE>& scriptIn)
 	}
 #define XFER_PROP_POINTER	XFERPTR(UProperty*)
 #define XFER_FUNC_POINTER	XFERPTR(UStruct*)
-//#define XFERNAME() XFER(FName)
+#define XFERNAME() XFER(FName)
+#define XFER_FUNC_NAME		XFERNAME()
 
 EExprToken SerializeExpr(INT& iCode, FScriptArchive& Ar)
 {
@@ -258,8 +274,7 @@ EExprToken SerializeExpr(INT& iCode, FScriptArchive& Ar)
 	case EX_VirtualFunction:
 	case EX_GlobalFunction:
 	{
-		assert(false);
-		//XFER_FUNC_NAME;												// Virtual function name.
+		XFER_FUNC_NAME;												// Virtual function name.
 		while (SerializeExpr(iCode, Ar) != EX_EndFunctionParms);	// Parms.
 		//HANDLE_OPTIONAL_DEBUG_INFO;									//DEBUGGER
 		break;
@@ -585,7 +600,19 @@ ScriptRuntimeContext* ScriptRuntimeContext::Get()
 
 UObject* ScriptRuntimeContext::IndexToObject(INT index)
 {
-	return m_reflectionInfo[index];
+	return m_reflectionInfo[index - 1];
+}
+
+size_t ScriptRuntimeContext::FindIndex(std::string& name)
+{
+	auto it = std::find_if(m_reflectionInfo.begin(), m_reflectionInfo.end(), [name](UObject* obj) {
+		return name == obj->Name;
+	});
+
+	if (it == m_reflectionInfo.end())
+		return -1;
+	else
+		return it - m_reflectionInfo.begin() + 1;
 }
 
 void ScriptRuntimeContext::LoadFromFile(const std::string& path)
@@ -649,13 +676,54 @@ void ScriptRuntimeContext::LoadFromFile(const std::string& path)
 
 		m_spContext->m_reflectionInfo.push_back(obj);
 	}
+
+	// second pass
+	ifile.close();
+	ifile.open(path);
+	int index = 0;
+	while (std::getline(ifile, line))
+	{
+		size_t begin = 0;
+		auto str0 = StringSlice(line, sep, begin);
+		auto str1 = StringSlice(line, sep, begin);
+
+		UObject* obj = m_spContext->m_reflectionInfo[index++];
+
+		if (str0 == "IntProperty")
+		{
+			auto str2 = StringSlice(line, sep, begin);
+			auto str3 = StringSlice(line, sep, begin);
+			auto str4 = StringSlice(line, sep, begin);
+			auto next = StringSlice(line, sep, begin);
+
+			UObject* nextPtr = stoi(next) >= 0 ? m_spContext->m_reflectionInfo[stoi(next)] : nullptr;
+
+			UProperty* prop = static_cast<UProperty*>(obj);
+			prop->Next = (UField*)nextPtr;
+
+		}
+		else if (str0 == "Function")
+		{
+			UFunction* func = static_cast<UFunction*>(obj);
+			auto str2 = StringSlice(line, sep, begin);
+			auto str3 = StringSlice(line, sep, begin);
+			auto str4 = StringSlice(line, sep, begin);
+			auto str5 = StringSlice(line, sep, begin);
+			auto children = StringSlice(line, sep, begin);
+
+			UObject* nextPtr = stoi(children) >= 0 ? m_spContext->m_reflectionInfo[stoi(children)] : nullptr;
+
+			func->Children = (UStruct*)nextPtr;
+
+		}
+	}
 }
 
 void ScriptRuntimeContext::RunFunction(int index)
 {
 	auto obj = IndexToObject(index);
 	UFunction* func = static_cast<UFunction*>(obj);
-	func->Script = ScriptSerialize(func->ScriptStorage);
+	func->Script = ScriptSerialize(func->ScriptStorage, func->BytecodeScriptSize);
 
 	int result = 0;
 	UObject uobject;

@@ -143,6 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="UnName.cpp" />
     <ClCompile Include="UnScript.cpp" />
     <ClCompile Include="UnStack.cpp" />
     <ClCompile Include="UObject.cpp" />
@@ -151,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Types.h" />
+    <ClInclude Include="UnName.h" />
     <ClInclude Include="UnScript.h" />
     <ClInclude Include="UnStack.h" />
     <ClInclude Include="UObject.h" />

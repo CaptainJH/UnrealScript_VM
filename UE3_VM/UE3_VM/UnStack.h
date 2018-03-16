@@ -1,8 +1,19 @@
 #pragma once
 #include <string>
 #include "ReflectionInfo.h"
+#include "UnName.h"
 
 class UObject;
+
+//
+// Information remembered about an Out parameter.
+//
+struct FOutParmRec
+{
+	UProperty* Property;
+	BYTE*      PropAddr;
+	FOutParmRec* NextOutParm;
+};
 
 //
 // Information about script execution at one stack level.
@@ -18,7 +29,7 @@ struct FFrame
 	/** Previous frame on the stack */
 	FFrame* PreviousFrame;
 	/** contains information on any out parameters */
-	//FOutParmRec* OutParms;
+	FOutParmRec* OutParms;
 
 	// Constructors.
 	FFrame(UObject* InObject);
@@ -33,9 +44,13 @@ struct FFrame
 
 	INT ReadInt();
 	FLOAT ReadFloat();
-	//FName ReadName();
+	FName ReadName();
 	UObject* ReadObject();
 	INT ReadWord();
+
+	CodeSkipSizeType ReadCodeSkipCount();
+
+	VariableSizeType ReadVariableSize(UField** ExpressionField = NULL);
 
 	void Log(const std::string& str) const;
 

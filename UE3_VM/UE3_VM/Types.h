@@ -2,16 +2,22 @@
 
 typedef unsigned char BYTE;
 typedef int	INT;
+typedef unsigned int        UINT;
 typedef float FLOAT;
 
 typedef unsigned long       DWORD;
+typedef signed __int64		SQWORD;		// 64-bit signed.
 typedef int                 BOOL;
 typedef unsigned short      WORD;
 typedef unsigned __int64	QWORD;		// 64-bit unsigned.
 typedef float               FLOAT;
+typedef UINT				UBOOL;		// Boolean 0 (false) or 1 (true).
+typedef unsigned long       BITFIELD;	// For bitfields.
+typedef SQWORD				PTRINT;		// Integer large enough to hold a pointer.
 
 typedef WORD				CodeSkipSizeType;
 typedef	QWORD				ScriptPointerType;
+typedef WORD				VariableSizeType;
 
 //
 // UnrealScript intrinsic return value declaration.

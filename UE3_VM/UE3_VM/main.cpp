@@ -7,6 +7,7 @@
 #include "UnStack.h"
 #include "UnScript.h"
 #include "Utils.h"
+#include "UnName.h"
 
 std::vector<BYTE> ReadByteCode(const std::string& path, const std::string& symbol)
 {
@@ -63,5 +64,7 @@ int main()
 	//++stack.Code;
 
 	ScriptRuntimeContext::LoadFromFile("D:\\Repo\\UnrealScript_VM\\UnrealScript_Wiki\\bytecode\\UnLinker_Export.txt");
-	ScriptRuntimeContext::Get()->RunFunction(1307);
+	FName::LoadNames("D:\\Repo\\UnrealScript_VM\\UnrealScript_Wiki\\bytecode\\UnLinker_Name_Export.txt");
+	auto id = ScriptRuntimeContext::Get()->FindIndex(std::string("HelloJHQ0"));
+	ScriptRuntimeContext::Get()->RunFunction(id);
 }
