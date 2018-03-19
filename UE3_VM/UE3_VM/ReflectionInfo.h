@@ -29,6 +29,8 @@ public:
 class UClass : public UStruct
 {
 public:
+
+	INT GetDefaultsCount();
 };
 
 class UFunction : public UStruct
@@ -61,12 +63,14 @@ public:
 
 	INT GetSize() const;
 
+	virtual bool Identical(const void* A, const void* B, DWORD PortFlags = 0) const { return false; }
+
 };
 
 class UIntProperty : public UProperty
 {
 public:
-
+	bool Identical(const void* A, const void* B, DWORD PortFlags = 0) const override;
 };
 
 class UStrProperty : public UProperty
@@ -77,5 +81,19 @@ public:
 class UBoolProperty : public UProperty
 {
 public:
+	bool Identical(const void* A, const void* B, DWORD PortFlags = 0) const override;
+
 	BITFIELD BitMask;
+};
+
+class UArrayProperty : public UProperty
+{
+public:
+	UProperty* Inner;
+};
+
+class UStructProperty : public UProperty
+{
+public:
+
 };

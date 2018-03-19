@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FArray.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="UnName.cpp" />
     <ClCompile Include="UnScript.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FArray.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="UnName.h" />
     <ClInclude Include="UnScript.h" />

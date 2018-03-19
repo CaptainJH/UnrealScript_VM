@@ -10,6 +10,7 @@ class UFunction;
 class UObject
 {
 public:
+	virtual ~UObject() {}
 
 	// UnrealScript intrinsics.
 	#define DECLARE_FUNCTION(func) void func( FFrame& Stack, RESULT_DECL )
@@ -29,6 +30,11 @@ public:
 	DECLARE_FUNCTION(execReturnNothing);
 	DECLARE_FUNCTION(execAssert);
 	DECLARE_FUNCTION(execDynArrayElement);
+	DECLARE_FUNCTION(execDynArrayInsert);
+	DECLARE_FUNCTION(execDynArrayRemove);
+	DECLARE_FUNCTION(execDynArrayFind);
+	DECLARE_FUNCTION(execDynArrayAdd);
+	DECLARE_FUNCTION(execDynArrayIterator);
 
 	DECLARE_FUNCTION(execSelf);
 	DECLARE_FUNCTION(execContext);
@@ -42,6 +48,7 @@ public:
 	DECLARE_FUNCTION(execNothing);
 
 	DECLARE_FUNCTION(execLet);
+	DECLARE_FUNCTION(execLetBool);
 
 	DECLARE_FUNCTION(execEndFunctionParms);
 
@@ -81,8 +88,27 @@ public:
 
 	DECLARE_FUNCTION(execEndOfScript);
 
+	DECLARE_FUNCTION(execMultiply_IntInt);
+	DECLARE_FUNCTION(execDivide_IntInt);
+	DECLARE_FUNCTION(execPercent_IntInt);
 	DECLARE_FUNCTION(execAdd_IntInt);
+	DECLARE_FUNCTION(execSubtract_IntInt);
+	DECLARE_FUNCTION(execLessLess_IntInt);
+	DECLARE_FUNCTION(execGreaterGreater_IntInt);
+	DECLARE_FUNCTION(execGreaterGreaterGreater_IntInt);
+	DECLARE_FUNCTION(execLess_IntInt);
 	DECLARE_FUNCTION(execGreater_IntInt);
+	DECLARE_FUNCTION(execLessEqual_IntInt);
+	DECLARE_FUNCTION(execGreaterEqual_IntInt);
+	DECLARE_FUNCTION(execEqualEqual_IntInt);
+	DECLARE_FUNCTION(execNotEqual_IntInt);
+	DECLARE_FUNCTION(execAnd_IntInt);
+	DECLARE_FUNCTION(execXor_IntInt);
+	DECLARE_FUNCTION(execOr_IntInt);
+	//DECLARE_FUNCTION(execMultiplyEqual_IntFloat);
+	//DECLARE_FUNCTION(execDivideEqual_IntFloat);
+	DECLARE_FUNCTION(execAddEqual_IntInt);
+	DECLARE_FUNCTION(execSubtractEqual_IntInt);
 
 	void CallFunction(FFrame& Stack, RESULT_DECL, UFunction* Function); 
 	UFunction* FindFunction(FName& name);

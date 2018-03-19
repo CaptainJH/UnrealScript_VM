@@ -2,6 +2,7 @@
 #include "UnScript.h"
 #include "Utils.h"
 #include "UnName.h"
+#include "FArray.h"
 #include <assert.h>
 #include <iostream>
 #include <array>
@@ -21,7 +22,32 @@ extern std::array<Native, 1000> GNatives;
 #define P_GET_INT(var)                     INT   var=0;                                            Stack.Step( Stack.Object, &var    );
 #define P_GET_NAME(var)                    FName var(-1);											Stack.Step( Stack.Object, &var    );
 #define P_FINISH                           Stack.Code++;
+#define P_GET_INT_REF(var)                 INT   var##T=0; GPropAddr=0;                            Stack.Step( Stack.Object, &var##T ); INT*     p##var = (INT    *)GPropAddr; INT&     var = GPropAddr ? *(INT    *)GPropAddr:var##T;
 
+//
+// Iterator macros.
+//
+#define PRE_ITERATOR \
+	INT wEndOffset = Stack.ReadWord(); \
+	BYTE B=0; \
+	DWORD Buffer[16]; \
+	BYTE *StartCode = Stack.Code; \
+	do {
+#define POST_ITERATOR \
+		while( (B=*Stack.Code)!=EX_IteratorPop && B!=EX_IteratorNext ) \
+			Stack.Step( Stack.Object, Buffer ); \
+		if( *Stack.Code++==EX_IteratorNext ) \
+			Stack.Code = StartCode; \
+	} while( B != EX_IteratorPop );
+
+// Exits an iterator within PRE/POST_ITERATOR
+#define EXIT_ITERATOR \
+	Stack.Code = &Stack.Node->Script[wEndOffset + 1];
+
+// Skips iterator execution, without PRE/POST_ITERATOR
+#define SKIP_ITERATOR \
+	INT wEndOffset = Stack.ReadWord(); \
+	Stack.Code = &Stack.Node->Script(wEndOffset + 1);
 
 //////////////////////////////
 // Undefined native handler //
@@ -125,6 +151,329 @@ void UObject::execNameConst(FFrame& Stack, RESULT_DECL)
 }
 IMPLEMENT_FUNCTION(UObject, EX_NameConst, execNameConst);
 
+void UObject::execDynArrayElement(FFrame& Stack, RESULT_DECL)
+{
+	// Get array index expression.
+	INT Index = 0;
+	Stack.Step(Stack.Object, &Index);
+
+	GProperty = NULL;
+	Stack.Step(this, NULL);
+	GPropObject = this;
+
+	// Add scaled offset to base pointer.
+	if (GProperty && GPropAddr)
+	{
+		UArrayProperty* ArrayProp = (UArrayProperty*)(GProperty);
+		assert(ArrayProp);
+
+		FScriptArray* Array = (FScriptArray*)GPropAddr;
+		if (Index >= Array->Num() || Index<0)
+		{
+			//if we are returning a value, check for out-of-bounds
+			if (Result || Index < 0)
+			{
+				GPropAddr = 0;
+				GPropObject = NULL;
+				if (Result)
+				{
+					memset(Result, 0, ArrayProp->Inner->ElementSize);
+				}
+
+				return;
+			}
+			//INT OrigSize = Array->Num();
+			//INT Count = Index - OrigSize + 1;
+			//Array->AddZeroed(Count, ArrayProp->Inner->ElementSize);
+
+			//// if this is an array of structs, and the struct has defaults, propagate those now
+			//UStructProperty* StructInner = dynamic_cast<UStructProperty*>(ArrayProp->Inner);
+			//if (StructInner && StructInner->Struct->GetDefaultsCount())
+			//{
+			//	// no need to initialize the element at Index, since this element is being assigned a new value in the next step
+			//	for (INT i = OrigSize; i < Index; i++)
+			//	{
+			//		BYTE* Dest = (BYTE*)Array->GetData() + i * ArrayProp->Inner->ElementSize;
+			//		StructInner->InitializeValue(Dest);
+			//	}
+			//}
+		}
+
+		GPropAddr = (BYTE*)Array->GetData() + Index * ArrayProp->Inner->ElementSize;
+
+		// Add scaled offset to base pointer.
+		if (Result)
+		{
+			ArrayProp->Inner->CopySingleValue(Result, GPropAddr);
+		}
+	}
+}
+IMPLEMENT_FUNCTION(UObject, EX_DynArrayElement, execDynArrayElement);
+
+void UObject::execDynArrayInsert(FFrame& Stack, RESULT_DECL)
+{
+	GPropObject = this;
+	GProperty = NULL;
+	Stack.Step(this, NULL);
+	UArrayProperty* ArrayProperty = dynamic_cast<UArrayProperty*>(GProperty);
+	FScriptArray* Array = (FScriptArray*)GPropAddr;
+
+	P_GET_INT(Index);
+	P_GET_INT(Count);
+	P_FINISH;
+	if (Array && Count)
+	{
+		assert(ArrayProperty);
+		if (Count < 0)
+		{		
+			return;
+		}
+		if (Index < 0 || Index > Array->Num())
+		{
+			Index = Clamp(Index, 0, Array->Num());
+		}
+		Array->InsertZeroed(Index, Count, ArrayProperty->Inner->ElementSize);
+
+		// if this is an array of structs, and the struct has defaults, propagate those now
+		//UStructProperty* StructInner = dynamic_cast<UStructProperty*>(ArrayProperty->Inner);
+		//if (StructInner && StructInner->Struct->GetDefaultsCount())
+		//{
+		//	for (INT i = Index; i < Index + Count; i++)
+		//	{
+		//		BYTE* Dest = (BYTE*)Array->GetData() + i * ArrayProperty->Inner->ElementSize;
+		//		StructInner->InitializeValue(Dest);
+		//	}
+		//}
+	}
+}
+IMPLEMENT_FUNCTION(UObject, EX_DynArrayInsert, execDynArrayInsert);
+
+void UObject::execDynArrayRemove(FFrame& Stack, RESULT_DECL)
+{
+	GProperty = NULL;
+	GPropObject = this;
+	Stack.Step(this, NULL);
+	UArrayProperty* ArrayProperty = dynamic_cast<UArrayProperty*>(GProperty);
+	FScriptArray* Array = (FScriptArray*)GPropAddr;
+
+	P_GET_INT(Index);
+	P_GET_INT(Count);
+	P_FINISH;
+	if (Array && Count)
+	{
+		assert(ArrayProperty);
+		if (Count < 0)
+		{
+			return;
+		}
+		if (Index < 0 || Index >= Array->Num() || Index + Count > Array->Num())
+		{
+			Index = Clamp(Index, 0, Array->Num());
+			if (Index + Count > Array->Num())
+				Count = Array->Num() - Index;
+		}
+
+		for (INT i = Index + Count - 1; i >= Index; i--)
+		{
+			ArrayProperty->Inner->DestroyValue((BYTE*)Array->GetData() + ArrayProperty->Inner->ElementSize*i);
+		}
+		Array->Remove(Index, Count, ArrayProperty->Inner->ElementSize);
+	}
+}
+IMPLEMENT_FUNCTION(UObject, EX_DynArrayRemove, execDynArrayRemove);
+
+void UObject::execDynArrayFind(FFrame& Stack, RESULT_DECL)
+{
+	// the script compiler doesn't allow calling Find on a dynamic array unless it's being assigned to something, so we should _always_ have a Result buffer
+	assert(Result);
+
+	GProperty = NULL;
+	GPropAddr = NULL;
+	GPropObject = this;
+
+	// read the array property off of the stack; if the array is being accessed through a NULL context, we'll just skip past the
+	// bytecodes corresponding to the expressions for the parameters of the 'find'
+	Stack.Step(this, NULL);
+
+	// if GPropAddr is NULL, we weren't able to read a valid property address from the stream, which should mean that we evaluted a NULL
+	// context expression (accessed none)
+	if (GPropAddr != NULL)
+	{
+		// advance past the word used to hold the skip offset - we won't need it
+		Stack.Code += sizeof(CodeSkipSizeType);
+
+		// got it
+		UArrayProperty* ArrayProp = dynamic_cast<UArrayProperty*>(GProperty);
+		assert(ArrayProp);
+
+		FScriptArray* Array = (FScriptArray*)GPropAddr;
+
+		// figure out what type to read off the stack
+		UProperty *InnerProp = ArrayProp->Inner;
+		assert(InnerProp != NULL);
+
+		// evaluate the value that we should search for, store it in SearchItem
+		BYTE *SearchItem = (BYTE*)malloc(InnerProp->ElementSize);
+		memset(SearchItem, 0, InnerProp->ElementSize);
+		Stack.Step(Stack.Object, SearchItem);
+		P_FINISH;
+		// for bools, we need to convert the SearchItem to match the property's BitMask so Identical() works as expected
+		if (dynamic_cast<UBoolProperty*>(InnerProp) && *(BITFIELD*)SearchItem != 0)
+		{
+			*(BITFIELD*)SearchItem = ((UBoolProperty*)InnerProp)->BitMask;
+		}
+
+		// compare against each element in the array
+		INT ResultIndex = INDEX_NONE;
+		for (INT Idx = 0; Idx < Array->Num() && ResultIndex == INDEX_NONE; Idx++)
+		{
+			BYTE *CheckItem = ((BYTE*)Array->GetData() + (Idx * InnerProp->ElementSize));
+			if (InnerProp->Identical(SearchItem, CheckItem))
+			{
+				ResultIndex = Idx;
+			}
+		}
+
+		//if (InnerProp->HasAnyPropertyFlags(CPF_NeedCtorLink))
+		//{
+		//	InnerProp->DestroyValue(SearchItem);
+		//}
+
+		// assign the resulting index
+		*(INT*)Result = ResultIndex;
+	}
+	else
+	{
+		// accessed none while trying to evaluate the address of the array - skip over the parameter expression bytecodes
+		CodeSkipSizeType NumBytesToSkip = Stack.ReadCodeSkipCount();
+		Stack.Code += NumBytesToSkip;
+
+		// set the return value to the expected "invalid" value
+		*(INT*)Result = INDEX_NONE;
+	}
+}
+IMPLEMENT_FUNCTION(UObject, EX_DynArrayFind, execDynArrayFind);
+
+void UObject::execDynArrayAdd(FFrame& Stack, RESULT_DECL)
+{
+	GProperty = NULL;
+	GPropObject = this;
+	Stack.Step(this, NULL);
+	UArrayProperty* ArrayProperty = dynamic_cast<UArrayProperty*>(GProperty);
+	FScriptArray* Array = (FScriptArray*)GPropAddr;
+
+	P_GET_INT(Count);
+	P_FINISH;
+	if (Array && Count)
+	{
+		assert(ArrayProperty);
+		if (Count < 0)
+		{
+			//Stack.Logf(TEXT("Attempt to add a negative number of elements '%s'"), *ArrayProperty->GetName());
+			return;
+		}
+		INT Index = Array->AddZeroed(Count, ArrayProperty->Inner->ElementSize);
+
+		// if this is an array of structs, and the struct has defaults, propagate those now
+		//UStructProperty* StructInner = dynamic_cast<UStructProperty*>(ArrayProperty->Inner);
+		//if (StructInner && StructInner->Struct->GetDefaultsCount())
+		//{
+		//	for (INT i = Index; i < Index + Count; i++)
+		//	{
+		//		BYTE* Dest = (BYTE*)Array->GetData() + i * ArrayProperty->Inner->ElementSize;
+		//		StructInner->InitializeValue(Dest);
+		//	}
+		//}
+		// set the return as the index of the first added
+		*(INT*)Result = Index;
+	}
+}
+IMPLEMENT_FUNCTION(UObject, EX_DynArrayAdd, execDynArrayAdd);
+
+
+void UObject::execDynArrayIterator(FFrame& Stack, RESULT_DECL)
+{
+	// grab the array
+	GPropObject = this;
+	GProperty = NULL;
+	Stack.Step(this, NULL);
+	// if we accessed None in the executed expression, execContext() will skip to the end of the iterator block
+	// so we can simply return from here
+	if (GProperty == NULL)
+	{
+		return;
+	}
+	
+	UArrayProperty* ArrayProperty = (UArrayProperty*)GProperty;
+	FScriptArray* Array = (FScriptArray*)GPropAddr;
+	UProperty* InnerProperty = ArrayProperty->Inner;
+
+	// grab the out item
+	Stack.Step(this, NULL);
+	UProperty* ItemProperty = GProperty;
+	BYTE* ItemPropAddr = GPropAddr;
+
+	// see if an index was specified
+	BYTE IndexByte = *(BYTE*)Stack.Code;
+	Stack.Code += sizeof(BYTE);
+
+	// serialize the index expression
+	GProperty = NULL;
+	GPropAddr = NULL;
+	Stack.Step(this, NULL);
+	// and grab the property, will quite possibly be null
+	UProperty* IndexProperty = GProperty;
+	BYTE* IndexPropAddr = GPropAddr;
+
+	// should the iterator skip null items?  currently only for object properties 
+	const UBOOL bSkipNullItems = false;//InnerProperty->IsA(UObjectProperty::StaticClass());
+
+	INT Index = 0;
+	PRE_ITERATOR;
+	if (bSkipNullItems)
+	{
+		// iterate till we find a valid value
+		*(UObject**)ItemPropAddr = NULL;
+		while (*(UObject**)ItemPropAddr == NULL && Index < Array->Num())
+		{
+			InnerProperty->CopySingleValue(ItemPropAddr, ((BYTE*)Array->GetData() + (Index * InnerProperty->ElementSize)));
+			// if there is an index property then assign the current index
+			if (IndexProperty != NULL)
+			{
+				IndexProperty->CopySingleValue(IndexPropAddr, &Index);
+			}
+			Index++;
+		}
+		// if we don't have a valid value then exit the iterator
+		if (*(UObject**)ItemPropAddr == NULL)
+		{
+			EXIT_ITERATOR;
+			break;
+		}
+	}
+	else
+	{
+		// otherwise iterate to the end of the array
+		if (Index < Array->Num())
+		{
+			InnerProperty->CopySingleValue(ItemPropAddr, ((BYTE*)Array->GetData() + (Index * InnerProperty->ElementSize)));
+			// if there is an index property then assign the current index
+			if (IndexProperty != NULL)
+			{
+				IndexProperty->CopySingleValue(IndexPropAddr, &Index);
+			}
+			Index++;
+		}
+		else
+		{
+			EXIT_ITERATOR;
+			break;
+		}
+	}
+	POST_ITERATOR;
+}
+IMPLEMENT_FUNCTION(UObject, EX_DynArrayIterator, execDynArrayIterator);
+
 //////////////
 // Commands //
 //////////////
@@ -143,7 +492,7 @@ void UObject::execSwitch(FFrame& Stack, RESULT_DECL)
 	VariableSizeType bSize = Stack.ReadVariableSize(&ExpressionField);
 	if (bSize == 0)
 	{
-		if (static_cast<UIntProperty*>(ExpressionField) != NULL)
+		if (dynamic_cast<UIntProperty*>(ExpressionField) != NULL)
 		{
 			// DynamicArray.Length
 			bSize = sizeof(INT);
@@ -159,7 +508,7 @@ void UObject::execSwitch(FFrame& Stack, RESULT_DECL)
 	memset(SwitchBuffer, 0, sizeof(1024));
 	Stack.Step(Stack.Object, SwitchBuffer);
 
-	UStrProperty* StringProp = static_cast<UStrProperty*>(ExpressionField);
+	UStrProperty* StringProp = dynamic_cast<UStrProperty*>(ExpressionField);
 
 	// Check each case clause till we find a match.
 	for (; ; )
@@ -282,79 +631,6 @@ void UObject::execAssert(FFrame& Stack, RESULT_DECL)
 IMPLEMENT_FUNCTION(UObject, EX_Assert, execAssert);
 
 
-void UObject::execDynArrayElement(FFrame& Stack, RESULT_DECL)
-{
-	//// Get array index expression.
-	//INT Index = 0;
-	//Stack.Step(Stack.Object, &Index);
-
-	//GProperty = NULL;
-	//Stack.Step(this, NULL);
-	//GPropObject = this;
-
-	//// Add scaled offset to base pointer.
-	//if (GProperty && GPropAddr)
-	//{
-	//	UArrayProperty* ArrayProp = (UArrayProperty*)(GProperty);
-	//	assert(ArrayProp);
-
-	//	FScriptArray* Array = (FScriptArray*)GPropAddr;
-	//	if (Index >= Array->Num() || Index<0)
-	//	{
-	//		//if we are returning a value, check for out-of-bounds
-	//		if (Result || Index < 0 || (GRuntimeUCFlags & RUC_NeverExpandDynArray))
-	//		{
-	//			if (ArrayProp->GetOuter()->GetClass() == UFunction::StaticClass())
-	//			{
-	//				//Stack.Logf(NAME_Error, TEXT("Accessed array '%s' out of bounds (%i/%i)"), *ArrayProp->GetName(), Index, Array->Num());
-	//			}
-	//			else
-	//			{
-	//				//Stack.Logf(NAME_Error, TEXT("Accessed array '%s.%s' out of bounds (%i/%i)"), *GetName(), *ArrayProp->GetName(), Index, Array->Num());
-	//			}
-	//			GPropAddr = 0;
-	//			GPropObject = NULL;
-	//			if (Result)
-	//			{
-	//				memset(Result, 0, ArrayProp->Inner->ElementSize);
-	//			}
-
-	//			return;
-	//		}
-
-	//		//if we are setting a value, allow the array to be resized
-	//		else
-	//		{
-	//			INT OrigSize = Array->Num();
-	//			INT Count = Index - OrigSize + 1;
-	//			Array->AddZeroed(Count, ArrayProp->Inner->ElementSize);
-
-	//			// if this is an array of structs, and the struct has defaults, propagate those now
-	//			UStructProperty* StructInner = Cast<UStructProperty>(ArrayProp->Inner, CLASS_IsAUStructProperty);
-	//			if (StructInner && StructInner->Struct->GetDefaultsCount())
-	//			{
-	//				// no need to initialize the element at Index, since this element is being assigned a new value in the next step
-	//				for (INT i = OrigSize; i < Index; i++)
-	//				{
-	//					BYTE* Dest = (BYTE*)Array->GetData() + i * ArrayProp->Inner->ElementSize;
-	//					StructInner->InitializeValue(Dest);
-	//				}
-	//			}
-	//		}
-	//	}
-
-	//	GPropAddr = (BYTE*)Array->GetData() + Index * ArrayProp->Inner->ElementSize;
-
-	//	// Add scaled offset to base pointer.
-	//	if (Result)
-	//	{
-	//		ArrayProp->Inner->CopySingleValue(Result, GPropAddr);
-	//	}
-	//}
-}
-IMPLEMENT_FUNCTION(UObject, EX_DynArrayElement, execDynArrayElement);
-
-
 ////////////////
 // Assignment //
 ////////////////
@@ -409,6 +685,64 @@ void UObject::execLet(FFrame& Stack, RESULT_DECL)
 		Stack.Step(Stack.Object, GPropAddr); // Evaluate expression into variable.
 }
 IMPLEMENT_FUNCTION(UObject, EX_Let, execLet);
+
+void UObject::execLetBool(FFrame& Stack, RESULT_DECL)
+{
+	GPropAddr = NULL;
+	GProperty = NULL;
+	GPropObject = NULL;
+
+	// Get the variable and address to place the data.
+	Stack.Step(Stack.Object, NULL);
+
+	/*
+	Class bool properties are packed together as bitfields, so in order
+	to set the value on the correct bool, we need to mask it against
+	the bool property's BitMask.
+
+	Local bool properties (declared inside functions) are not packed, thus
+	their bitmask is always 1.
+
+	Bool properties inside dynamic arrays and tmaps are also not packed together.
+	If the bool property we're accessing is an element in a dynamic array, GProperty
+	will be pointing to the dynamic array that has a UBoolProperty as its inner, so
+	we'll need to check for that.
+	*/
+	BITFIELD*      BoolAddr = (BITFIELD*)GPropAddr;
+	UBoolProperty* BoolProperty = dynamic_cast<UBoolProperty*>(GProperty);
+	if (BoolProperty == NULL)
+	{
+		assert(false);
+		//UArrayProperty* ArrayProp = ExactCast<UArrayProperty>(GProperty);
+		//if (ArrayProp != NULL)
+		//{
+		//	BoolProperty = ExactCast<UBoolProperty>(ArrayProp->Inner);
+		//}
+		/* @todo tmaps
+		else
+		{
+		UMapProperty* MapProp = ExactCast<UMapProperty>(GProperty);
+		}
+		*/
+	}
+
+	INT NewValue = 0;  // must be INT...execTrue/execFalse return 32 bits. --ryan.
+
+	// evaluate the r-value for this expression into Value
+	Stack.Step(Stack.Object, &NewValue);
+	if (BoolAddr)
+	{
+		if (NewValue)
+		{
+			*BoolAddr |= BoolProperty->BitMask;
+		}
+		else
+		{
+			*BoolAddr &= ~BoolProperty->BitMask;
+		}
+	}
+}
+IMPLEMENT_FUNCTION(UObject, EX_LetBool, execLetBool);
 
 void UObject::execEndFunctionParms(FFrame& Stack, RESULT_DECL)
 {
@@ -999,6 +1333,198 @@ void UObject::execGreater_IntInt(FFrame& Stack, RESULT_DECL)
 	*(DWORD*)Result = A > B;
 }
 IMPLEMENT_FUNCTION(UObject, 151, execGreater_IntInt);
+
+void UObject::execMultiply_IntInt(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_INT(A);
+	P_GET_INT(B);
+	P_FINISH;
+
+	*(INT*)Result = A * B;
+}
+IMPLEMENT_FUNCTION(UObject, 144, execMultiply_IntInt);
+
+void UObject::execDivide_IntInt(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_INT(A);
+	P_GET_INT(B);
+	P_FINISH;
+
+	if (B == 0)
+	{
+		assert(false);
+		//Stack.Logf(NAME_ScriptWarning, TEXT("Divide by zero"));
+	}
+
+	*(INT*)Result = B ? A / B : 0;
+}
+IMPLEMENT_FUNCTION(UObject, 145, execDivide_IntInt);
+
+void UObject::execPercent_IntInt(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_INT(A);
+	P_GET_INT(B);
+	P_FINISH;
+
+	if (B == 0)
+	{
+		assert(false);
+		//Stack.Logf(NAME_ScriptWarning, TEXT("Modulo by zero"));
+	}
+
+	*(INT*)Result = (B != 0) ? (A % B) : 0;
+}
+IMPLEMENT_FUNCTION(UObject, 253, execPercent_IntInt);
+
+void UObject::execSubtract_IntInt(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_INT(A);
+	P_GET_INT(B);
+	P_FINISH;
+
+	*(INT*)Result = A - B;
+}
+IMPLEMENT_FUNCTION(UObject, 147, execSubtract_IntInt);
+
+void UObject::execLessLess_IntInt(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_INT(A);
+	P_GET_INT(B);
+	P_FINISH;
+
+	*(INT*)Result = A << B;
+}
+IMPLEMENT_FUNCTION(UObject, 148, execLessLess_IntInt);
+
+void UObject::execGreaterGreater_IntInt(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_INT(A);
+	P_GET_INT(B);
+	P_FINISH;
+
+	*(INT*)Result = A >> B;
+}
+IMPLEMENT_FUNCTION(UObject, 149, execGreaterGreater_IntInt);
+
+void UObject::execLess_IntInt(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_INT(A);
+	P_GET_INT(B);
+	P_FINISH;
+
+	*(DWORD*)Result = A < B;
+}
+IMPLEMENT_FUNCTION(UObject, 150, execLess_IntInt);
+
+void UObject::execLessEqual_IntInt(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_INT(A);
+	P_GET_INT(B);
+	P_FINISH;
+
+	*(DWORD*)Result = A <= B;
+}
+IMPLEMENT_FUNCTION(UObject, 152, execLessEqual_IntInt);
+
+void UObject::execGreaterEqual_IntInt(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_INT(A);
+	P_GET_INT(B);
+	P_FINISH;
+
+	*(DWORD*)Result = A >= B;
+}
+IMPLEMENT_FUNCTION(UObject, 153, execGreaterEqual_IntInt);
+
+void UObject::execEqualEqual_IntInt(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_INT(A);
+	P_GET_INT(B);
+	P_FINISH;
+
+	*(DWORD*)Result = A == B;
+}
+IMPLEMENT_FUNCTION(UObject, 154, execEqualEqual_IntInt);
+
+void UObject::execNotEqual_IntInt(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_INT(A);
+	P_GET_INT(B);
+	P_FINISH;
+
+	*(DWORD*)Result = A != B;
+}
+IMPLEMENT_FUNCTION(UObject, 155, execNotEqual_IntInt);
+
+void UObject::execAnd_IntInt(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_INT(A);
+	P_GET_INT(B);
+	P_FINISH;
+
+	*(INT*)Result = A & B;
+}
+IMPLEMENT_FUNCTION(UObject, 156, execAnd_IntInt);
+
+void UObject::execXor_IntInt(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_INT(A);
+	P_GET_INT(B);
+	P_FINISH;
+
+	*(INT*)Result = A ^ B;
+}
+IMPLEMENT_FUNCTION(UObject, 157, execXor_IntInt);
+
+void UObject::execOr_IntInt(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_INT(A);
+	P_GET_INT(B);
+	P_FINISH;
+
+	*(INT*)Result = A | B;
+}
+IMPLEMENT_FUNCTION(UObject, 158, execOr_IntInt);
+
+//void UObject::execMultiplyEqual_IntFloat(FFrame& Stack, RESULT_DECL)
+//{
+//	P_GET_INT_REF(A);
+//	P_GET_FLOAT(B);
+//	P_FINISH;
+//
+//	*(INT*)Result = A = appTrunc(A * B);
+//}
+//IMPLEMENT_FUNCTION(UObject, 159, execMultiplyEqual_IntFloat);
+
+//void UObject::execDivideEqual_IntFloat(FFrame& Stack, RESULT_DECL)
+//{
+//	P_GET_INT_REF(A);
+//	P_GET_FLOAT(B);
+//	P_FINISH;
+//
+//	*(INT*)Result = A = appTrunc(B ? A / B : 0.f);
+//}
+//IMPLEMENT_FUNCTION(UObject, 160, execDivideEqual_IntFloat);
+
+void UObject::execAddEqual_IntInt(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_INT_REF(A);
+	P_GET_INT(B);
+	P_FINISH;
+
+	*(INT*)Result = (A += B);
+}
+IMPLEMENT_FUNCTION(UObject, 161, execAddEqual_IntInt);
+
+void UObject::execSubtractEqual_IntInt(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_INT_REF(A);
+	P_GET_INT(B);
+	P_FINISH;
+
+	*(INT*)Result = (A -= B);
+}
+IMPLEMENT_FUNCTION(UObject, 162, execSubtractEqual_IntInt);
 
 void UObject::CallFunction(FFrame& Stack, RESULT_DECL, UFunction* Function)
 {

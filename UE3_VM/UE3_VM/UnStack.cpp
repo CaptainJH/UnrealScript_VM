@@ -85,21 +85,21 @@ VariableSizeType FFrame::ReadVariableSize(UField** ExpressionField/*=NULL*/)
 
 	if (Field != NULL)
 	{
-		UProperty* Property = static_cast<UProperty*>(Field);
+		UProperty* Property = dynamic_cast<UProperty*>(Field);
 		if (Property != NULL)
 		{
 			Result = Property->GetSize();
 		}
 		else
 		{
-			UEnum* ExplicitEnumValue = static_cast<UEnum*>(Field);
+			UEnum* ExplicitEnumValue = dynamic_cast<UEnum*>(Field);
 			if (ExplicitEnumValue != NULL)
 			{
 				Result = 1;
 			}
 			else
 			{
-				UFunction* FunctionRef = static_cast<UFunction*>(Field);
+				UFunction* FunctionRef = dynamic_cast<UFunction*>(Field);
 				if (FunctionRef != NULL)
 				{
 					Result = sizeof(ScriptPointerType);
@@ -122,8 +122,8 @@ VariableSizeType FFrame::ReadVariableSize(UField** ExpressionField/*=NULL*/)
 			break;
 		case CPT_Float:		Result = sizeof(FLOAT);
 			break;
-		//case CPT_Name:		Result = sizeof(FName);
-		//	break;
+		case CPT_Name:		Result = sizeof(FName);
+			break;
 		//case CPT_Vector:	Result = sizeof(FVector);
 		//	break;
 		//case CPT_Rotation:	Result = sizeof(FRotator);
@@ -139,7 +139,7 @@ VariableSizeType FFrame::ReadVariableSize(UField** ExpressionField/*=NULL*/)
 
 	if (ExpressionField != NULL)
 	{
-		*ExpressionField = static_cast<UField*>(Field);
+		*ExpressionField = dynamic_cast<UField*>(Field);
 	}
 
 	return Result;

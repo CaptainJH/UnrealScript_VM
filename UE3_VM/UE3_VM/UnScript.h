@@ -16,7 +16,7 @@ enum EExprToken
 
 		// Tokens.
 		EX_Return = 0x04,	// Return from function.
-		EX_Switch = 0x05,	//? Switch.
+		EX_Switch = 0x05,	// Switch.
 		EX_Jump = 0x06,	// Goto a local address in code.
 		EX_JumpIfNot = 0x07,	// Goto if not expression.
 		EX_Stop = 0x08,	// Stop executing state code.
@@ -27,11 +27,11 @@ enum EExprToken
 		EX_GotoLabel = 0x0D,	// Goto a label. 
 		EX_EatReturnValue = 0x0E, // destroy an unused return value
 		EX_Let = 0x0F,	// Assign an arbitrary size value to a variable.
-		EX_DynArrayElement = 0x10, //? Dynamic array element.!! ?
+		EX_DynArrayElement = 0x10, // Dynamic array element.!! 
 		EX_New = 0x11, //? New object allocation.
 		EX_ClassContext = 0x12, //? Class default metaobject context.
 		EX_MetaCast = 0x13, //? Metaclass cast.
-		EX_LetBool = 0x14, //? Let boolean variable.
+		EX_LetBool = 0x14, // Let boolean variable.
 		EX_EndParmValue = 0x15,	// end of default value for optional function parameter
 		EX_EndFunctionParms = 0x16,	// End of function call parameters.
 		EX_Self = 0x17,	// Self object.
@@ -68,20 +68,20 @@ enum EExprToken
 		EX_DynArrayLength = 0x36,	// A dynamic array length for setting/getting
 		EX_GlobalFunction = 0x37, // Call non-state version of a function.
 		EX_PrimitiveCast = 0x38,	//? A casting operator for primitives which reads the type as the subsequent byte
-		EX_DynArrayInsert = 0x39,	//? Inserts into a dynamic array
+		EX_DynArrayInsert = 0x39,	// Inserts into a dynamic array
 		EX_ReturnNothing = 0x3A, // failsafe for functions that return a value - returns the zero value for a property and logs that control reached the end of a non-void function
 		EX_EqualEqual_DelDel = 0x3B,	//? delegate comparison for equality
 		EX_NotEqual_DelDel = 0x3C, //? delegate comparison for inequality
 		EX_EqualEqual_DelFunc = 0x3D,	//? delegate comparison for equality against a function
 		EX_NotEqual_DelFunc = 0x3E,	//? delegate comparison for inequality against a function
 		EX_EmptyDelegate = 0x3F,	//? delegate 'None'
-		EX_DynArrayRemove = 0x40,	//? Removes from a dynamic array
+		EX_DynArrayRemove = 0x40,	// Removes from a dynamic array
 		EX_DebugInfo = 0x41,	//?DEBUGGER Debug information
 		EX_DelegateFunction = 0x42, //? Call to a delegate function
 		EX_DelegateProperty = 0x43, //? Delegate expression
 		EX_LetDelegate = 0x44, //? Assignment to a delegate
 		EX_Conditional = 0x45, // tertiary operator support
-		EX_DynArrayFind = 0x46, //? dynarray search for item index
+		EX_DynArrayFind = 0x46, // dynarray search for item index
 		EX_DynArrayFindStruct = 0x47, //? dynarray<struct> search for item index
 		EX_LocalOutVariable = 0x48, // local out (pass by reference) function parameter
 		EX_DefaultParmValue = 0x49,	// default value of optional function parameter

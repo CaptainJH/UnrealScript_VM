@@ -48,21 +48,6 @@ int main()
 {
 	std::cout << "==============UE3_VM==============" << std::endl;
 
-	//auto byteCode = ReadByteCode("D:\\Repo\\UnrealScript_VM\\UnrealScript_Wiki\\bytecode\\CompiledCode.txt", "HelloJHQ0");
-
-	//UStruct ustruct;
-	//ustruct.Script = byteCode;
-	//UObject uobject;
-	//void* temp = malloc(128);
-	//FFrame stack(&uobject, &ustruct, 0, temp);
-
-	//std::array<int, 1024> Buffer = { 0 };
-	//while (*stack.Code != EX_Return)
-	//{
-	//	stack.Step(stack.Object, &Buffer[0]);
-	//}
-	//++stack.Code;
-
 	ScriptRuntimeContext::LoadFromFile("D:\\Repo\\UnrealScript_VM\\UnrealScript_Wiki\\bytecode\\UnLinker_Export.txt");
 	FName::LoadNames("D:\\Repo\\UnrealScript_VM\\UnrealScript_Wiki\\bytecode\\UnLinker_Name_Export.txt");
 	auto id = ScriptRuntimeContext::Get()->FindIndex(std::string("HelloJHQ0"));
