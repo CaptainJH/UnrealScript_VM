@@ -43,3 +43,13 @@ bool UIntProperty::Identical(const void* A, const void* B, DWORD PortFlags) cons
 {
 	return *(INT*)A == (B ? *(INT*)B : 0);
 }
+
+bool UFloatProperty::Identical(const void* A, const void* B, DWORD PortFlags) const
+{
+	return *(FLOAT*)A == (B ? *(FLOAT*)B : 0);
+}
+
+bool UByteProperty::Identical(const void* A, const void* B, DWORD PortFlags) const
+{
+	return *(BYTE*)A == (B ? *(BYTE*)B : 0);
+}

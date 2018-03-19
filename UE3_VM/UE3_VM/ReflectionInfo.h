@@ -86,6 +86,18 @@ public:
 	BITFIELD BitMask;
 };
 
+class UFloatProperty : public UProperty
+{
+public:
+	bool Identical(const void* A, const void* B, DWORD PortFlags = 0) const override;
+};
+
+class UByteProperty : public UProperty
+{
+public:
+	bool Identical(const void* A, const void* B, DWORD PortFlags = 0) const override;
+};
+
 class UArrayProperty : public UProperty
 {
 public:

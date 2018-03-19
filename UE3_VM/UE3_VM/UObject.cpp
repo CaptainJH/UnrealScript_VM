@@ -1197,14 +1197,14 @@ void UObject::execDynArrayLength(FFrame& Stack, RESULT_DECL)
 
 	if (GPropAddr)
 	{
-		//FScriptArray* Array = (FScriptArray*)GPropAddr;
+		FScriptArray* Array = (FScriptArray*)GPropAddr;
 		if (!Result)
 		{
 			//GRuntimeUCFlags |= RUC_ArrayLengthSet; //so that EX_Let knows that this is a length 'set'-ting
 		}
 		else
 		{
-			//*(INT*)Result = Array->Num();
+			*(INT*)Result = Array->Num();
 		}
 	}
 }
