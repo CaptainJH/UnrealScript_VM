@@ -14,9 +14,17 @@ INT UClass::GetDefaultsCount()
 	return GetPropertiesSize();
 }
 
+void UProperty::CopySingleValue(void* Dest, void* Src)
+{
+	memcpy(Dest, Src, ElementSize);
+}
+
 void UProperty::CopyCompleteValue(void* Dest, void* Src)
 {
-	*(INT*)Dest = *(INT*)Src;
+	for (auto i = 0; i < ArrayDim; ++i)
+	{
+		CopySingleValue((BYTE*)Dest + i * ElementSize, (BYTE*)Src + i * ElementSize);
+	}
 }
 
 void UProperty::DestroyValue(void* dest) const

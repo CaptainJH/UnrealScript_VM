@@ -57,6 +57,7 @@ public:
 
 	int PropertySize;
 
+	virtual void CopySingleValue(void* Dest, void* Src);
 	virtual void CopyCompleteValue(void* Dest, void* Src); 
 	virtual void CopySingleValue(void* Dest, void* Src, UObject* SubobjectRoot=NULL, UObject* DestOwnerObject=NULL/*, FObjectInstancingGraph* InstanceGraph=NULL*/) const;
 	virtual void DestroyValue(void* Dest) const;

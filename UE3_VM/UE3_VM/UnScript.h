@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <array>
 #include "Types.h"
 #include "UnStack.h"
 
@@ -42,7 +43,7 @@ enum EExprToken
 		EX_FinalFunction = 0x1C,	// A prebound function call with parameters.
 		EX_IntConst = 0x1D,	// Int constant.
 		EX_FloatConst = 0x1E,	// Floating point constant.
-		EX_StringConst = 0x1F,	//? String constant.
+		EX_StringConst = 0x1F,	// String constant.
 		EX_ObjectConst = 0x20,	// An object constant.
 		EX_NameConst = 0x21,	// A name constant.
 		EX_RotationConst = 0x22,	// A rotation constant.
@@ -169,7 +170,28 @@ public:
 	UObject* IndexToObject(INT index);
 	size_t FindIndex(std::string& name);
 
-	void RunFunction(int index);
+	template<class T>
+	T RunFunction(int index)
+	{
+		auto obj = IndexToObject(index);
+		UFunction* func = static_cast<UFunction*>(obj);
+		func->Script = ScriptSerialize(func->ScriptStorage, func->BytecodeScriptSize);
+
+		T result;
+		UObject uobject;
+		std::vector<BYTE> stackLocal(func->PropertiesSize);
+		FFrame stack(&uobject, func, 0, &stackLocal[0]);
+
+		std::array<BYTE, 8> buffer;
+		while (*stack.Code != EX_Return)
+		{
+			stack.Step(stack.Object, &buffer[0]);
+		}
+		++stack.Code;
+		stack.Step(stack.Object, &result);
+
+		return result;
+	}
 
 private:
 	std::vector<UObject*> m_reflectionInfo;

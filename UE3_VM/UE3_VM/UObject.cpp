@@ -182,21 +182,24 @@ void UObject::execDynArrayElement(FFrame& Stack, RESULT_DECL)
 
 				return;
 			}
-			//INT OrigSize = Array->Num();
-			//INT Count = Index - OrigSize + 1;
-			//Array->AddZeroed(Count, ArrayProp->Inner->ElementSize);
+			else
+			{
+				INT OrigSize = Array->Num();
+				INT Count = Index - OrigSize + 1;
+				Array->AddZeroed(Count, ArrayProp->Inner->ElementSize);
 
-			//// if this is an array of structs, and the struct has defaults, propagate those now
-			//UStructProperty* StructInner = dynamic_cast<UStructProperty*>(ArrayProp->Inner);
-			//if (StructInner && StructInner->Struct->GetDefaultsCount())
-			//{
-			//	// no need to initialize the element at Index, since this element is being assigned a new value in the next step
-			//	for (INT i = OrigSize; i < Index; i++)
-			//	{
-			//		BYTE* Dest = (BYTE*)Array->GetData() + i * ArrayProp->Inner->ElementSize;
-			//		StructInner->InitializeValue(Dest);
-			//	}
-			//}
+				// if this is an array of structs, and the struct has defaults, propagate those now
+				//UStructProperty* StructInner = dynamic_cast<UStructProperty*>(ArrayProp->Inner);
+				//if (StructInner && StructInner->Struct->GetDefaultsCount())
+				//{
+				//	// no need to initialize the element at Index, since this element is being assigned a new value in the next step
+				//	for (INT i = OrigSize; i < Index; i++)
+				//	{
+				//		BYTE* Dest = (BYTE*)Array->GetData() + i * ArrayProp->Inner->ElementSize;
+				//		StructInner->InitializeValue(Dest);
+				//	}
+				//}
+			}
 		}
 
 		GPropAddr = (BYTE*)Array->GetData() + Index * ArrayProp->Inner->ElementSize;
@@ -474,6 +477,83 @@ void UObject::execDynArrayIterator(FFrame& Stack, RESULT_DECL)
 }
 IMPLEMENT_FUNCTION(UObject, EX_DynArrayIterator, execDynArrayIterator);
 
+void UObject::execStructMember(FFrame& Stack, RESULT_DECL)
+{
+	// Get structure element.
+	UProperty* Property = (UProperty*)Stack.ReadObject();
+	assert(Property);
+
+	// Read the struct we're accessing
+	UStruct* Struct = (UStruct*)Stack.ReadObject();
+	assert(Struct);
+
+	// read the byte that indicates whether we must make a copy of the struct in order to access its members
+	BYTE bMemberAccessRequiresStructCopy = *Stack.Code++;
+
+	BYTE* Buffer = NULL;
+	if (bMemberAccessRequiresStructCopy != 0)
+	{
+		// We must use the struct's aligned size so that if Struct's aligned size is larger than its PropertiesSize, we don't overrun the buffer when
+		// UStructProperty::CopyCompleteValue performs an appMemcpy using the struct property's ElementSize (which is always aligned)
+		const INT BufferSize = Align(Struct->GetPropertiesSize(), Struct->GetMinAlignment());
+
+		// allocate a buffer that will contain the copy of the struct we're accessing
+		Buffer = (BYTE*)malloc(BufferSize);
+		memset(Buffer, 0, BufferSize);
+	}
+
+	// read the byte that indicates whether the struct will be modified by the expression that's using it
+	BYTE bStructWillBeModified = *Stack.Code++;
+
+	// now evaluate the expression corresponding to the struct value.
+	// If bMemberRequiresStructCopy is 1, Buffer will be non-NULL and the value of the struct will be copied into Buffer
+	// Otherwise, this will set GPropAddr to the address of the value for the struct, and GProperty to the struct variable
+	GPropAddr = NULL;
+	Stack.Step(this, Buffer);
+
+	// Set result.
+	GProperty = Property;
+	GPropObject = this;
+
+	// GPropAddr is non-NULL if the struct evaluated in the previous call to Step is an instance, local, or default variable
+	if (GPropAddr)
+	{
+		GPropAddr += Property->Offset;
+	}
+
+	if (Buffer != NULL)
+	{
+		// Result is non-NULL when we're accessing the struct member as an r-value;  Result is where we're copying the value of the struct member to
+		if (Result)
+		{
+			Property->CopyCompleteValue(Result, Buffer + Property->Offset);
+		}
+
+		// if we allocated a temporary buffer, clean up any properties which may have allocated heap memory
+		//for (UProperty* P = Struct->ConstructorLink; P; P = P->ConstructorLinkNext)
+		//{
+		//	P->DestroyValue(Buffer + P->Offset);
+		//}
+	}
+	else if (Result != NULL)
+	{
+		if (GPropAddr != NULL)
+		{
+			// Result is non-NULL when we're accessing the struct member as an r-value;  Result is where we're copying the value of the struct member to
+			Property->CopyCompleteValue(Result, GPropAddr);
+		}
+		else
+		{
+			//if (Property->PropertyFlags & CPF_NeedCtorLink)
+			//{
+			//	Property->DestroyValue(Result);
+			//}
+			//appMemzero(Result, Property->ArrayDim * Property->ElementSize);
+		}
+	}
+}
+IMPLEMENT_FUNCTION(UObject, EX_StructMember, execStructMember);
+
 //////////////
 // Commands //
 //////////////
@@ -514,7 +594,7 @@ void UObject::execSwitch(FFrame& Stack, RESULT_DECL)
 	for (; ; )
 	{
 		// Skip over case token.
-		assert(*(int*)Stack.Code[0] == EX_Case);
+		assert(*Stack.Code == EX_Case);
 		Stack.Code++;
 
 		// Get address of next handler.
@@ -527,9 +607,10 @@ void UObject::execSwitch(FFrame& Stack, RESULT_DECL)
 		// Get case expression.
 		Stack.Step(Stack.Object, Buffer);
 
-		if (StringProp == NULL ? (memcmp(SwitchBuffer, Buffer, bSize) == 0) : StringProp/*(*(FString*)SwitchBuffer == *(FString*)Buffer)*/)
+		//if (StringProp == NULL ? (memcmp(SwitchBuffer, Buffer, bSize) == 0) : StringProp/*(*(FString*)SwitchBuffer == *(FString*)Buffer)*/)
+		assert(StringProp == NULL);
+		if(memcmp(SwitchBuffer, Buffer, bSize) == 0)
 		{
-			assert(StringProp == NULL);
 			break;
 		}
 
@@ -787,6 +868,15 @@ void UObject::execFloatConst(FFrame& Stack, RESULT_DECL)
 	*(FLOAT*)Result = Stack.ReadFloat();
 }
 IMPLEMENT_FUNCTION(UObject, EX_FloatConst, execFloatConst);
+
+void UObject::execStringConst(FFrame& Stack, RESULT_DECL)
+{
+	*(FString*)Result = (char*)Stack.Code;
+	while (*Stack.Code)
+		Stack.Code++;
+	Stack.Code++;
+}
+IMPLEMENT_FUNCTION(UObject, EX_StringConst, execStringConst);
 
 
 void UObject::execObjectConst(FFrame& Stack, RESULT_DECL)
@@ -1095,99 +1185,6 @@ void UObject::execStructCmpNe(FFrame& Stack, RESULT_DECL)
 	//}
 }
 IMPLEMENT_FUNCTION(UObject, EX_StructCmpNe, execStructCmpNe);
-
-void UObject::execStructMember(FFrame& Stack, RESULT_DECL)
-{
-	// Get structure element.
-	UProperty* Property = (UProperty*)Stack.ReadObject();
-	assert(Property);
-
-	// Read the struct we're accessing
-	UStruct* Struct = (UStruct*)Stack.ReadObject();
-	assert(Struct);
-
-	// read the byte that indicates whether we must make a copy of the struct in order to access its members
-	BYTE bMemberAccessRequiresStructCopy = *Stack.Code++;
-
-	BYTE* Buffer = NULL;
-	if (bMemberAccessRequiresStructCopy != 0)
-	{
-		// We must use the struct's aligned size so that if Struct's aligned size is larger than its PropertiesSize, we don't overrun the buffer when
-		// UStructProperty::CopyCompleteValue performs an appMemcpy using the struct property's ElementSize (which is always aligned)
-		const INT BufferSize = Align(Struct->GetPropertiesSize(), Struct->GetMinAlignment());
-
-		// allocate a buffer that will contain the copy of the struct we're accessing
-		Buffer = (BYTE*)malloc(BufferSize);
-		memset(Buffer, 0, BufferSize);
-	}
-
-	// read the byte that indicates whether the struct will be modified by the expression that's using it
-	BYTE bStructWillBeModified = *Stack.Code++;
-
-	// set flag so that if we're accessing a member of a struct inside a dynamic array,
-	// execDynArrayElement() will throw an error if it is accessed out of bounds instead of expanding it
-	//DWORD OldUCFlags = GRuntimeUCFlags;
-	//if (*Stack.Code == EX_DynArrayElement)
-	//{
-	//	GRuntimeUCFlags |= RUC_NeverExpandDynArray;
-	//}
-
-	// now evaluate the expression corresponding to the struct value.
-	// If bMemberRequiresStructCopy is 1, Buffer will be non-NULL and the value of the struct will be copied into Buffer
-	// Otherwise, this will set GPropAddr to the address of the value for the struct, and GProperty to the struct variable
-	GPropAddr = NULL;
-	Stack.Step(this, Buffer);
-
-	//GRuntimeUCFlags = OldUCFlags;
-
-	// if the struct property will be modified and is a variable relevant to netplay, set the object dirty
-	//if (bStructWillBeModified && GPropObject != NULL && GProperty != NULL && (GProperty->PropertyFlags & CPF_Net))
-	//{
-	//	GPropObject->NetDirty(GProperty);
-	//}
-
-	// Set result.
-	GProperty = Property;
-	GPropObject = this;
-
-	// GPropAddr is non-NULL if the struct evaluated in the previous call to Step is an instance, local, or default variable
-	if (GPropAddr)
-	{
-		GPropAddr += Property->Offset;
-	}
-
-	if (Buffer != NULL)
-	{
-		// Result is non-NULL when we're accessing the struct member as an r-value;  Result is where we're copying the value of the struct member to
-		if (Result)
-		{
-			Property->CopyCompleteValue(Result, Buffer + Property->Offset);
-		}
-
-		// if we allocated a temporary buffer, clean up any properties which may have allocated heap memory
-		//for (UProperty* P = Struct->ConstructorLink; P; P = P->ConstructorLinkNext)
-		//{
-		//	P->DestroyValue(Buffer + P->Offset);
-		//}
-	}
-	else if (Result != NULL)
-	{
-		if (GPropAddr != NULL)
-		{
-			// Result is non-NULL when we're accessing the struct member as an r-value;  Result is where we're copying the value of the struct member to
-			Property->CopyCompleteValue(Result, GPropAddr);
-		}
-		else
-		{
-			//if (Property->PropertyFlags & CPF_NeedCtorLink)
-			//{
-			//	Property->DestroyValue(Result);
-			//}
-			//appMemzero(Result, Property->ArrayDim * Property->ElementSize);
-		}
-	}
-}
-IMPLEMENT_FUNCTION(UObject, EX_StructMember, execStructMember);
 
 void UObject::execDynArrayLength(FFrame& Stack, RESULT_DECL)
 {
@@ -1525,6 +1522,15 @@ void UObject::execSubtractEqual_IntInt(FFrame& Stack, RESULT_DECL)
 	*(INT*)Result = (A -= B);
 }
 IMPLEMENT_FUNCTION(UObject, 162, execSubtractEqual_IntInt);
+
+void UObject::execAddAdd_PreInt(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_INT_REF(A);
+	P_FINISH;
+
+	*(INT*)Result = ++(A);
+}
+IMPLEMENT_FUNCTION(UObject, 163, execAddAdd_PreInt);
 
 void UObject::CallFunction(FFrame& Stack, RESULT_DECL, UFunction* Function)
 {

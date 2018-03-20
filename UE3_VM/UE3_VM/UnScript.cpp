@@ -5,6 +5,7 @@
 #include "UnScript.h"
 #include "UObject.h"
 #include "Utils.h"
+#include "FArray.h"
 
 extern std::array<Native, 1000> GNatives;
 INT GNativeDuplicate = 0;
@@ -69,6 +70,14 @@ FScriptArchive& FScriptArchive::operator<<(UProperty*& prop)
 
 FScriptArchive& FScriptArchive::operator<<(UStruct*& st)
 {
+	INT Index;
+	FScriptArchive& Ar = *this;
+	Ar << Index;
+
+	UObject* Temporary = NULL;
+	Temporary = ScriptRuntimeContext::Get()->IndexToObject(Index);
+	memcpy(&st, &Temporary, sizeof(UProperty*));
+
 	return *this;
 }
 
@@ -632,18 +641,102 @@ void ScriptRuntimeContext::LoadFromFile(const std::string& path)
 
 		if (str0 == "IntProperty")
 		{
-			obj = new UProperty;
+			obj = new UIntProperty;
 			obj->Name = str1;
 
 			auto str2 = StringSlice(line, sep, begin);
 			auto str3 = StringSlice(line, sep, begin);
 			auto str4 = StringSlice(line, sep, begin);
 
-			UProperty* prop = static_cast<UProperty*>(obj);
+			UIntProperty* prop = static_cast<UIntProperty*>(obj);
 			prop->ArrayDim = std::stoi(str2);
 			prop->ElementSize = std::stoi(str3);
 			prop->Offset = std::stoi(str4);
 
+		}
+		else if (str0 == "FloatProperty")
+		{
+			obj = new UFloatProperty;
+			obj->Name = str1;
+
+			auto str2 = StringSlice(line, sep, begin);
+			auto str3 = StringSlice(line, sep, begin);
+			auto str4 = StringSlice(line, sep, begin);
+
+			UFloatProperty* prop = static_cast<UFloatProperty*>(obj);
+			prop->ArrayDim = std::stoi(str2);
+			prop->ElementSize = std::stoi(str3);
+			prop->Offset = std::stoi(str4);
+		}
+		else if (str0 == "ByteProperty")
+		{
+			obj = new UByteProperty;
+			obj->Name = str1;
+
+			auto str2 = StringSlice(line, sep, begin);
+			auto str3 = StringSlice(line, sep, begin);
+			auto str4 = StringSlice(line, sep, begin);
+
+			UByteProperty* prop = static_cast<UByteProperty*>(obj);
+			prop->ArrayDim = std::stoi(str2);
+			prop->ElementSize = std::stoi(str3);
+			prop->Offset = std::stoi(str4);
+		}
+		else if (str0 == "ArrayProperty")
+		{
+			obj = new UArrayProperty;
+			obj->Name = str1;
+
+			auto str2 = StringSlice(line, sep, begin);
+			auto str3 = StringSlice(line, sep, begin);
+			auto str4 = StringSlice(line, sep, begin);
+
+			UArrayProperty* prop = static_cast<UArrayProperty*>(obj);
+			prop->ArrayDim = std::stoi(str2);
+			prop->ElementSize = std::stoi(str3);
+			prop->Offset = std::stoi(str4);
+		}
+		else if (str0 == "BoolProperty")
+		{
+			obj = new UBoolProperty;
+			obj->Name = str1;
+
+			auto str2 = StringSlice(line, sep, begin);
+			auto str3 = StringSlice(line, sep, begin);
+			auto str4 = StringSlice(line, sep, begin);
+
+			UBoolProperty* prop = static_cast<UBoolProperty*>(obj);
+			prop->ArrayDim = std::stoi(str2);
+			prop->ElementSize = std::stoi(str3);
+			prop->Offset = std::stoi(str4);
+		}
+		else if (str0 == "StrProperty")
+		{
+			obj = new UStrProperty;
+			obj->Name = str1;
+
+			auto str2 = StringSlice(line, sep, begin);
+			auto str3 = StringSlice(line, sep, begin);
+			auto str4 = StringSlice(line, sep, begin);
+
+			auto prop = static_cast<UStrProperty*>(obj);
+			prop->ArrayDim = std::stoi(str2);
+			prop->ElementSize = std::stoi(str3);
+			prop->Offset = std::stoi(str4);
+		}
+		else if (str0 == "StructProperty")
+		{
+			obj = new UStructProperty;
+			obj->Name = str1;
+
+			auto str2 = StringSlice(line, sep, begin);
+			auto str3 = StringSlice(line, sep, begin);
+			auto str4 = StringSlice(line, sep, begin);
+
+			auto prop = static_cast<UStructProperty*>(obj);
+			prop->ArrayDim = std::stoi(str2);
+			prop->ElementSize = std::stoi(str3);
+			prop->Offset = std::stoi(str4);
 		}
 		else if (str0 == "Function")
 		{
@@ -689,7 +782,8 @@ void ScriptRuntimeContext::LoadFromFile(const std::string& path)
 
 		UObject* obj = m_spContext->m_reflectionInfo[index++];
 
-		if (str0 == "IntProperty")
+		if (str0 == "IntProperty" || str0 == "FloatArray" || str0 == "ByteProperty" 
+			|| str0 == "BoolProperty" || str0 == "StrProperty" || str0 == "StructProperty")
 		{
 			auto str2 = StringSlice(line, sep, begin);
 			auto str3 = StringSlice(line, sep, begin);
@@ -701,6 +795,18 @@ void ScriptRuntimeContext::LoadFromFile(const std::string& path)
 			UProperty* prop = static_cast<UProperty*>(obj);
 			prop->Next = (UField*)nextPtr;
 
+		}
+		else if (str0 == "ArrayProperty")
+		{
+			auto str2 = StringSlice(line, sep, begin);
+			auto str3 = StringSlice(line, sep, begin);
+			auto str4 = StringSlice(line, sep, begin);
+
+			auto inner = StringSlice(line, sep, begin);
+			auto index = stoi(inner);
+			UObject* nextPtr = index >= 0 ? m_spContext->m_reflectionInfo[index] : nullptr;
+			UArrayProperty* prop = static_cast<UArrayProperty*>(obj);
+			prop->Inner = static_cast<UProperty*>(nextPtr);
 		}
 		else if (str0 == "Function")
 		{
@@ -717,24 +823,4 @@ void ScriptRuntimeContext::LoadFromFile(const std::string& path)
 
 		}
 	}
-}
-
-void ScriptRuntimeContext::RunFunction(int index)
-{
-	auto obj = IndexToObject(index);
-	UFunction* func = static_cast<UFunction*>(obj);
-	func->Script = ScriptSerialize(func->ScriptStorage, func->BytecodeScriptSize);
-
-	int result = 0;
-	UObject uobject;
-	std::vector<BYTE> stackLocal(func->PropertiesSize);
-	FFrame stack(&uobject, func, 0, &stackLocal[0]);
-
-	std::array<BYTE, 8> buffer;
-	while (*stack.Code != EX_Return)
-	{
-		stack.Step(stack.Object, &buffer[0]);
-	}
-	++stack.Code;
-	stack.Step(stack.Object, &result);
 }

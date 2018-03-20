@@ -154,6 +154,7 @@
   <ItemGroup>
     <ClInclude Include="FArray.h" />
     <ClInclude Include="Types.h" />
+    <ClInclude Include="UnitTest.h" />
     <ClInclude Include="UnName.h" />
     <ClInclude Include="UnScript.h" />
     <ClInclude Include="UnStack.h" />

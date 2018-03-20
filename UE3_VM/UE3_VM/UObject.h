@@ -66,6 +66,7 @@ public:
 	DECLARE_FUNCTION(execFalse);
 	DECLARE_FUNCTION(execNoObject);
 	DECLARE_FUNCTION(execNameConst);
+	DECLARE_FUNCTION(execStringConst);
 
 	DECLARE_FUNCTION(execBoolVariable);
 
@@ -109,6 +110,7 @@ public:
 	//DECLARE_FUNCTION(execDivideEqual_IntFloat);
 	DECLARE_FUNCTION(execAddEqual_IntInt);
 	DECLARE_FUNCTION(execSubtractEqual_IntInt);
+	DECLARE_FUNCTION(execAddAdd_PreInt);
 
 	void CallFunction(FFrame& Stack, RESULT_DECL, UFunction* Function); 
 	UFunction* FindFunction(FName& name);

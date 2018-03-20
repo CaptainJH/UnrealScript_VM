@@ -8,83 +8,83 @@ Class|Subsystem|
 Subsystem|Default__Subsystem|
 Enum|EInterpMethodType|
 Enum|EInterpCurveMode|
-ByteProperty|InterpMode|
-FloatProperty|LeaveTangent|
-FloatProperty|ArriveTangent|
-FloatProperty|OutVal|
-FloatProperty|InVal|
+ByteProperty|InterpMode|1|1|16|-1
+FloatProperty|LeaveTangent|1|4|12|10
+FloatProperty|ArriveTangent|1|4|8|11
+FloatProperty|OutVal|1|4|4|12
+FloatProperty|InVal|1|4|0|13
 ScriptStruct|InterpCurvePointFloat|
-StructProperty|Points|
-ByteProperty|InterpMethod|
-ArrayProperty|Points|
+StructProperty|Points|1|20|0|-1
+ByteProperty|InterpMethod|1|1|16|-1
+ArrayProperty|Points|1|16|0|16
 ScriptStruct|InterpCurveFloat|
-ByteProperty|InterpMode|
-StructProperty|LeaveTangent|
-StructProperty|ArriveTangent|
-StructProperty|OutVal|
-FloatProperty|InVal|
+ByteProperty|InterpMode|1|1|28|-1
+StructProperty|LeaveTangent|1|8|20|20
+StructProperty|ArriveTangent|1|8|12|21
+StructProperty|OutVal|1|8|4|22
+FloatProperty|InVal|1|4|0|23
 ScriptStruct|InterpCurvePointVector2D|
-StructProperty|Points|
-ByteProperty|InterpMethod|
-ArrayProperty|Points|
+StructProperty|Points|1|32|0|-1
+ByteProperty|InterpMethod|1|1|16|-1
+ArrayProperty|Points|1|16|0|26
 ScriptStruct|InterpCurveVector2D|
-ByteProperty|InterpMode|
-StructProperty|LeaveTangent|
-StructProperty|ArriveTangent|
-StructProperty|OutVal|
-FloatProperty|InVal|
+ByteProperty|InterpMode|1|1|40|-1
+StructProperty|LeaveTangent|1|12|28|30
+StructProperty|ArriveTangent|1|12|16|31
+StructProperty|OutVal|1|12|4|32
+FloatProperty|InVal|1|4|0|33
 ScriptStruct|InterpCurvePointVector|
-StructProperty|Points|
-ByteProperty|InterpMethod|
-ArrayProperty|Points|
+StructProperty|Points|1|44|0|-1
+ByteProperty|InterpMethod|1|1|16|-1
+ArrayProperty|Points|1|16|0|36
 ScriptStruct|InterpCurveVector|
-ByteProperty|InterpMode|
-StructProperty|LeaveTangent|
-StructProperty|ArriveTangent|
-StructProperty|OutVal|
-FloatProperty|InVal|
+ByteProperty|InterpMode|1|1|76|-1
+StructProperty|LeaveTangent|1|24|52|40
+StructProperty|ArriveTangent|1|24|28|41
+StructProperty|OutVal|1|24|4|42
+FloatProperty|InVal|1|4|0|43
 ScriptStruct|InterpCurvePointTwoVectors|
-StructProperty|Points|
-ByteProperty|InterpMethod|
-ArrayProperty|Points|
+StructProperty|Points|1|80|0|-1
+ByteProperty|InterpMethod|1|1|16|-1
+ArrayProperty|Points|1|16|0|46
 ScriptStruct|InterpCurveTwoVectors|
-ByteProperty|InterpMode|
-StructProperty|LeaveTangent|
-StructProperty|ArriveTangent|
-StructProperty|OutVal|
-FloatProperty|InVal|
+ByteProperty|InterpMode|1|1|64|-1
+StructProperty|LeaveTangent|1|16|48|50
+StructProperty|ArriveTangent|1|16|32|51
+StructProperty|OutVal|1|16|16|52
+FloatProperty|InVal|1|4|0|53
 ScriptStruct|InterpCurvePointQuat|
-StructProperty|Points|
-ByteProperty|InterpMethod|
-ArrayProperty|Points|
+StructProperty|Points|1|80|0|-1
+ByteProperty|InterpMethod|1|1|16|-1
+ArrayProperty|Points|1|16|0|56
 ScriptStruct|InterpCurveQuat|
-ByteProperty|InterpMode|
-StructProperty|LeaveTangent|
-StructProperty|ArriveTangent|
-StructProperty|OutVal|
-FloatProperty|InVal|
+ByteProperty|InterpMode|1|1|52|-1
+StructProperty|LeaveTangent|1|16|36|60
+StructProperty|ArriveTangent|1|16|20|61
+StructProperty|OutVal|1|16|4|62
+FloatProperty|InVal|1|4|0|63
 ScriptStruct|InterpCurvePointLinearColor|
-StructProperty|Points|
-ByteProperty|InterpMethod|
-ArrayProperty|Points|
+StructProperty|Points|1|56|0|-1
+ByteProperty|InterpMethod|1|1|16|-1
+ArrayProperty|Points|1|16|0|66
 ScriptStruct|InterpCurveLinearColor|
-FloatProperty|LookupTable|
-FloatProperty|LookupTableStartTime|
-FloatProperty|LookupTableTimeScale|
-ArrayProperty|LookupTable|
-ByteProperty|LookupTableChunkSize|
-ByteProperty|LookupTableNumElements|
-ByteProperty|Op|
-ByteProperty|Type|
+FloatProperty|LookupTable|1|4|0|-1
+FloatProperty|LookupTableStartTime|1|4|24|-1
+FloatProperty|LookupTableTimeScale|1|4|20|71
+ArrayProperty|LookupTable|1|16|4|70
+ByteProperty|LookupTableChunkSize|1|1|3|73
+ByteProperty|LookupTableNumElements|1|1|2|74
+ByteProperty|Op|1|1|1|75
+ByteProperty|Type|1|1|0|76
 ScriptStruct|RawDistribution|
 IntProperty|NumPendingFences|1|4|0|-1
 ScriptStruct|RenderCommandFence|
 IntProperty|ElementIndex|1|4|8|-1
-StructProperty|Node|
+StructProperty|Node|1|8|0|81
 ScriptStruct|OctreeElementId|
-FloatProperty|Scale|
-StructProperty|Translation|
-StructProperty|Rotation|
+FloatProperty|Scale|1|4|28|-1
+StructProperty|Translation|1|12|16|84
+StructProperty|Rotation|1|16|0|85
 ScriptStruct|BoneAtom|
 Const|MaxInt|
 Const|Pi|
@@ -105,60 +105,60 @@ Enum|ETickingGroup|
 Enum|EAutomatedRunResult|
 Enum|EDebugBreakType|
 Enum|EAxis|
-BoolProperty|ReturnValue|
-BoolProperty|A|
+BoolProperty|ReturnValue|1|4|4|-1
+BoolProperty|A|1|4|0|107
 Function|Not_PreBool|8|11|7|29 6d 0 0 0 b 53 |108
-BoolProperty|ReturnValue|
-BoolProperty|B|
-BoolProperty|A|
+BoolProperty|ReturnValue|1|4|8|-1
+BoolProperty|B|1|4|4|110
+BoolProperty|A|1|4|0|111
 Function|EqualEqual_BoolBool|12|20|12|29 71 0 0 0 29 70 0 0 0 b 53 |112
-BoolProperty|ReturnValue|
-BoolProperty|B|
-BoolProperty|A|
+BoolProperty|ReturnValue|1|4|8|-1
+BoolProperty|B|1|4|4|114
+BoolProperty|A|1|4|0|115
 Function|NotEqual_BoolBool|12|20|12|29 75 0 0 0 29 74 0 0 0 b 53 |116
-BoolProperty|ReturnValue|
-BoolProperty|B|
-BoolProperty|A|
+BoolProperty|ReturnValue|1|4|8|-1
+BoolProperty|B|1|4|4|118
+BoolProperty|A|1|4|0|119
 Function|AndAnd_BoolBool|12|20|12|29 79 0 0 0 29 78 0 0 0 b 53 |120
-BoolProperty|ReturnValue|
-BoolProperty|B|
-BoolProperty|A|
+BoolProperty|ReturnValue|1|4|8|-1
+BoolProperty|B|1|4|4|122
+BoolProperty|A|1|4|0|123
 Function|XorXor_BoolBool|12|20|12|29 7d 0 0 0 29 7c 0 0 0 b 53 |124
-BoolProperty|ReturnValue|
-BoolProperty|B|
-BoolProperty|A|
+BoolProperty|ReturnValue|1|4|8|-1
+BoolProperty|B|1|4|4|126
+BoolProperty|A|1|4|0|127
 Function|OrOr_BoolBool|12|20|12|29 81 0 0 0 29 80 0 0 0 b 53 |128
-ByteProperty|ReturnValue|
-ByteProperty|B|
-ByteProperty|A|
+ByteProperty|ReturnValue|1|1|2|-1
+ByteProperty|B|1|1|1|130
+ByteProperty|A|1|1|0|131
 Function|MultiplyEqual_ByteByte|3|20|12|29 85 0 0 0 29 84 0 0 0 b 53 |132
-ByteProperty|ReturnValue|
-FloatProperty|B|
-ByteProperty|A|
+ByteProperty|ReturnValue|1|1|8|-1
+FloatProperty|B|1|4|4|134
+ByteProperty|A|1|1|0|135
 Function|MultiplyEqual_ByteFloat|9|20|12|29 89 0 0 0 29 88 0 0 0 b 53 |136
-ByteProperty|ReturnValue|
-ByteProperty|B|
-ByteProperty|A|
+ByteProperty|ReturnValue|1|1|2|-1
+ByteProperty|B|1|1|1|138
+ByteProperty|A|1|1|0|139
 Function|DivideEqual_ByteByte|3|20|12|29 8d 0 0 0 29 8c 0 0 0 b 53 |140
-ByteProperty|ReturnValue|
-ByteProperty|B|
-ByteProperty|A|
+ByteProperty|ReturnValue|1|1|2|-1
+ByteProperty|B|1|1|1|142
+ByteProperty|A|1|1|0|143
 Function|AddEqual_ByteByte|3|20|12|29 91 0 0 0 29 90 0 0 0 b 53 |144
-ByteProperty|ReturnValue|
-ByteProperty|B|
-ByteProperty|A|
+ByteProperty|ReturnValue|1|1|2|-1
+ByteProperty|B|1|1|1|146
+ByteProperty|A|1|1|0|147
 Function|SubtractEqual_ByteByte|3|20|12|29 95 0 0 0 29 94 0 0 0 b 53 |148
-ByteProperty|ReturnValue|
-ByteProperty|A|
+ByteProperty|ReturnValue|1|1|1|-1
+ByteProperty|A|1|1|0|150
 Function|AddAdd_PreByte|2|11|7|29 98 0 0 0 b 53 |151
-ByteProperty|ReturnValue|
-ByteProperty|A|
+ByteProperty|ReturnValue|1|1|1|-1
+ByteProperty|A|1|1|0|153
 Function|SubtractSubtract_PreByte|2|11|7|29 9b 0 0 0 b 53 |154
-ByteProperty|ReturnValue|
-ByteProperty|A|
+ByteProperty|ReturnValue|1|1|1|-1
+ByteProperty|A|1|1|0|156
 Function|AddAdd_Byte|2|11|7|29 9e 0 0 0 b 53 |157
-ByteProperty|ReturnValue|
-ByteProperty|A|
+ByteProperty|ReturnValue|1|1|1|-1
+ByteProperty|A|1|1|0|159
 Function|SubtractSubtract_Byte|2|11|7|29 a1 0 0 0 b 53 |160
 IntProperty|ReturnValue|1|4|4|-1
 IntProperty|A|1|4|0|162
@@ -198,27 +198,27 @@ IntProperty|ReturnValue|1|4|8|-1
 IntProperty|B|1|4|4|196
 IntProperty|A|1|4|0|197
 Function|GreaterGreaterGreater_IntInt|12|20|12|29 c7 0 0 0 29 c6 0 0 0 b 53 |198
-BoolProperty|ReturnValue|
+BoolProperty|ReturnValue|1|4|8|-1
 IntProperty|B|1|4|4|200
 IntProperty|A|1|4|0|201
 Function|Less_IntInt|12|20|12|29 cb 0 0 0 29 ca 0 0 0 b 53 |202
-BoolProperty|ReturnValue|
+BoolProperty|ReturnValue|1|4|8|-1
 IntProperty|B|1|4|4|204
 IntProperty|A|1|4|0|205
 Function|Greater_IntInt|12|20|12|29 cf 0 0 0 29 ce 0 0 0 b 53 |206
-BoolProperty|ReturnValue|
+BoolProperty|ReturnValue|1|4|8|-1
 IntProperty|B|1|4|4|208
 IntProperty|A|1|4|0|209
 Function|LessEqual_IntInt|12|20|12|29 d3 0 0 0 29 d2 0 0 0 b 53 |210
-BoolProperty|ReturnValue|
+BoolProperty|ReturnValue|1|4|8|-1
 IntProperty|B|1|4|4|212
 IntProperty|A|1|4|0|213
 Function|GreaterEqual_IntInt|12|20|12|29 d7 0 0 0 29 d6 0 0 0 b 53 |214
-BoolProperty|ReturnValue|
+BoolProperty|ReturnValue|1|4|8|-1
 IntProperty|B|1|4|4|216
 IntProperty|A|1|4|0|217
 Function|EqualEqual_IntInt|12|20|12|29 db 0 0 0 29 da 0 0 0 b 53 |218
-BoolProperty|ReturnValue|
+BoolProperty|ReturnValue|1|4|8|-1
 IntProperty|B|1|4|4|220
 IntProperty|A|1|4|0|221
 Function|NotEqual_IntInt|12|20|12|29 df 0 0 0 29 de 0 0 0 b 53 |222
@@ -235,11 +235,11 @@ IntProperty|B|1|4|4|232
 IntProperty|A|1|4|0|233
 Function|Or_IntInt|12|20|12|29 eb 0 0 0 29 ea 0 0 0 b 53 |234
 IntProperty|ReturnValue|1|4|8|-1
-FloatProperty|B|
+FloatProperty|B|1|4|4|236
 IntProperty|A|1|4|0|237
 Function|MultiplyEqual_IntFloat|12|20|12|29 ef 0 0 0 29 ee 0 0 0 b 53 |238
 IntProperty|ReturnValue|1|4|8|-1
-FloatProperty|B|
+FloatProperty|B|1|4|4|240
 IntProperty|A|1|4|0|241
 Function|DivideEqual_IntFloat|12|20|12|29 f3 0 0 0 29 f2 0 0 0 b 53 |242
 IntProperty|ReturnValue|1|4|8|-1
@@ -278,430 +278,430 @@ IntProperty|B|1|4|8|275
 IntProperty|A|1|4|4|276
 IntProperty|V|1|4|0|277
 Function|Clamp|16|29|17|29 17 1 0 0 29 16 1 0 0 29 15 1 0 0 b 53 |278
-StrProperty|ReturnValue|
+StrProperty|ReturnValue|1|16|4|-1
 IntProperty|A|1|4|0|280
 Function|ToHex|20|11|7|29 1a 1 0 0 b 53 |281
-FloatProperty|ReturnValue|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|4|-1
+FloatProperty|A|1|4|0|283
 Function|Subtract_PreFloat|8|11|7|29 1d 1 0 0 b 53 |284
-FloatProperty|ReturnValue|
-FloatProperty|Exp|
-FloatProperty|Base|
+FloatProperty|ReturnValue|1|4|8|-1
+FloatProperty|Exp|1|4|4|286
+FloatProperty|Base|1|4|0|287
 Function|MultiplyMultiply_FloatFloat|12|20|12|29 21 1 0 0 29 20 1 0 0 b 53 |288
-FloatProperty|ReturnValue|
-FloatProperty|B|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|8|-1
+FloatProperty|B|1|4|4|290
+FloatProperty|A|1|4|0|291
 Function|Multiply_FloatFloat|12|20|12|29 25 1 0 0 29 24 1 0 0 b 53 |292
-FloatProperty|ReturnValue|
-FloatProperty|B|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|8|-1
+FloatProperty|B|1|4|4|294
+FloatProperty|A|1|4|0|295
 Function|Divide_FloatFloat|12|20|12|29 29 1 0 0 29 28 1 0 0 b 53 |296
-FloatProperty|ReturnValue|
-FloatProperty|B|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|8|-1
+FloatProperty|B|1|4|4|298
+FloatProperty|A|1|4|0|299
 Function|Percent_FloatFloat|12|20|12|29 2d 1 0 0 29 2c 1 0 0 b 53 |300
-FloatProperty|ReturnValue|
-FloatProperty|B|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|8|-1
+FloatProperty|B|1|4|4|302
+FloatProperty|A|1|4|0|303
 Function|Add_FloatFloat|12|20|12|29 31 1 0 0 29 30 1 0 0 b 53 |304
-FloatProperty|ReturnValue|
-FloatProperty|B|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|8|-1
+FloatProperty|B|1|4|4|306
+FloatProperty|A|1|4|0|307
 Function|Subtract_FloatFloat|12|20|12|29 35 1 0 0 29 34 1 0 0 b 53 |308
-BoolProperty|ReturnValue|
-FloatProperty|B|
-FloatProperty|A|
+BoolProperty|ReturnValue|1|4|8|-1
+FloatProperty|B|1|4|4|310
+FloatProperty|A|1|4|0|311
 Function|Less_FloatFloat|12|20|12|29 39 1 0 0 29 38 1 0 0 b 53 |312
-BoolProperty|ReturnValue|
-FloatProperty|B|
-FloatProperty|A|
+BoolProperty|ReturnValue|1|4|8|-1
+FloatProperty|B|1|4|4|314
+FloatProperty|A|1|4|0|315
 Function|Greater_FloatFloat|12|20|12|29 3d 1 0 0 29 3c 1 0 0 b 53 |316
-BoolProperty|ReturnValue|
-FloatProperty|B|
-FloatProperty|A|
+BoolProperty|ReturnValue|1|4|8|-1
+FloatProperty|B|1|4|4|318
+FloatProperty|A|1|4|0|319
 Function|LessEqual_FloatFloat|12|20|12|29 41 1 0 0 29 40 1 0 0 b 53 |320
-BoolProperty|ReturnValue|
-FloatProperty|B|
-FloatProperty|A|
+BoolProperty|ReturnValue|1|4|8|-1
+FloatProperty|B|1|4|4|322
+FloatProperty|A|1|4|0|323
 Function|GreaterEqual_FloatFloat|12|20|12|29 45 1 0 0 29 44 1 0 0 b 53 |324
-BoolProperty|ReturnValue|
-FloatProperty|B|
-FloatProperty|A|
+BoolProperty|ReturnValue|1|4|8|-1
+FloatProperty|B|1|4|4|326
+FloatProperty|A|1|4|0|327
 Function|EqualEqual_FloatFloat|12|20|12|29 49 1 0 0 29 48 1 0 0 b 53 |328
-BoolProperty|ReturnValue|
-FloatProperty|B|
-FloatProperty|A|
+BoolProperty|ReturnValue|1|4|8|-1
+FloatProperty|B|1|4|4|330
+FloatProperty|A|1|4|0|331
 Function|ComplementEqual_FloatFloat|12|20|12|29 4d 1 0 0 29 4c 1 0 0 b 53 |332
-BoolProperty|ReturnValue|
-FloatProperty|B|
-FloatProperty|A|
+BoolProperty|ReturnValue|1|4|8|-1
+FloatProperty|B|1|4|4|334
+FloatProperty|A|1|4|0|335
 Function|NotEqual_FloatFloat|12|20|12|29 51 1 0 0 29 50 1 0 0 b 53 |336
-FloatProperty|ReturnValue|
-FloatProperty|B|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|8|-1
+FloatProperty|B|1|4|4|338
+FloatProperty|A|1|4|0|339
 Function|MultiplyEqual_FloatFloat|12|20|12|29 55 1 0 0 29 54 1 0 0 b 53 |340
-FloatProperty|ReturnValue|
-FloatProperty|B|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|8|-1
+FloatProperty|B|1|4|4|342
+FloatProperty|A|1|4|0|343
 Function|DivideEqual_FloatFloat|12|20|12|29 59 1 0 0 29 58 1 0 0 b 53 |344
-FloatProperty|ReturnValue|
-FloatProperty|B|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|8|-1
+FloatProperty|B|1|4|4|346
+FloatProperty|A|1|4|0|347
 Function|AddEqual_FloatFloat|12|20|12|29 5d 1 0 0 29 5c 1 0 0 b 53 |348
-FloatProperty|ReturnValue|
-FloatProperty|B|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|8|-1
+FloatProperty|B|1|4|4|350
+FloatProperty|A|1|4|0|351
 Function|SubtractEqual_FloatFloat|12|20|12|29 61 1 0 0 29 60 1 0 0 b 53 |352
-FloatProperty|ReturnValue|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|4|-1
+FloatProperty|A|1|4|0|354
 Function|Abs|8|11|7|29 64 1 0 0 b 53 |355
-FloatProperty|ReturnValue|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|4|-1
+FloatProperty|A|1|4|0|357
 Function|Sin|8|11|7|29 67 1 0 0 b 53 |358
-FloatProperty|ReturnValue|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|4|-1
+FloatProperty|A|1|4|0|360
 Function|Asin|8|11|7|29 6a 1 0 0 b 53 |361
-FloatProperty|ReturnValue|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|4|-1
+FloatProperty|A|1|4|0|363
 Function|Cos|8|11|7|29 6d 1 0 0 b 53 |364
-FloatProperty|ReturnValue|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|4|-1
+FloatProperty|A|1|4|0|366
 Function|Acos|8|11|7|29 70 1 0 0 b 53 |367
-FloatProperty|ReturnValue|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|4|-1
+FloatProperty|A|1|4|0|369
 Function|Tan|8|11|7|29 73 1 0 0 b 53 |370
-FloatProperty|ReturnValue|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|4|-1
+FloatProperty|A|1|4|0|372
 Function|Atan|8|11|7|29 76 1 0 0 b 53 |373
-FloatProperty|ReturnValue|
-FloatProperty|B|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|8|-1
+FloatProperty|B|1|4|4|375
+FloatProperty|A|1|4|0|376
 Function|Atan2|12|20|12|29 7a 1 0 0 29 79 1 0 0 b 53 |377
-FloatProperty|ReturnValue|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|4|-1
+FloatProperty|A|1|4|0|379
 Function|Exp|8|11|7|29 7d 1 0 0 b 53 |380
-FloatProperty|ReturnValue|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|4|-1
+FloatProperty|A|1|4|0|382
 Function|Loge|8|11|7|29 80 1 0 0 b 53 |383
-FloatProperty|ReturnValue|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|4|-1
+FloatProperty|A|1|4|0|385
 Function|Sqrt|8|11|7|29 83 1 0 0 b 53 |386
-FloatProperty|ReturnValue|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|4|-1
+FloatProperty|A|1|4|0|388
 Function|Square|8|11|7|29 86 1 0 0 b 53 |389
-FloatProperty|ReturnValue|
+FloatProperty|ReturnValue|1|4|0|-1
 Function|FRand|4|2|2|b 53 |391
-FloatProperty|ReturnValue|
-FloatProperty|B|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|8|-1
+FloatProperty|B|1|4|4|393
+FloatProperty|A|1|4|0|394
 Function|FMin|12|20|12|29 8c 1 0 0 29 8b 1 0 0 b 53 |395
-FloatProperty|ReturnValue|
-FloatProperty|B|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|8|-1
+FloatProperty|B|1|4|4|397
+FloatProperty|A|1|4|0|398
 Function|FMax|12|20|12|29 90 1 0 0 29 8f 1 0 0 b 53 |399
-FloatProperty|ReturnValue|
-FloatProperty|B|
-FloatProperty|A|
-FloatProperty|V|
+FloatProperty|ReturnValue|1|4|12|-1
+FloatProperty|B|1|4|8|401
+FloatProperty|A|1|4|4|402
+FloatProperty|V|1|4|0|403
 Function|FClamp|16|29|17|29 95 1 0 0 29 94 1 0 0 29 93 1 0 0 b 53 |404
-FloatProperty|ReturnValue|
-FloatProperty|Alpha|
-FloatProperty|B|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|12|-1
+FloatProperty|Alpha|1|4|8|406
+FloatProperty|B|1|4|4|407
+FloatProperty|A|1|4|0|408
 Function|Lerp|16|29|17|29 9a 1 0 0 29 99 1 0 0 29 98 1 0 0 b 53 |409
 IntProperty|ReturnValue|1|4|4|-1
-FloatProperty|A|
+FloatProperty|A|1|4|0|411
 Function|Round|8|11|7|29 9d 1 0 0 b 53 |412
 IntProperty|ReturnValue|1|4|4|-1
-FloatProperty|A|
+FloatProperty|A|1|4|0|414
 Function|FFloor|8|11|7|29 a0 1 0 0 b 53 |415
 IntProperty|ReturnValue|1|4|4|-1
-FloatProperty|A|
+FloatProperty|A|1|4|0|417
 Function|FCeil|8|11|7|29 a3 1 0 0 b 53 |418
-FloatProperty|ReturnValue|
-FloatProperty|A|
-FloatProperty|T1|
-FloatProperty|P1|
-FloatProperty|T0|
-FloatProperty|P0|
+FloatProperty|ReturnValue|1|4|20|-1
+FloatProperty|A|1|4|16|420
+FloatProperty|T1|1|4|12|421
+FloatProperty|P1|1|4|8|422
+FloatProperty|T0|1|4|4|423
+FloatProperty|P0|1|4|0|424
 Function|FCubicInterp|24|47|27|29 aa 1 0 0 29 a9 1 0 0 29 a8 1 0 0 29 a7 1 0 0 29 a6 1 0 0 b 53 |425
-FloatProperty|ReturnValue|
-FloatProperty|Exp|
-FloatProperty|Alpha|
-FloatProperty|B|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|16|-1
+FloatProperty|Exp|1|4|12|427
+FloatProperty|Alpha|1|4|8|428
+FloatProperty|B|1|4|4|429
+FloatProperty|A|1|4|0|430
 Function|FInterpEaseIn|20|52|32|4 f7 0 b0 1 0 0 0 af 1 0 0 aa 0 ae 1 0 0 0 ad 1 0 0 16 16 4 3a ac 1 0 0 53 |431
-FloatProperty|ReturnValue|
-FloatProperty|Exp|
-FloatProperty|Alpha|
-FloatProperty|B|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|16|-1
+FloatProperty|Exp|1|4|12|433
+FloatProperty|Alpha|1|4|8|434
+FloatProperty|B|1|4|4|435
+FloatProperty|A|1|4|0|436
 Function|FInterpEaseOut|20|57|37|4 f7 0 b6 1 0 0 0 b5 1 0 0 aa 0 b4 1 0 0 ac 38 3f 26 0 b3 1 0 0 16 16 16 4 3a b2 1 0 0 53 |437
-FloatProperty|ReturnValue|
-FloatProperty|Exp|
-FloatProperty|Alpha|
-FloatProperty|B|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|16|-1
+FloatProperty|Exp|1|4|12|439
+FloatProperty|Alpha|1|4|8|440
+FloatProperty|B|1|4|4|441
+FloatProperty|A|1|4|0|442
 Function|FInterpEaseInOut|20|38|22|29 bc 1 0 0 29 bb 1 0 0 29 ba 1 0 0 29 b9 1 0 0 b 53 |443
-FloatProperty|ReturnValue|
-FloatProperty|InMax|
-FloatProperty|InMin|
+FloatProperty|ReturnValue|1|4|8|-1
+FloatProperty|InMax|1|4|4|445
+FloatProperty|InMin|1|4|0|446
 Function|RandRange|12|47|31|4 ae 0 c0 1 0 0 ab af 0 bf 1 0 0 0 c0 1 0 0 16 c3 16 16 16 4 3a be 1 0 0 53 |447
-FloatProperty|ReturnValue|
-FloatProperty|InMax|
-FloatProperty|InMin|
-FloatProperty|Value|
+FloatProperty|ReturnValue|1|4|12|-1
+FloatProperty|InMax|1|4|8|449
+FloatProperty|InMin|1|4|4|450
+FloatProperty|Value|1|4|0|451
 Function|FPctByRange|16|54|34|4 ac af 0 c5 1 0 0 0 c4 1 0 0 16 af 0 c3 1 0 0 0 c4 1 0 0 16 16 4 3a c2 1 0 0 53 |452
-FloatProperty|ReturnValue|
-FloatProperty|InterpSpeed|
-FloatProperty|DeltaTime|
-FloatProperty|Target|
-FloatProperty|Current|
+FloatProperty|ReturnValue|1|4|16|-1
+FloatProperty|InterpSpeed|1|4|12|454
+FloatProperty|DeltaTime|1|4|8|455
+FloatProperty|Target|1|4|4|456
+FloatProperty|Current|1|4|0|457
 Function|FInterpTo|20|38|22|29 cb 1 0 0 29 ca 1 0 0 29 c9 1 0 0 29 c8 1 0 0 b 53 |458
-FloatProperty|ReturnValue|
-FloatProperty|InterpSpeed|
-FloatProperty|DeltaTime|
-FloatProperty|Target|
-FloatProperty|Current|
+FloatProperty|ReturnValue|1|4|16|-1
+FloatProperty|InterpSpeed|1|4|12|460
+FloatProperty|DeltaTime|1|4|8|461
+FloatProperty|Target|1|4|4|462
+FloatProperty|Current|1|4|0|463
 Function|FInterpConstantTo|20|38|22|29 d1 1 0 0 29 d0 1 0 0 29 cf 1 0 0 29 ce 1 0 0 b 53 |464
-StructProperty|ReturnValue|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|12|-1
+StructProperty|A|1|12|0|466
 Function|Subtract_PreVector|24|11|7|29 d4 1 0 0 b 53 |467
-StructProperty|ReturnValue|
-FloatProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|16|-1
+FloatProperty|B|1|4|12|469
+StructProperty|A|1|12|0|470
 Function|Multiply_VectorFloat|28|20|12|29 d8 1 0 0 29 d7 1 0 0 b 53 |471
-StructProperty|ReturnValue|
-StructProperty|B|
-FloatProperty|A|
+StructProperty|ReturnValue|1|12|16|-1
+StructProperty|B|1|12|4|473
+FloatProperty|A|1|4|0|474
 Function|Multiply_FloatVector|28|20|12|29 dc 1 0 0 29 db 1 0 0 b 53 |475
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|24|-1
+StructProperty|B|1|12|12|477
+StructProperty|A|1|12|0|478
 Function|Multiply_VectorVector|36|20|12|29 e0 1 0 0 29 df 1 0 0 b 53 |479
-StructProperty|ReturnValue|
-FloatProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|16|-1
+FloatProperty|B|1|4|12|481
+StructProperty|A|1|12|0|482
 Function|Divide_VectorFloat|28|20|12|29 e4 1 0 0 29 e3 1 0 0 b 53 |483
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|24|-1
+StructProperty|B|1|12|12|485
+StructProperty|A|1|12|0|486
 Function|Add_VectorVector|36|20|12|29 e8 1 0 0 29 e7 1 0 0 b 53 |487
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|24|-1
+StructProperty|B|1|12|12|489
+StructProperty|A|1|12|0|490
 Function|Subtract_VectorVector|36|20|12|29 ec 1 0 0 29 eb 1 0 0 b 53 |491
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|24|-1
+StructProperty|B|1|12|12|493
+StructProperty|A|1|12|0|494
 Function|LessLess_VectorRotator|36|20|12|29 f0 1 0 0 29 ef 1 0 0 b 53 |495
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|24|-1
+StructProperty|B|1|12|12|497
+StructProperty|A|1|12|0|498
 Function|GreaterGreater_VectorRotator|36|20|12|29 f4 1 0 0 29 f3 1 0 0 b 53 |499
-BoolProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+BoolProperty|ReturnValue|1|4|24|-1
+StructProperty|B|1|12|12|501
+StructProperty|A|1|12|0|502
 Function|EqualEqual_VectorVector|28|20|12|29 f8 1 0 0 29 f7 1 0 0 b 53 |503
-BoolProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+BoolProperty|ReturnValue|1|4|24|-1
+StructProperty|B|1|12|12|505
+StructProperty|A|1|12|0|506
 Function|NotEqual_VectorVector|28|20|12|29 fc 1 0 0 29 fb 1 0 0 b 53 |507
-FloatProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+FloatProperty|ReturnValue|1|4|24|-1
+StructProperty|B|1|12|12|509
+StructProperty|A|1|12|0|510
 Function|Dot_VectorVector|28|20|12|29 0 2 0 0 29 ff 1 0 0 b 53 |511
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|24|-1
+StructProperty|B|1|12|12|513
+StructProperty|A|1|12|0|514
 Function|Cross_VectorVector|36|20|12|29 4 2 0 0 29 3 2 0 0 b 53 |515
-StructProperty|ReturnValue|
-FloatProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|16|-1
+FloatProperty|B|1|4|12|517
+StructProperty|A|1|12|0|518
 Function|MultiplyEqual_VectorFloat|28|20|12|29 8 2 0 0 29 7 2 0 0 b 53 |519
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|24|-1
+StructProperty|B|1|12|12|521
+StructProperty|A|1|12|0|522
 Function|MultiplyEqual_VectorVector|36|20|12|29 c 2 0 0 29 b 2 0 0 b 53 |523
-StructProperty|ReturnValue|
-FloatProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|16|-1
+FloatProperty|B|1|4|12|525
+StructProperty|A|1|12|0|526
 Function|DivideEqual_VectorFloat|28|20|12|29 10 2 0 0 29 f 2 0 0 b 53 |527
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|24|-1
+StructProperty|B|1|12|12|529
+StructProperty|A|1|12|0|530
 Function|AddEqual_VectorVector|36|20|12|29 14 2 0 0 29 13 2 0 0 b 53 |531
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|24|-1
+StructProperty|B|1|12|12|533
+StructProperty|A|1|12|0|534
 Function|SubtractEqual_VectorVector|36|20|12|29 18 2 0 0 29 17 2 0 0 b 53 |535
-FloatProperty|ReturnValue|
-StructProperty|A|
+FloatProperty|ReturnValue|1|4|12|-1
+StructProperty|A|1|12|0|537
 Function|VSize|16|11|7|29 1b 2 0 0 b 53 |538
-FloatProperty|ReturnValue|
-StructProperty|A|
+FloatProperty|ReturnValue|1|4|12|-1
+StructProperty|A|1|12|0|540
 Function|VSize2D|16|11|7|29 1e 2 0 0 b 53 |541
-FloatProperty|ReturnValue|
-StructProperty|A|
+FloatProperty|ReturnValue|1|4|12|-1
+StructProperty|A|1|12|0|543
 Function|VSizeSq|16|11|7|29 21 2 0 0 b 53 |544
-FloatProperty|ReturnValue|
-StructProperty|A|
+FloatProperty|ReturnValue|1|4|12|-1
+StructProperty|A|1|12|0|546
 Function|VSizeSq2D|16|11|7|29 24 2 0 0 b 53 |547
-StructProperty|ReturnValue|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|12|-1
+StructProperty|A|1|12|0|549
 Function|Normal|24|11|7|29 27 2 0 0 b 53 |550
-StructProperty|ReturnValue|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|12|-1
+StructProperty|A|1|12|0|552
 Function|Normal2D|24|11|7|29 2a 2 0 0 b 53 |553
-StructProperty|ReturnValue|
-FloatProperty|Alpha|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|28|-1
+FloatProperty|Alpha|1|4|24|555
+StructProperty|B|1|12|12|556
+StructProperty|A|1|12|0|557
 Function|VLerp|40|29|17|29 2f 2 0 0 29 2e 2 0 0 29 2d 2 0 0 b 53 |558
-StructProperty|ReturnValue|
+StructProperty|ReturnValue|1|12|0|-1
 Function|VRand|12|2|2|b 53 |560
-StructProperty|ReturnValue|
-FloatProperty|ConeHalfAngleRadians|
-StructProperty|Dir|
+StructProperty|ReturnValue|1|12|16|-1
+FloatProperty|ConeHalfAngleRadians|1|4|12|562
+StructProperty|Dir|1|12|0|563
 Function|VRandCone|28|20|12|29 35 2 0 0 29 34 2 0 0 b 53 |564
-StructProperty|ReturnValue|
-FloatProperty|VerticalConeHalfAngleRadians|
-FloatProperty|HorizontalConeHalfAngleRadians|
-StructProperty|Dir|
+StructProperty|ReturnValue|1|12|20|-1
+FloatProperty|VerticalConeHalfAngleRadians|1|4|16|566
+FloatProperty|HorizontalConeHalfAngleRadians|1|4|12|567
+StructProperty|Dir|1|12|0|568
 Function|VRandCone2|32|29|17|29 3a 2 0 0 29 39 2 0 0 29 38 2 0 0 b 53 |569
-StructProperty|ReturnValue|
-StructProperty|InNormal|
-StructProperty|InVect|
+StructProperty|ReturnValue|1|12|24|-1
+StructProperty|InNormal|1|12|12|571
+StructProperty|InVect|1|12|0|572
 Function|MirrorVectorByNormal|36|20|12|29 3e 2 0 0 29 3d 2 0 0 b 53 |573
-StructProperty|ReturnValue|
-StructProperty|Y|
-StructProperty|X|
+StructProperty|ReturnValue|1|12|24|-1
+StructProperty|Y|1|12|12|575
+StructProperty|X|1|12|0|576
 Function|ProjectOnTo|36|20|12|29 42 2 0 0 29 41 2 0 0 b 53 |577
-BoolProperty|ReturnValue|
-StructProperty|A|
+BoolProperty|ReturnValue|1|4|12|-1
+StructProperty|A|1|12|0|579
 Function|IsZero|16|11|7|29 45 2 0 0 b 53 |580
-StructProperty|ReturnValue|
-FloatProperty|InterpSpeed|
-FloatProperty|DeltaTime|
-StructProperty|Target|
-StructProperty|Current|
+StructProperty|ReturnValue|1|12|32|-1
+FloatProperty|InterpSpeed|1|4|28|582
+FloatProperty|DeltaTime|1|4|24|583
+StructProperty|Target|1|12|12|584
+StructProperty|Current|1|12|0|585
 Function|VInterpTo|44|38|22|29 4b 2 0 0 29 4a 2 0 0 29 49 2 0 0 29 48 2 0 0 b 53 |586
-StructProperty|ReturnValue|
-FloatProperty|MaxLength|
-StructProperty|V|
+StructProperty|ReturnValue|1|12|16|-1
+FloatProperty|MaxLength|1|4|12|588
+StructProperty|V|1|12|0|589
 Function|ClampLength|28|20|12|29 4f 2 0 0 29 4e 2 0 0 b 53 |590
-FloatProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+FloatProperty|ReturnValue|1|4|24|-1
+StructProperty|B|1|12|12|592
+StructProperty|A|1|12|0|593
 Function|NoZDot|28|20|12|29 53 2 0 0 29 52 2 0 0 b 53 |594
-StructProperty|VDir|
-StructProperty|B|
-BoolProperty|ReturnValue|
-BoolProperty|bIgnoreZ|
-StructProperty|A|
-FloatProperty|Width|
-StructProperty|Dir|
-StructProperty|Origin|
-Function|InCylinder|72|258|166|b 7 70 0 2d 0 58 2 0 0 f 35 99 5 0 0 9c 5 0 0 0 1 0 5c 2 0 0 1e 0 0 0 0 f 35 d5 5 0 0 d6 5 0 0 0 1 0 5b 2 0 0 25 f 35 99 5 0 0 9c 5 0 0 0 1 0 59 2 0 0 1e 0 0 0 0 f 0 55 2 0 0 38 39 0 5b 2 0 0 f 0 56 2 0 0 d7 d5 db d8 0 59 2 0 0 0 5c 2 0 0 16 0 55 2 0 0 16 0 55 2 0 0 16 0 5c 2 0 0 16 7 f5 0 b2 e4 d8 0 56 2 0 0 0 59 2 0 0 16 16 ab 0 5a 2 0 0 0 5a 2 0 0 16 16 4 27 4 28 4 3a 57 2 0 0 53 |603
-BoolProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|VDir|1|12|60|-1
+StructProperty|B|1|12|48|596
+BoolProperty|ReturnValue|1|4|44|597
+BoolProperty|bIgnoreZ|1|4|40|598
+StructProperty|A|1|12|28|599
+FloatProperty|Width|1|4|24|600
+StructProperty|Dir|1|12|12|601
+StructProperty|Origin|1|12|0|602
+Function|InCylinder|72|258|166|b 7 70 0 2d 0 58 2 0 0 f 35 a1 5 0 0 a4 5 0 0 0 1 0 5c 2 0 0 1e 0 0 0 0 f 35 dd 5 0 0 de 5 0 0 0 1 0 5b 2 0 0 25 f 35 a1 5 0 0 a4 5 0 0 0 1 0 59 2 0 0 1e 0 0 0 0 f 0 55 2 0 0 38 39 0 5b 2 0 0 f 0 56 2 0 0 d7 d5 db d8 0 59 2 0 0 0 5c 2 0 0 16 0 55 2 0 0 16 0 55 2 0 0 16 0 5c 2 0 0 16 7 f5 0 b2 e4 d8 0 56 2 0 0 0 59 2 0 0 16 16 ab 0 5a 2 0 0 0 5a 2 0 0 16 16 4 27 4 28 4 3a 57 2 0 0 53 |603
+BoolProperty|ReturnValue|1|4|24|-1
+StructProperty|B|1|12|12|605
+StructProperty|A|1|12|0|606
 Function|EqualEqual_RotatorRotator|28|20|12|29 60 2 0 0 29 5f 2 0 0 b 53 |607
-BoolProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+BoolProperty|ReturnValue|1|4|24|-1
+StructProperty|B|1|12|12|609
+StructProperty|A|1|12|0|610
 Function|NotEqual_RotatorRotator|28|20|12|29 64 2 0 0 29 63 2 0 0 b 53 |611
-StructProperty|ReturnValue|
-FloatProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|16|-1
+FloatProperty|B|1|4|12|613
+StructProperty|A|1|12|0|614
 Function|Multiply_RotatorFloat|28|20|12|29 68 2 0 0 29 67 2 0 0 b 53 |615
-StructProperty|ReturnValue|
-StructProperty|B|
-FloatProperty|A|
+StructProperty|ReturnValue|1|12|16|-1
+StructProperty|B|1|12|4|617
+FloatProperty|A|1|4|0|618
 Function|Multiply_FloatRotator|28|20|12|29 6c 2 0 0 29 6b 2 0 0 b 53 |619
-StructProperty|ReturnValue|
-FloatProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|16|-1
+FloatProperty|B|1|4|12|621
+StructProperty|A|1|12|0|622
 Function|Divide_RotatorFloat|28|20|12|29 70 2 0 0 29 6f 2 0 0 b 53 |623
-StructProperty|ReturnValue|
-FloatProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|16|-1
+FloatProperty|B|1|4|12|625
+StructProperty|A|1|12|0|626
 Function|MultiplyEqual_RotatorFloat|28|20|12|29 74 2 0 0 29 73 2 0 0 b 53 |627
-StructProperty|ReturnValue|
-FloatProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|16|-1
+FloatProperty|B|1|4|12|629
+StructProperty|A|1|12|0|630
 Function|DivideEqual_RotatorFloat|28|20|12|29 78 2 0 0 29 77 2 0 0 b 53 |631
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|24|-1
+StructProperty|B|1|12|12|633
+StructProperty|A|1|12|0|634
 Function|Add_RotatorRotator|36|20|12|29 7c 2 0 0 29 7b 2 0 0 b 53 |635
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|24|-1
+StructProperty|B|1|12|12|637
+StructProperty|A|1|12|0|638
 Function|Subtract_RotatorRotator|36|20|12|29 80 2 0 0 29 7f 2 0 0 b 53 |639
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|24|-1
+StructProperty|B|1|12|12|641
+StructProperty|A|1|12|0|642
 Function|AddEqual_RotatorRotator|36|20|12|29 84 2 0 0 29 83 2 0 0 b 53 |643
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|24|-1
+StructProperty|B|1|12|12|645
+StructProperty|A|1|12|0|646
 Function|SubtractEqual_RotatorRotator|36|20|12|29 88 2 0 0 29 87 2 0 0 b 53 |647
-BoolProperty|ReturnValue|
+BoolProperty|ReturnValue|1|4|8|-1
 IntProperty|B|1|4|4|649
 IntProperty|A|1|4|0|650
 Function|ClockwiseFrom_IntInt|12|20|12|29 8c 2 0 0 29 8b 2 0 0 b 53 |651
-StructProperty|Z|
-StructProperty|Y|
-StructProperty|X|
-StructProperty|A|
+StructProperty|Z|1|12|36|-1
+StructProperty|Y|1|12|24|653
+StructProperty|X|1|12|12|654
+StructProperty|A|1|12|0|655
 Function|GetAxes|48|38|22|29 91 2 0 0 29 90 2 0 0 29 8f 2 0 0 29 8e 2 0 0 b 53 |656
-StructProperty|Z|
-StructProperty|Y|
-StructProperty|X|
-StructProperty|A|
+StructProperty|Z|1|12|36|-1
+StructProperty|Y|1|12|24|658
+StructProperty|X|1|12|12|659
+StructProperty|A|1|12|0|660
 Function|GetUnAxes|48|38|22|29 96 2 0 0 29 95 2 0 0 29 94 2 0 0 29 93 2 0 0 b 53 |661
-StructProperty|ReturnValue|
+StructProperty|ReturnValue|1|12|16|-1
 IntProperty|Axis|1|4|12|663
-StructProperty|A|
+StructProperty|A|1|12|0|664
 Function|GetRotatorAxis|28|20|12|29 9a 2 0 0 29 99 2 0 0 b 53 |665
-StructProperty|ReturnValue|
-BoolProperty|bRoll|
+StructProperty|ReturnValue|1|12|4|-1
+BoolProperty|bRoll|1|4|0|667
 Function|RotRand|16|12|8|b 29 9d 2 0 0 b 53 |668
-StructProperty|ReturnValue|
-StructProperty|Z|
-StructProperty|Y|
-StructProperty|X|
+StructProperty|ReturnValue|1|12|36|-1
+StructProperty|Z|1|12|24|670
+StructProperty|Y|1|12|12|671
+StructProperty|X|1|12|0|672
 Function|OrthoRotation|48|29|17|29 a2 2 0 0 29 a1 2 0 0 29 a0 2 0 0 b 53 |673
-StructProperty|ReturnValue|
-StructProperty|Rot|
+StructProperty|ReturnValue|1|12|12|-1
+StructProperty|Rot|1|12|0|675
 Function|Normalize|24|11|7|29 a5 2 0 0 b 53 |676
-StructProperty|ReturnValue|
-BoolProperty|bShortestPath|
-FloatProperty|Alpha|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|32|-1
+BoolProperty|bShortestPath|1|4|28|678
+FloatProperty|Alpha|1|4|24|679
+StructProperty|B|1|12|12|680
+StructProperty|A|1|12|0|681
 Function|RLerp|44|39|23|b 29 ab 2 0 0 29 aa 2 0 0 29 a9 2 0 0 29 a8 2 0 0 b 53 |682
-StructProperty|ReturnValue|
-StructProperty|RBasis|
-StructProperty|R|
+StructProperty|ReturnValue|1|12|24|-1
+StructProperty|RBasis|1|12|12|684
+StructProperty|R|1|12|0|685
 Function|RTransform|36|20|12|29 af 2 0 0 29 ae 2 0 0 b 53 |686
-StructProperty|ReturnValue|
-BoolProperty|bConstantInterpSpeed|
-FloatProperty|InterpSpeed|
-FloatProperty|DeltaTime|
-StructProperty|Target|
-StructProperty|Current|
+StructProperty|ReturnValue|1|12|36|-1
+BoolProperty|bConstantInterpSpeed|1|4|32|688
+FloatProperty|InterpSpeed|1|4|28|689
+FloatProperty|DeltaTime|1|4|24|690
+StructProperty|Target|1|12|12|691
+StructProperty|Current|1|12|0|692
 Function|RInterpTo|48|48|28|b 29 b6 2 0 0 29 b5 2 0 0 29 b4 2 0 0 29 b3 2 0 0 29 b2 2 0 0 b 53 |693
 IntProperty|ReturnValue|1|4|4|-1
 IntProperty|Angle|1|4|0|695
 Function|NormalizeRotAxis|8|11|7|29 b9 2 0 0 b 53 |696
-FloatProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+FloatProperty|ReturnValue|1|4|24|-1
+StructProperty|B|1|12|12|698
+StructProperty|A|1|12|0|699
 Function|RDiff|28|20|12|29 bd 2 0 0 29 bc 2 0 0 b 53 |700
-FloatProperty|ReturnValue|
-StructProperty|R|
+FloatProperty|ReturnValue|1|4|12|-1
+StructProperty|R|1|12|0|702
 Function|RSize|16|11|7|29 c0 2 0 0 b 53 |703
 IntProperty|DesiredViewAxis|1|4|16|-1
 IntProperty|MinLimit|1|4|12|705
@@ -722,407 +722,407 @@ IntProperty|Max|1|4|8|719
 IntProperty|Min|1|4|4|720
 IntProperty|Current|1|4|0|721
 Function|ClampRotAxisFromRange|24|137|85|f 0 cf 2 0 0 91 1c ba 2 0 0 93 0 d1 2 0 0 0 d2 2 0 0 16 16 2c 2 16 f 0 ce 2 0 0 91 1c ba 2 0 0 92 0 d1 2 0 0 0 d2 2 0 0 16 16 2c 2 16 4 1c cd 2 0 0 0 d3 2 0 0 0 ce 2 0 0 0 cf 2 0 0 16 4 3a d0 2 0 0 53 |722
-BoolProperty|bClamped|
-BoolProperty|ReturnValue|
-FloatProperty|InterpolationSpeed|
+BoolProperty|bClamped|1|4|28|-1
+BoolProperty|ReturnValue|1|4|24|724
+FloatProperty|InterpolationSpeed|1|4|20|725
 IntProperty|MinLimit|1|4|16|726
 IntProperty|MaxLimit|1|4|12|727
 IntProperty|out_DeltaViewAxis|1|4|8|728
 IntProperty|ViewAxis|1|4|4|729
-FloatProperty|DeltaTime|
+FloatProperty|DeltaTime|1|4|0|730
 Function|SClampRotAxis|32|618|402|f 48 da 2 0 0 1c ba 2 0 0 48 da 2 0 0 16 f 0 db 2 0 0 1c ba 2 0 0 0 db 2 0 0 16 7 a2 0 82 98 0 db 2 0 0 0 d9 2 0 0 16 18 20 0 99 92 0 db 2 0 0 48 da 2 0 0 16 0 d9 2 0 0 16 16 f 48 da 2 0 0 93 0 d9 2 0 0 0 db 2 0 0 16 14 2d 0 d5 2 0 0 27 6 54 2 7 48 1 97 0 db 2 0 0 0 d9 2 0 0 16 7 d3 0 97 48 da 2 0 0 25 16 f 48 da 2 0 0 25 7 45 1 97 92 0 db 2 0 0 48 da 2 0 0 16 0 d9 2 0 0 16 f 48 da 2 0 0 38 44 af af 1c cc 1 0 0 38 3f 0 db 2 0 0 38 3f 0 d9 2 0 0 0 dc 2 0 0 0 d7 2 0 0 16 38 3f 0 db 2 0 0 16 38 3f 26 16 6 54 2 7 b0 1 82 99 0 db 2 0 0 0 d8 2 0 0 16 18 20 0 98 92 0 db 2 0 0 48 da 2 0 0 16 0 d8 2 0 0 16 16 f 48 da 2 0 0 93 0 d8 2 0 0 0 db 2 0 0 16 14 2d 0 d5 2 0 0 27 6 54 2 7 54 2 96 0 db 2 0 0 0 d8 2 0 0 16 7 e1 1 96 48 da 2 0 0 25 16 f 48 da 2 0 0 25 7 54 2 96 92 0 db 2 0 0 48 da 2 0 0 16 0 d8 2 0 0 16 a1 48 da 2 0 0 38 44 ae af 1c cc 1 0 0 38 3f 0 db 2 0 0 38 3f 0 d8 2 0 0 0 dc 2 0 0 0 d7 2 0 0 16 38 3f 0 db 2 0 0 16 38 3f 26 16 16 4 2d 0 d5 2 0 0 4 3a d6 2 0 0 53 |731
-StructProperty|R|
-StructProperty|ReturnValue|
+StructProperty|R|1|12|24|-1
+StructProperty|ReturnValue|1|12|12|733
 IntProperty|Roll|1|4|8|734
 IntProperty|Yaw|1|4|4|735
 IntProperty|Pitch|1|4|0|736
-Function|MakeRotator|36|135|79|f 35 d5 5 0 0 d6 5 0 0 0 1 0 de 2 0 0 0 e2 2 0 0 f 35 d4 5 0 0 d6 5 0 0 0 1 0 de 2 0 0 0 e1 2 0 0 f 35 d3 5 0 0 d6 5 0 0 0 1 0 de 2 0 0 0 e0 2 0 0 4 0 de 2 0 0 4 3a df 2 0 0 53 |737
-StrProperty|ReturnValue|
-StrProperty|B|
-StrProperty|A|
+Function|MakeRotator|36|135|79|f 35 dd 5 0 0 de 5 0 0 0 1 0 de 2 0 0 0 e2 2 0 0 f 35 dc 5 0 0 de 5 0 0 0 1 0 de 2 0 0 0 e1 2 0 0 f 35 db 5 0 0 de 5 0 0 0 1 0 de 2 0 0 0 e0 2 0 0 4 0 de 2 0 0 4 3a df 2 0 0 53 |737
+StrProperty|ReturnValue|1|16|32|-1
+StrProperty|B|1|16|16|739
+StrProperty|A|1|16|0|740
 Function|Concat_StrStr|48|20|12|29 e6 2 0 0 29 e5 2 0 0 b 53 |741
-StrProperty|ReturnValue|
-StrProperty|B|
-StrProperty|A|
+StrProperty|ReturnValue|1|16|32|-1
+StrProperty|B|1|16|16|743
+StrProperty|A|1|16|0|744
 Function|At_StrStr|48|20|12|29 ea 2 0 0 29 e9 2 0 0 b 53 |745
-BoolProperty|ReturnValue|
-StrProperty|B|
-StrProperty|A|
+BoolProperty|ReturnValue|1|4|32|-1
+StrProperty|B|1|16|16|747
+StrProperty|A|1|16|0|748
 Function|Less_StrStr|36|20|12|29 ee 2 0 0 29 ed 2 0 0 b 53 |749
-BoolProperty|ReturnValue|
-StrProperty|B|
-StrProperty|A|
+BoolProperty|ReturnValue|1|4|32|-1
+StrProperty|B|1|16|16|751
+StrProperty|A|1|16|0|752
 Function|Greater_StrStr|36|20|12|29 f2 2 0 0 29 f1 2 0 0 b 53 |753
-BoolProperty|ReturnValue|
-StrProperty|B|
-StrProperty|A|
+BoolProperty|ReturnValue|1|4|32|-1
+StrProperty|B|1|16|16|755
+StrProperty|A|1|16|0|756
 Function|LessEqual_StrStr|36|20|12|29 f6 2 0 0 29 f5 2 0 0 b 53 |757
-BoolProperty|ReturnValue|
-StrProperty|B|
-StrProperty|A|
+BoolProperty|ReturnValue|1|4|32|-1
+StrProperty|B|1|16|16|759
+StrProperty|A|1|16|0|760
 Function|GreaterEqual_StrStr|36|20|12|29 fa 2 0 0 29 f9 2 0 0 b 53 |761
-BoolProperty|ReturnValue|
-StrProperty|B|
-StrProperty|A|
+BoolProperty|ReturnValue|1|4|32|-1
+StrProperty|B|1|16|16|763
+StrProperty|A|1|16|0|764
 Function|EqualEqual_StrStr|36|20|12|29 fe 2 0 0 29 fd 2 0 0 b 53 |765
-BoolProperty|ReturnValue|
-StrProperty|B|
-StrProperty|A|
+BoolProperty|ReturnValue|1|4|32|-1
+StrProperty|B|1|16|16|767
+StrProperty|A|1|16|0|768
 Function|NotEqual_StrStr|36|20|12|29 2 3 0 0 29 1 3 0 0 b 53 |769
-BoolProperty|ReturnValue|
-StrProperty|B|
-StrProperty|A|
+BoolProperty|ReturnValue|1|4|32|-1
+StrProperty|B|1|16|16|771
+StrProperty|A|1|16|0|772
 Function|ComplementEqual_StrStr|36|20|12|29 6 3 0 0 29 5 3 0 0 b 53 |773
-StrProperty|ReturnValue|
-StrProperty|B|
-StrProperty|A|
+StrProperty|ReturnValue|1|16|32|-1
+StrProperty|B|1|16|16|775
+StrProperty|A|1|16|0|776
 Function|ConcatEqual_StrStr|48|20|12|29 a 3 0 0 29 9 3 0 0 b 53 |777
-StrProperty|ReturnValue|
-StrProperty|B|
-StrProperty|A|
+StrProperty|ReturnValue|1|16|32|-1
+StrProperty|B|1|16|16|779
+StrProperty|A|1|16|0|780
 Function|AtEqual_StrStr|48|20|12|29 e 3 0 0 29 d 3 0 0 b 53 |781
-StrProperty|ReturnValue|
-StrProperty|B|
-StrProperty|A|
+StrProperty|ReturnValue|1|16|32|-1
+StrProperty|B|1|16|16|783
+StrProperty|A|1|16|0|784
 Function|SubtractEqual_StrStr|48|20|12|29 12 3 0 0 29 11 3 0 0 b 53 |785
 IntProperty|ReturnValue|1|4|16|-1
-StrProperty|S|
+StrProperty|S|1|16|0|787
 Function|Len|20|11|7|29 15 3 0 0 b 53 |788
 IntProperty|ReturnValue|1|4|44|-1
 IntProperty|StartPos|1|4|40|790
-BoolProperty|bIgnoreCase|
-BoolProperty|bSearchFromRight|
-StrProperty|T|
-StrProperty|S|
+BoolProperty|bIgnoreCase|1|4|36|791
+BoolProperty|bSearchFromRight|1|4|32|792
+StrProperty|T|1|16|16|793
+StrProperty|S|1|16|0|794
 Function|InStr|48|50|30|b b b 29 1c 3 0 0 29 1b 3 0 0 29 1a 3 0 0 29 19 3 0 0 29 18 3 0 0 b 53 |795
-StrProperty|ReturnValue|
+StrProperty|ReturnValue|1|16|24|-1
 IntProperty|J|1|4|20|797
 IntProperty|I|1|4|16|798
-StrProperty|S|
+StrProperty|S|1|16|0|799
 Function|Mid|40|30|18|b 29 21 3 0 0 29 20 3 0 0 29 1f 3 0 0 b 53 |800
-StrProperty|ReturnValue|
+StrProperty|ReturnValue|1|16|20|-1
 IntProperty|I|1|4|16|802
-StrProperty|S|
+StrProperty|S|1|16|0|803
 Function|Left|36|20|12|29 25 3 0 0 29 24 3 0 0 b 53 |804
-StrProperty|ReturnValue|
+StrProperty|ReturnValue|1|16|20|-1
 IntProperty|I|1|4|16|806
-StrProperty|S|
+StrProperty|S|1|16|0|807
 Function|Right|36|20|12|29 29 3 0 0 29 28 3 0 0 b 53 |808
-StrProperty|ReturnValue|
-StrProperty|S|
+StrProperty|ReturnValue|1|16|16|-1
+StrProperty|S|1|16|0|810
 Function|Caps|32|11|7|29 2c 3 0 0 b 53 |811
-StrProperty|ReturnValue|
-StrProperty|S|
+StrProperty|ReturnValue|1|16|16|-1
+StrProperty|S|1|16|0|813
 Function|Locs|32|11|7|29 2f 3 0 0 b 53 |814
-StrProperty|ReturnValue|
+StrProperty|ReturnValue|1|16|4|-1
 IntProperty|I|1|4|0|816
 Function|Chr|20|11|7|29 32 3 0 0 b 53 |817
 IntProperty|ReturnValue|1|4|16|-1
-StrProperty|S|
+StrProperty|S|1|16|0|819
 Function|Asc|20|11|7|29 35 3 0 0 b 53 |820
-StrProperty|ReturnValue|
-BoolProperty|bCaseSensitive|
-StrProperty|With|
-StrProperty|Match|
-StrProperty|Src|
+StrProperty|ReturnValue|1|16|52|-1
+BoolProperty|bCaseSensitive|1|4|48|822
+StrProperty|With|1|16|32|823
+StrProperty|Match|1|16|16|824
+StrProperty|Src|1|16|0|825
 Function|Repl|68|39|23|b 29 3b 3 0 0 29 3a 3 0 0 29 39 3 0 0 29 38 3 0 0 b 53 |826
 IntProperty|pos|1|4|52|-1
-StrProperty|ReturnValue|
-BoolProperty|bOmitSplitStr|
-StrProperty|SplitStr|
-StrProperty|Text|
+StrProperty|ReturnValue|1|16|36|828
+BoolProperty|bOmitSplitStr|1|4|32|829
+StrProperty|SplitStr|1|16|16|830
+StrProperty|Text|1|16|0|831
 Function|Split|56|147|99|b f 0 3d 3 0 0 7e 0 41 3 0 0 0 40 3 0 0 4a 4a 4a 16 7 7e 0 9b 0 3d 3 0 0 1d ff ff ff ff 16 7 65 0 2d 0 3f 3 0 0 4 7f 0 41 3 0 0 92 0 3d 3 0 0 7d 0 40 3 0 0 16 16 4a 16 4 7f 0 41 3 0 0 0 3d 3 0 0 4a 16 6 88 0 4 0 41 3 0 0 4 3a 3e 3 0 0 53 |832
 IntProperty|Idx|1|4|32|-1
-StrProperty|ReturnValue|
-StrProperty|Text|
+StrProperty|ReturnValue|1|16|16|834
+StrProperty|Text|1|16|0|835
 Function|GetRightMost|36|141|97|f 0 43 3 0 0 7e 0 45 3 0 0 1f 5f 0 4a 4a 4a 16 7 78 0 9b 0 43 3 0 0 1d ff ff ff ff 16 f 0 45 3 0 0 7f 0 45 3 0 0 92 0 43 3 0 0 26 16 7d 0 45 3 0 0 16 16 f 0 43 3 0 0 7e 0 45 3 0 0 1f 5f 0 4a 4a 4a 16 6 1b 0 4 0 45 3 0 0 4 3a 44 3 0 0 53 |836
-StrProperty|StringArray|
+StrProperty|StringArray|1|16|0|-1
 IntProperty|I|1|4|52|-1
-BoolProperty|bIgnoreBlanks|
-StrProperty|delim|
-StrProperty|out_Result|
-ArrayProperty|StringArray|
+BoolProperty|bIgnoreBlanks|1|4|48|839
+StrProperty|delim|1|16|32|840
+StrProperty|out_Result|1|16|16|841
+ArrayProperty|StringArray|1|16|0|838
 Function|JoinArray|56|239|167|49 4 0 1f 2c 0 15 49 2 0 27 15 f 48 4b 3 0 0 1f 0 f 0 48 3 0 0 25 7 ec 0 96 0 48 3 0 0 36 0 4c 3 0 0 16 7 de 0 84 7b 10 0 48 3 0 0 0 4c 3 0 0 1f 0 16 18 d 0 81 2d 0 49 3 0 0 16 16 7 b6 0 84 7b 48 4b 3 0 0 1f 0 16 18 1e 0 82 81 2d 0 49 3 0 0 16 18 d 0 97 0 48 3 0 0 25 16 16 16 e 8 3 0 0 61 42 48 4b 3 0 0 0 4a 3 0 0 16 e 8 3 0 0 61 42 48 4b 3 0 0 10 0 48 3 0 0 0 4c 3 0 0 16 a5 0 48 3 0 0 16 6 23 0 4 b 53 |843
-StrProperty|Pieces|
-BoolProperty|bCullEmpty|
-StrProperty|delim|
-ArrayProperty|Pieces|
-StrProperty|BaseString|
+StrProperty|Pieces|1|16|0|-1
+BoolProperty|bCullEmpty|1|4|48|-1
+StrProperty|delim|1|16|32|846
+ArrayProperty|Pieces|1|16|16|845
+StrProperty|BaseString|1|16|0|848
 Function|ParseStringIntoArray|52|38|22|29 52 3 0 0 29 51 3 0 0 29 50 3 0 0 29 4f 3 0 0 b 53 |849
-StrProperty|ReturnValue|
-StrProperty|Result|
-ArrayProperty|Result|
-ArrayProperty|ReturnValue|
-BoolProperty|bCullEmpty|
-StrProperty|Delimiter|
-StrProperty|Source|
+StrProperty|ReturnValue|1|16|0|-1
+StrProperty|Result|1|16|0|-1
+ArrayProperty|Result|1|16|52|852
+ArrayProperty|ReturnValue|1|16|36|851
+BoolProperty|bCullEmpty|1|4|32|854
+StrProperty|Delimiter|1|16|16|855
+StrProperty|Source|1|16|0|856
 Function|SplitString|68|76|48|49 4 0 1f 2c 0 15 b 1c 53 3 0 0 0 5a 3 0 0 0 56 3 0 0 0 59 3 0 0 2d 0 58 3 0 0 16 4 0 56 3 0 0 4 3a 57 3 0 0 53 |857
-StrProperty|ReturnValue|
+StrProperty|ReturnValue|1|16|8|-1
 ObjectProperty|CheckObject|
 Function|PathName|24|11|7|29 5d 3 0 0 b 53 |860
-BoolProperty|ReturnValue|
+BoolProperty|ReturnValue|1|4|16|-1
 ObjectProperty|B|
 ObjectProperty|A|
 Function|EqualEqual_ObjectObject|20|20|12|29 61 3 0 0 29 60 3 0 0 b 53 |864
-BoolProperty|ReturnValue|
+BoolProperty|ReturnValue|1|4|16|-1
 ObjectProperty|B|
 ObjectProperty|A|
 Function|NotEqual_ObjectObject|20|20|12|29 65 3 0 0 29 64 3 0 0 b 53 |868
-BoolProperty|ReturnValue|
+BoolProperty|ReturnValue|1|4|32|-1
 InterfaceProperty|B|
 InterfaceProperty|A|
 Function|EqualEqual_InterfaceInterface|36|20|12|29 69 3 0 0 29 68 3 0 0 b 53 |872
-BoolProperty|ReturnValue|
+BoolProperty|ReturnValue|1|4|32|-1
 InterfaceProperty|B|
 InterfaceProperty|A|
 Function|NotEqual_InterfaceInterface|36|20|12|29 6d 3 0 0 29 6c 3 0 0 b 53 |876
-BoolProperty|ReturnValue|
+BoolProperty|ReturnValue|1|4|16|-1
 ClassProperty|ParentClass|
 ClassProperty|TestClass|
 Function|ClassIsChildOf|20|20|12|29 71 3 0 0 29 70 3 0 0 b 53 |880
-BoolProperty|ReturnValue|
+BoolProperty|ReturnValue|1|4|8|-1
 NameProperty|ClassName|
 Function|IsA|12|11|7|29 74 3 0 0 b 53 |883
-BoolProperty|ReturnValue|
+BoolProperty|ReturnValue|1|4|16|-1
 NameProperty|B|
 NameProperty|A|
 Function|EqualEqual_NameName|20|20|12|29 78 3 0 0 29 77 3 0 0 b 53 |887
-BoolProperty|ReturnValue|
+BoolProperty|ReturnValue|1|4|16|-1
 NameProperty|B|
 NameProperty|A|
 Function|NotEqual_NameName|20|20|12|29 7c 3 0 0 29 7b 3 0 0 b 53 |891
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|64|128|-1
+StructProperty|B|1|64|64|893
+StructProperty|A|1|64|0|894
 Function|Multiply_MatrixMatrix|192|20|12|29 80 3 0 0 29 7f 3 0 0 b 53 |895
-StructProperty|ReturnValue|
-StructProperty|A|
-StructProperty|TM|
+StructProperty|ReturnValue|1|12|76|-1
+StructProperty|A|1|12|64|897
+StructProperty|TM|1|64|0|898
 Function|TransformVector|88|20|12|29 84 3 0 0 29 83 3 0 0 b 53 |899
-StructProperty|ReturnValue|
-StructProperty|A|
-StructProperty|TM|
+StructProperty|ReturnValue|1|12|76|-1
+StructProperty|A|1|12|64|901
+StructProperty|TM|1|64|0|902
 Function|InverseTransformVector|88|20|12|29 88 3 0 0 29 87 3 0 0 b 53 |903
-StructProperty|ReturnValue|
-StructProperty|A|
-StructProperty|TM|
+StructProperty|ReturnValue|1|12|76|-1
+StructProperty|A|1|12|64|905
+StructProperty|TM|1|64|0|906
 Function|TransformNormal|88|20|12|29 8c 3 0 0 29 8b 3 0 0 b 53 |907
-StructProperty|ReturnValue|
-StructProperty|A|
-StructProperty|TM|
+StructProperty|ReturnValue|1|12|76|-1
+StructProperty|A|1|12|64|909
+StructProperty|TM|1|64|0|910
 Function|InverseTransformNormal|88|20|12|29 90 3 0 0 29 8f 3 0 0 b 53 |911
-StructProperty|ReturnValue|
-StructProperty|Rotation|
-StructProperty|Translation|
+StructProperty|ReturnValue|1|64|32|-1
+StructProperty|Rotation|1|12|12|913
+StructProperty|Translation|1|12|0|914
 Function|MakeRotationTranslationMatrix|96|20|12|29 94 3 0 0 29 93 3 0 0 b 53 |915
-StructProperty|ReturnValue|
-StructProperty|Rotation|
+StructProperty|ReturnValue|1|64|16|-1
+StructProperty|Rotation|1|12|0|917
 Function|MakeRotationMatrix|80|11|7|29 97 3 0 0 b 53 |918
-StructProperty|ReturnValue|
-StructProperty|TM|
+StructProperty|ReturnValue|1|12|64|-1
+StructProperty|TM|1|64|0|920
 Function|MatrixGetRotator|76|11|7|29 9a 3 0 0 b 53 |921
-StructProperty|ReturnValue|
-StructProperty|TM|
+StructProperty|ReturnValue|1|12|64|-1
+StructProperty|TM|1|64|0|923
 Function|MatrixGetOrigin|76|11|7|29 9d 3 0 0 b 53 |924
-StructProperty|ReturnValue|
-ByteProperty|Axis|
-StructProperty|TM|
+StructProperty|ReturnValue|1|12|68|-1
+ByteProperty|Axis|1|1|64|926
+StructProperty|TM|1|64|0|927
 Function|MatrixGetAxis|80|20|12|29 a1 3 0 0 29 a0 3 0 0 b 53 |928
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|16|32|-1
+StructProperty|B|1|16|16|930
+StructProperty|A|1|16|0|931
 Function|QuatProduct|48|20|12|29 a5 3 0 0 29 a4 3 0 0 b 53 |932
-FloatProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+FloatProperty|ReturnValue|1|4|32|-1
+StructProperty|B|1|16|16|934
+StructProperty|A|1|16|0|935
 Function|QuatDot|36|20|12|29 a9 3 0 0 29 a8 3 0 0 b 53 |936
-StructProperty|ReturnValue|
-StructProperty|A|
+StructProperty|ReturnValue|1|16|16|-1
+StructProperty|A|1|16|0|938
 Function|QuatInvert|32|11|7|29 ac 3 0 0 b 53 |939
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|28|-1
+StructProperty|B|1|12|16|941
+StructProperty|A|1|16|0|942
 Function|QuatRotateVector|40|20|12|29 b0 3 0 0 29 af 3 0 0 b 53 |943
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|16|32|-1
+StructProperty|B|1|12|12|945
+StructProperty|A|1|12|0|946
 Function|QuatFindBetween|48|20|12|29 b4 3 0 0 29 b3 3 0 0 b 53 |947
-StructProperty|ReturnValue|
-FloatProperty|Angle|
-StructProperty|Axis|
+StructProperty|ReturnValue|1|16|16|-1
+FloatProperty|Angle|1|4|12|949
+StructProperty|Axis|1|12|0|950
 Function|QuatFromAxisAndAngle|32|20|12|29 b8 3 0 0 29 b7 3 0 0 b 53 |951
-StructProperty|ReturnValue|
-StructProperty|A|
+StructProperty|ReturnValue|1|16|16|-1
+StructProperty|A|1|12|0|953
 Function|QuatFromRotator|32|11|7|29 bb 3 0 0 b 53 |954
-StructProperty|ReturnValue|
-StructProperty|A|
+StructProperty|ReturnValue|1|12|16|-1
+StructProperty|A|1|16|0|956
 Function|QuatToRotator|28|11|7|29 be 3 0 0 b 53 |957
-StructProperty|ReturnValue|
-BoolProperty|bShortestPath|
-FloatProperty|Alpha|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|16|48|-1
+BoolProperty|bShortestPath|1|4|36|959
+FloatProperty|Alpha|1|4|32|960
+StructProperty|B|1|16|16|961
+StructProperty|A|1|16|0|962
 Function|QuatSlerp|64|39|23|b 29 c4 3 0 0 29 c3 3 0 0 29 c2 3 0 0 29 c1 3 0 0 b 53 |963
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|16|32|-1
+StructProperty|B|1|16|16|965
+StructProperty|A|1|16|0|966
 Function|Add_QuatQuat|48|20|12|29 c8 3 0 0 29 c7 3 0 0 b 53 |967
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|16|32|-1
+StructProperty|B|1|16|16|969
+StructProperty|A|1|16|0|970
 Function|Subtract_QuatQuat|48|20|12|29 cc 3 0 0 29 cb 3 0 0 b 53 |971
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|8|16|-1
+StructProperty|B|1|8|8|973
+StructProperty|A|1|8|0|974
 Function|Add_Vector2DVector2D|24|20|12|29 d0 3 0 0 29 cf 3 0 0 b 53 |975
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|8|16|-1
+StructProperty|B|1|8|8|977
+StructProperty|A|1|8|0|978
 Function|Subtract_Vector2DVector2D|24|20|12|29 d4 3 0 0 29 d3 3 0 0 b 53 |979
-StructProperty|ReturnValue|
-FloatProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|8|12|-1
+FloatProperty|B|1|4|8|981
+StructProperty|A|1|8|0|982
 Function|Multiply_Vector2DFloat|20|20|12|29 d8 3 0 0 29 d7 3 0 0 b 53 |983
-StructProperty|ReturnValue|
-FloatProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|8|12|-1
+FloatProperty|B|1|4|8|985
+StructProperty|A|1|8|0|986
 Function|Divide_Vector2DFloat|20|20|12|29 dc 3 0 0 29 db 3 0 0 b 53 |987
-StructProperty|ReturnValue|
-FloatProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|8|12|-1
+FloatProperty|B|1|4|8|989
+StructProperty|A|1|8|0|990
 Function|MultiplyEqual_Vector2DFloat|20|20|12|29 e0 3 0 0 29 df 3 0 0 b 53 |991
-StructProperty|ReturnValue|
-FloatProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|8|12|-1
+FloatProperty|B|1|4|8|993
+StructProperty|A|1|8|0|994
 Function|DivideEqual_Vector2DFloat|20|20|12|29 e4 3 0 0 29 e3 3 0 0 b 53 |995
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|8|16|-1
+StructProperty|B|1|8|8|997
+StructProperty|A|1|8|0|998
 Function|AddEqual_Vector2DVector2D|24|20|12|29 e8 3 0 0 29 e7 3 0 0 b 53 |999
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
+StructProperty|ReturnValue|1|8|16|-1
+StructProperty|B|1|8|8|1001
+StructProperty|A|1|8|0|1002
 Function|SubtractEqual_Vector2DVector2D|24|20|12|29 ec 3 0 0 29 eb 3 0 0 b 53 |1003
-FloatProperty|ReturnValue|
-FloatProperty|Pct|
-StructProperty|Range|
-Function|GetRangeValueByPct|16|111|67|4 ae 35 cc 5 0 0 cd 5 0 0 0 0 0 f0 3 0 0 ab af 35 cb 5 0 0 cd 5 0 0 0 0 0 f0 3 0 0 35 cc 5 0 0 cd 5 0 0 0 0 0 f0 3 0 0 16 0 ef 3 0 0 16 16 4 3a ee 3 0 0 53 |1007
-FloatProperty|ReturnValue|
-FloatProperty|Value|
-StructProperty|Range|
-Function|GetRangePctByValue|16|202|122|4 45 b4 35 cb 5 0 0 cd 5 0 0 0 0 0 f4 3 0 0 35 cc 5 0 0 cd 5 0 0 0 0 0 f4 3 0 0 16 1c 0 35 cc 5 0 0 cd 5 0 0 0 0 0 f4 3 0 0 63 0 ac af 0 f3 3 0 0 35 cc 5 0 0 cd 5 0 0 0 0 0 f4 3 0 0 16 af 35 cb 5 0 0 cd 5 0 0 0 0 0 f4 3 0 0 35 cc 5 0 0 cd 5 0 0 0 0 0 f4 3 0 0 16 16 4 3a f2 3 0 0 53 |1011
-FloatProperty|ReturnValue|
-FloatProperty|Value|
-StructProperty|OutputRange|
-StructProperty|InputRange|
+FloatProperty|ReturnValue|1|4|12|-1
+FloatProperty|Pct|1|4|8|1005
+StructProperty|Range|1|8|0|1006
+Function|GetRangeValueByPct|16|111|67|4 ae 35 d4 5 0 0 d5 5 0 0 0 0 0 f0 3 0 0 ab af 35 d3 5 0 0 d5 5 0 0 0 0 0 f0 3 0 0 35 d4 5 0 0 d5 5 0 0 0 0 0 f0 3 0 0 16 0 ef 3 0 0 16 16 4 3a ee 3 0 0 53 |1007
+FloatProperty|ReturnValue|1|4|12|-1
+FloatProperty|Value|1|4|8|1009
+StructProperty|Range|1|8|0|1010
+Function|GetRangePctByValue|16|202|122|4 45 b4 35 d3 5 0 0 d5 5 0 0 0 0 0 f4 3 0 0 35 d4 5 0 0 d5 5 0 0 0 0 0 f4 3 0 0 16 1c 0 35 d4 5 0 0 d5 5 0 0 0 0 0 f4 3 0 0 63 0 ac af 0 f3 3 0 0 35 d4 5 0 0 d5 5 0 0 0 0 0 f4 3 0 0 16 af 35 d3 5 0 0 d5 5 0 0 0 0 0 f4 3 0 0 35 d4 5 0 0 d5 5 0 0 0 0 0 f4 3 0 0 16 16 4 3a f2 3 0 0 53 |1011
+FloatProperty|ReturnValue|1|4|20|-1
+FloatProperty|Value|1|4|16|1013
+StructProperty|OutputRange|1|8|8|1014
+StructProperty|InputRange|1|8|0|1015
 Function|GetMappedRangeValue|24|29|17|29 f9 3 0 0 29 f8 3 0 0 29 f7 3 0 0 b 53 |1016
-StructProperty|NewVect2d|
-StructProperty|ReturnValue|
-FloatProperty|InY|
-FloatProperty|InX|
-Function|vect2d|24|97|57|f 35 cc 5 0 0 cd 5 0 0 0 1 0 fb 3 0 0 0 fe 3 0 0 f 35 cb 5 0 0 cd 5 0 0 0 1 0 fb 3 0 0 0 fd 3 0 0 4 0 fb 3 0 0 4 3a fc 3 0 0 53 |1021
-FloatProperty|ReturnValue|
-FloatProperty|InVal|
-StructProperty|FloatCurve|
+StructProperty|NewVect2d|1|8|16|-1
+StructProperty|ReturnValue|1|8|8|1018
+FloatProperty|InY|1|4|4|1019
+FloatProperty|InX|1|4|0|1020
+Function|vect2d|24|97|57|f 35 d4 5 0 0 d5 5 0 0 0 1 0 fb 3 0 0 0 fe 3 0 0 f 35 d3 5 0 0 d5 5 0 0 0 1 0 fb 3 0 0 0 fd 3 0 0 4 0 fb 3 0 0 4 3a fc 3 0 0 53 |1021
+FloatProperty|ReturnValue|1|4|24|-1
+FloatProperty|InVal|1|4|20|1023
+StructProperty|FloatCurve|1|20|0|1024
 Function|EvalInterpCurveFloat|28|20|12|29 2 4 0 0 29 1 4 0 0 b 53 |1025
-StructProperty|ReturnValue|
-FloatProperty|InVal|
-StructProperty|VectorCurve|
+StructProperty|ReturnValue|1|12|24|-1
+FloatProperty|InVal|1|4|20|1027
+StructProperty|VectorCurve|1|20|0|1028
 Function|EvalInterpCurveVector|36|20|12|29 6 4 0 0 29 5 4 0 0 b 53 |1029
-StructProperty|ReturnValue|
-FloatProperty|InVal|
-StructProperty|Vector2DCurve|
+StructProperty|ReturnValue|1|8|24|-1
+FloatProperty|InVal|1|4|20|1031
+StructProperty|Vector2DCurve|1|20|0|1032
 Function|EvalInterpCurveVector2D|32|20|12|29 a 4 0 0 29 9 4 0 0 b 53 |1033
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
-Function|Subtract_ColorColor|12|195|115|88 35 b9 5 0 0 bc 5 0 0 0 1 0 e 4 0 0 35 b9 5 0 0 bc 5 0 0 0 0 0 d 4 0 0 16 88 35 ba 5 0 0 bc 5 0 0 0 1 0 e 4 0 0 35 ba 5 0 0 bc 5 0 0 0 0 0 d 4 0 0 16 88 35 bb 5 0 0 bc 5 0 0 0 1 0 e 4 0 0 35 bb 5 0 0 bc 5 0 0 0 0 0 d 4 0 0 16 4 0 e 4 0 0 4 3a c 4 0 0 53 |1037
-StructProperty|ReturnValue|
-StructProperty|B|
-FloatProperty|A|
-Function|Multiply_FloatColor|12|138|82|c6 35 b9 5 0 0 bc 5 0 0 0 1 0 11 4 0 0 0 12 4 0 0 16 c6 35 ba 5 0 0 bc 5 0 0 0 1 0 11 4 0 0 0 12 4 0 0 16 c6 35 bb 5 0 0 bc 5 0 0 0 1 0 11 4 0 0 0 12 4 0 0 16 4 0 11 4 0 0 4 3a 10 4 0 0 53 |1041
-StructProperty|ReturnValue|
-FloatProperty|B|
-StructProperty|A|
-Function|Multiply_ColorFloat|12|138|82|c6 35 b9 5 0 0 bc 5 0 0 0 1 0 16 4 0 0 0 15 4 0 0 16 c6 35 ba 5 0 0 bc 5 0 0 0 1 0 16 4 0 0 0 15 4 0 0 16 c6 35 bb 5 0 0 bc 5 0 0 0 1 0 16 4 0 0 0 15 4 0 0 16 4 0 16 4 0 0 4 3a 14 4 0 0 53 |1045
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
-Function|Add_ColorColor|12|195|115|87 35 b9 5 0 0 bc 5 0 0 0 1 0 1a 4 0 0 35 b9 5 0 0 bc 5 0 0 0 0 0 19 4 0 0 16 87 35 ba 5 0 0 bc 5 0 0 0 1 0 1a 4 0 0 35 ba 5 0 0 bc 5 0 0 0 0 0 19 4 0 0 16 87 35 bb 5 0 0 bc 5 0 0 0 1 0 1a 4 0 0 35 bb 5 0 0 bc 5 0 0 0 0 0 19 4 0 0 16 4 0 1a 4 0 0 4 3a 18 4 0 0 53 |1049
-StructProperty|C|
-StructProperty|ReturnValue|
-ByteProperty|A|
-ByteProperty|B|
-ByteProperty|G|
-ByteProperty|R|
-Function|MakeColor|12|174|102|b f 35 b9 5 0 0 bc 5 0 0 0 1 0 1c 4 0 0 0 21 4 0 0 f 35 ba 5 0 0 bc 5 0 0 0 1 0 1c 4 0 0 0 20 4 0 0 f 35 bb 5 0 0 bc 5 0 0 0 1 0 1c 4 0 0 0 1f 4 0 0 f 35 b8 5 0 0 bc 5 0 0 0 1 0 1c 4 0 0 0 1e 4 0 0 4 0 1c 4 0 0 4 3a 1d 4 0 0 53 |1056
-StructProperty|Result|
-FloatProperty|FloatResultAlpha|
-FloatProperty|AlphaB|
-FloatProperty|AlphaA|
-StructProperty|FloatResult|
-StructProperty|FloatB|
-StructProperty|FloatA|
-StructProperty|ReturnValue|
-FloatProperty|Alpha|
-StructProperty|B|
-StructProperty|A|
-Function|LerpColor|68|800|488|f 35 9b 5 0 0 9c 5 0 0 0 1 0 29 4 0 0 38 3c 35 b9 5 0 0 bc 5 0 0 0 0 0 2d 4 0 0 f 35 9a 5 0 0 9c 5 0 0 0 1 0 29 4 0 0 38 3c 35 ba 5 0 0 bc 5 0 0 0 0 0 2d 4 0 0 f 35 99 5 0 0 9c 5 0 0 0 1 0 29 4 0 0 38 3c 35 bb 5 0 0 bc 5 0 0 0 0 0 2d 4 0 0 f 0 26 4 0 0 38 3c 35 b8 5 0 0 bc 5 0 0 0 0 0 2d 4 0 0 f 35 9b 5 0 0 9c 5 0 0 0 1 0 28 4 0 0 38 3c 35 b9 5 0 0 bc 5 0 0 0 0 0 2c 4 0 0 f 35 9a 5 0 0 9c 5 0 0 0 1 0 28 4 0 0 38 3c 35 ba 5 0 0 bc 5 0 0 0 0 0 2c 4 0 0 f 35 99 5 0 0 9c 5 0 0 0 1 0 28 4 0 0 38 3c 35 bb 5 0 0 bc 5 0 0 0 0 0 2c 4 0 0 f 0 25 4 0 0 38 3c 35 b8 5 0 0 bc 5 0 0 0 0 0 2c 4 0 0 f 0 27 4 0 0 d7 0 29 4 0 0 d4 d8 0 28 4 0 0 0 29 4 0 0 16 f6 0 2b 4 0 0 1e 0 0 0 0 1e 0 0 80 3f 16 16 16 f 0 24 4 0 0 ae 0 26 4 0 0 ab af 0 25 4 0 0 0 26 4 0 0 16 f6 0 2b 4 0 0 1e 0 0 0 0 1e 0 0 80 3f 16 16 16 f 35 b9 5 0 0 bc 5 0 0 0 1 0 23 4 0 0 38 43 35 9b 5 0 0 9c 5 0 0 0 0 0 27 4 0 0 f 35 ba 5 0 0 bc 5 0 0 0 1 0 23 4 0 0 38 43 35 9a 5 0 0 9c 5 0 0 0 0 0 27 4 0 0 f 35 bb 5 0 0 bc 5 0 0 0 1 0 23 4 0 0 38 43 35 99 5 0 0 9c 5 0 0 0 0 0 27 4 0 0 f 35 b8 5 0 0 bc 5 0 0 0 1 0 23 4 0 0 38 43 0 24 4 0 0 4 0 23 4 0 0 4 3a 2a 4 0 0 53 |1068
-StructProperty|LC|
-StructProperty|ReturnValue|
-FloatProperty|A|
-FloatProperty|B|
-FloatProperty|G|
-FloatProperty|R|
-Function|MakeLinearColor|48|173|101|f 35 c0 5 0 0 c1 5 0 0 0 1 0 2f 4 0 0 0 34 4 0 0 f 35 bf 5 0 0 c1 5 0 0 0 1 0 2f 4 0 0 0 33 4 0 0 f 35 be 5 0 0 c1 5 0 0 0 1 0 2f 4 0 0 0 32 4 0 0 f 35 bd 5 0 0 c1 5 0 0 0 1 0 2f 4 0 0 0 31 4 0 0 4 0 2f 4 0 0 4 3a 30 4 0 0 53 |1075
-StructProperty|ReturnValue|
-StructProperty|OldColor|
-Function|ColorToLinearColor|20|170|114|4 1c 35 4 0 0 ac 38 3c 35 b9 5 0 0 bc 5 0 0 0 0 0 37 4 0 0 1e 0 0 7f 43 16 ac 38 3c 35 ba 5 0 0 bc 5 0 0 0 0 0 37 4 0 0 1e 0 0 7f 43 16 ac 38 3c 35 bb 5 0 0 bc 5 0 0 0 0 0 37 4 0 0 1e 0 0 7f 43 16 ac 38 3c 35 b8 5 0 0 bc 5 0 0 0 0 0 37 4 0 0 1e 0 0 7f 43 16 16 4 3a 36 4 0 0 53 |1078
-StructProperty|ReturnValue|
-FloatProperty|Mult|
-StructProperty|LC|
-Function|Multiply_LinearColorFloat|36|138|82|b6 35 c0 5 0 0 c1 5 0 0 0 1 0 3b 4 0 0 0 3a 4 0 0 16 b6 35 bf 5 0 0 c1 5 0 0 0 1 0 3b 4 0 0 0 3a 4 0 0 16 b6 35 be 5 0 0 c1 5 0 0 0 1 0 3b 4 0 0 0 3a 4 0 0 16 4 0 3b 4 0 0 4 3a 39 4 0 0 53 |1082
-StructProperty|ReturnValue|
-StructProperty|B|
-StructProperty|A|
-Function|Subtract_LinearColorLinearColor|48|195|115|b9 35 c0 5 0 0 c1 5 0 0 0 1 0 3f 4 0 0 35 c0 5 0 0 c1 5 0 0 0 0 0 3e 4 0 0 16 b9 35 bf 5 0 0 c1 5 0 0 0 1 0 3f 4 0 0 35 bf 5 0 0 c1 5 0 0 0 0 0 3e 4 0 0 16 b9 35 be 5 0 0 c1 5 0 0 0 1 0 3f 4 0 0 35 be 5 0 0 c1 5 0 0 0 0 0 3e 4 0 0 16 4 0 3f 4 0 0 4 3a 3d 4 0 0 53 |1086
+StructProperty|ReturnValue|1|4|8|-1
+StructProperty|B|1|4|4|1035
+StructProperty|A|1|4|0|1036
+Function|Subtract_ColorColor|12|195|115|88 35 c1 5 0 0 c4 5 0 0 0 1 0 e 4 0 0 35 c1 5 0 0 c4 5 0 0 0 0 0 d 4 0 0 16 88 35 c2 5 0 0 c4 5 0 0 0 1 0 e 4 0 0 35 c2 5 0 0 c4 5 0 0 0 0 0 d 4 0 0 16 88 35 c3 5 0 0 c4 5 0 0 0 1 0 e 4 0 0 35 c3 5 0 0 c4 5 0 0 0 0 0 d 4 0 0 16 4 0 e 4 0 0 4 3a c 4 0 0 53 |1037
+StructProperty|ReturnValue|1|4|8|-1
+StructProperty|B|1|4|4|1039
+FloatProperty|A|1|4|0|1040
+Function|Multiply_FloatColor|12|138|82|c6 35 c1 5 0 0 c4 5 0 0 0 1 0 11 4 0 0 0 12 4 0 0 16 c6 35 c2 5 0 0 c4 5 0 0 0 1 0 11 4 0 0 0 12 4 0 0 16 c6 35 c3 5 0 0 c4 5 0 0 0 1 0 11 4 0 0 0 12 4 0 0 16 4 0 11 4 0 0 4 3a 10 4 0 0 53 |1041
+StructProperty|ReturnValue|1|4|8|-1
+FloatProperty|B|1|4|4|1043
+StructProperty|A|1|4|0|1044
+Function|Multiply_ColorFloat|12|138|82|c6 35 c1 5 0 0 c4 5 0 0 0 1 0 16 4 0 0 0 15 4 0 0 16 c6 35 c2 5 0 0 c4 5 0 0 0 1 0 16 4 0 0 0 15 4 0 0 16 c6 35 c3 5 0 0 c4 5 0 0 0 1 0 16 4 0 0 0 15 4 0 0 16 4 0 16 4 0 0 4 3a 14 4 0 0 53 |1045
+StructProperty|ReturnValue|1|4|8|-1
+StructProperty|B|1|4|4|1047
+StructProperty|A|1|4|0|1048
+Function|Add_ColorColor|12|195|115|87 35 c1 5 0 0 c4 5 0 0 0 1 0 1a 4 0 0 35 c1 5 0 0 c4 5 0 0 0 0 0 19 4 0 0 16 87 35 c2 5 0 0 c4 5 0 0 0 1 0 1a 4 0 0 35 c2 5 0 0 c4 5 0 0 0 0 0 19 4 0 0 16 87 35 c3 5 0 0 c4 5 0 0 0 1 0 1a 4 0 0 35 c3 5 0 0 c4 5 0 0 0 0 0 19 4 0 0 16 4 0 1a 4 0 0 4 3a 18 4 0 0 53 |1049
+StructProperty|C|1|4|8|-1
+StructProperty|ReturnValue|1|4|4|1051
+ByteProperty|A|1|1|3|1052
+ByteProperty|B|1|1|2|1053
+ByteProperty|G|1|1|1|1054
+ByteProperty|R|1|1|0|1055
+Function|MakeColor|12|174|102|b f 35 c1 5 0 0 c4 5 0 0 0 1 0 1c 4 0 0 0 21 4 0 0 f 35 c2 5 0 0 c4 5 0 0 0 1 0 1c 4 0 0 0 20 4 0 0 f 35 c3 5 0 0 c4 5 0 0 0 1 0 1c 4 0 0 0 1f 4 0 0 f 35 c0 5 0 0 c4 5 0 0 0 1 0 1c 4 0 0 0 1e 4 0 0 4 0 1c 4 0 0 4 3a 1d 4 0 0 53 |1056
+StructProperty|Result|1|4|64|-1
+FloatProperty|FloatResultAlpha|1|4|60|1058
+FloatProperty|AlphaB|1|4|56|1059
+FloatProperty|AlphaA|1|4|52|1060
+StructProperty|FloatResult|1|12|40|1061
+StructProperty|FloatB|1|12|28|1062
+StructProperty|FloatA|1|12|16|1063
+StructProperty|ReturnValue|1|4|12|1064
+FloatProperty|Alpha|1|4|8|1065
+StructProperty|B|1|4|4|1066
+StructProperty|A|1|4|0|1067
+Function|LerpColor|68|800|488|f 35 a3 5 0 0 a4 5 0 0 0 1 0 29 4 0 0 38 3c 35 c1 5 0 0 c4 5 0 0 0 0 0 2d 4 0 0 f 35 a2 5 0 0 a4 5 0 0 0 1 0 29 4 0 0 38 3c 35 c2 5 0 0 c4 5 0 0 0 0 0 2d 4 0 0 f 35 a1 5 0 0 a4 5 0 0 0 1 0 29 4 0 0 38 3c 35 c3 5 0 0 c4 5 0 0 0 0 0 2d 4 0 0 f 0 26 4 0 0 38 3c 35 c0 5 0 0 c4 5 0 0 0 0 0 2d 4 0 0 f 35 a3 5 0 0 a4 5 0 0 0 1 0 28 4 0 0 38 3c 35 c1 5 0 0 c4 5 0 0 0 0 0 2c 4 0 0 f 35 a2 5 0 0 a4 5 0 0 0 1 0 28 4 0 0 38 3c 35 c2 5 0 0 c4 5 0 0 0 0 0 2c 4 0 0 f 35 a1 5 0 0 a4 5 0 0 0 1 0 28 4 0 0 38 3c 35 c3 5 0 0 c4 5 0 0 0 0 0 2c 4 0 0 f 0 25 4 0 0 38 3c 35 c0 5 0 0 c4 5 0 0 0 0 0 2c 4 0 0 f 0 27 4 0 0 d7 0 29 4 0 0 d4 d8 0 28 4 0 0 0 29 4 0 0 16 f6 0 2b 4 0 0 1e 0 0 0 0 1e 0 0 80 3f 16 16 16 f 0 24 4 0 0 ae 0 26 4 0 0 ab af 0 25 4 0 0 0 26 4 0 0 16 f6 0 2b 4 0 0 1e 0 0 0 0 1e 0 0 80 3f 16 16 16 f 35 c1 5 0 0 c4 5 0 0 0 1 0 23 4 0 0 38 43 35 a3 5 0 0 a4 5 0 0 0 0 0 27 4 0 0 f 35 c2 5 0 0 c4 5 0 0 0 1 0 23 4 0 0 38 43 35 a2 5 0 0 a4 5 0 0 0 0 0 27 4 0 0 f 35 c3 5 0 0 c4 5 0 0 0 1 0 23 4 0 0 38 43 35 a1 5 0 0 a4 5 0 0 0 0 0 27 4 0 0 f 35 c0 5 0 0 c4 5 0 0 0 1 0 23 4 0 0 38 43 0 24 4 0 0 4 0 23 4 0 0 4 3a 2a 4 0 0 53 |1068
+StructProperty|LC|1|16|32|-1
+StructProperty|ReturnValue|1|16|16|1070
+FloatProperty|A|1|4|12|1071
+FloatProperty|B|1|4|8|1072
+FloatProperty|G|1|4|4|1073
+FloatProperty|R|1|4|0|1074
+Function|MakeLinearColor|48|173|101|f 35 c8 5 0 0 c9 5 0 0 0 1 0 2f 4 0 0 0 34 4 0 0 f 35 c7 5 0 0 c9 5 0 0 0 1 0 2f 4 0 0 0 33 4 0 0 f 35 c6 5 0 0 c9 5 0 0 0 1 0 2f 4 0 0 0 32 4 0 0 f 35 c5 5 0 0 c9 5 0 0 0 1 0 2f 4 0 0 0 31 4 0 0 4 0 2f 4 0 0 4 3a 30 4 0 0 53 |1075
+StructProperty|ReturnValue|1|16|4|-1
+StructProperty|OldColor|1|4|0|1077
+Function|ColorToLinearColor|20|170|114|4 1c 35 4 0 0 ac 38 3c 35 c1 5 0 0 c4 5 0 0 0 0 0 37 4 0 0 1e 0 0 7f 43 16 ac 38 3c 35 c2 5 0 0 c4 5 0 0 0 0 0 37 4 0 0 1e 0 0 7f 43 16 ac 38 3c 35 c3 5 0 0 c4 5 0 0 0 0 0 37 4 0 0 1e 0 0 7f 43 16 ac 38 3c 35 c0 5 0 0 c4 5 0 0 0 0 0 37 4 0 0 1e 0 0 7f 43 16 16 4 3a 36 4 0 0 53 |1078
+StructProperty|ReturnValue|1|16|20|-1
+FloatProperty|Mult|1|4|16|1080
+StructProperty|LC|1|16|0|1081
+Function|Multiply_LinearColorFloat|36|138|82|b6 35 c8 5 0 0 c9 5 0 0 0 1 0 3b 4 0 0 0 3a 4 0 0 16 b6 35 c7 5 0 0 c9 5 0 0 0 1 0 3b 4 0 0 0 3a 4 0 0 16 b6 35 c6 5 0 0 c9 5 0 0 0 1 0 3b 4 0 0 0 3a 4 0 0 16 4 0 3b 4 0 0 4 3a 39 4 0 0 53 |1082
+StructProperty|ReturnValue|1|16|32|-1
+StructProperty|B|1|16|16|1084
+StructProperty|A|1|16|0|1085
+Function|Subtract_LinearColorLinearColor|48|195|115|b9 35 c8 5 0 0 c9 5 0 0 0 1 0 3f 4 0 0 35 c8 5 0 0 c9 5 0 0 0 0 0 3e 4 0 0 16 b9 35 c7 5 0 0 c9 5 0 0 0 1 0 3f 4 0 0 35 c7 5 0 0 c9 5 0 0 0 0 0 3e 4 0 0 16 b9 35 c6 5 0 0 c9 5 0 0 0 1 0 3f 4 0 0 35 c6 5 0 0 c9 5 0 0 0 0 0 3e 4 0 0 16 4 0 3f 4 0 0 4 3a 3d 4 0 0 53 |1086
 NameProperty|Tag|
-StrProperty|S|
+StrProperty|S|1|16|0|1088
 Function|LogInternal|24|21|13|b 29 42 4 0 0 29 41 4 0 0 b 53 |1089
-StrProperty|S|
+StrProperty|S|1|16|0|-1
 Function|WarnInternal|16|11|7|29 44 4 0 0 b 53 |1091
-StrProperty|ReturnValue|
-StrProperty|PackageName|
-StrProperty|KeyName|
-StrProperty|SectionName|
+StrProperty|ReturnValue|1|16|48|-1
+StrProperty|PackageName|1|16|32|1093
+StrProperty|KeyName|1|16|16|1094
+StrProperty|SectionName|1|16|0|1095
 Function|Localize|64|29|17|29 49 4 0 0 29 48 4 0 0 29 47 4 0 0 b 53 |1096
-StrProperty|Pieces|
-ArrayProperty|Pieces|
-StrProperty|ReturnValue|
-StrProperty|PathName|
-Function|ParseLocalizedPropertyPath|48|111|79|1c 53 3 0 0 0 4e 4 0 0 0 4c 4 0 0 1f 2e 0 28 16 7 61 0 99 36 0 4c 4 0 0 2c 3 16 4 1b db 1 0 0 0 0 0 0 10 26 0 4c 4 0 0 10 2c 2 0 4c 4 0 0 10 25 0 4c 4 0 0 16 6 64 0 4 1f 0 4 3a 4d 4 0 0 53 |1101
+StrProperty|Pieces|1|16|0|-1
+ArrayProperty|Pieces|1|16|32|1098
+StrProperty|ReturnValue|1|16|16|1099
+StrProperty|PathName|1|16|0|1100
+Function|ParseLocalizedPropertyPath|48|111|79|1c 53 3 0 0 0 4e 4 0 0 0 4c 4 0 0 1f 2e 0 28 16 7 61 0 99 36 0 4c 4 0 0 2c 3 16 4 1b dd 1 0 0 0 0 0 0 10 26 0 4c 4 0 0 10 2c 2 0 4c 4 0 0 10 25 0 4c 4 0 0 16 6 64 0 4 1f 0 4 3a 4d 4 0 0 53 |1101
 Function|ScriptTrace|0|2|2|b 53 |-1
-StrProperty|ReturnValue|
+StrProperty|ReturnValue|1|16|0|-1
 Function|GetScriptTrace|16|2|2|b 53 |1104
-ByteProperty|DebuggerType|
+ByteProperty|DebuggerType|1|1|4|-1
 IntProperty|UserFlags|1|4|0|1106
 Function|DebugBreak|5|27|19|b 49 3 0 24 0 15 29 54 4 0 0 29 53 4 0 0 b 53 |1107
 NameProperty|ReturnValue|
 Function|GetFuncName|8|2|2|b 53 |1109
-BoolProperty|bShouldUTrace|
+BoolProperty|bShouldUTrace|1|4|0|-1
 Function|SetUTracing|4|11|7|29 58 4 0 0 b 53 |1111
-BoolProperty|ReturnValue|
+BoolProperty|ReturnValue|1|4|0|-1
 Function|IsUTracing|4|2|2|b 53 |1113
-BoolProperty|bKeepStack|
-BoolProperty|bForceEvents|
+BoolProperty|bKeepStack|1|4|20|-1
+BoolProperty|bForceEvents|1|4|16|1115
 NameProperty|Label|
 NameProperty|NewState|
 Function|GotoState|24|42|26|b b b b 29 5f 4 0 0 29 5e 4 0 0 29 5d 4 0 0 29 5c 4 0 0 b 53 |1118
-BoolProperty|ReturnValue|
-BoolProperty|bTestStateStack|
+BoolProperty|ReturnValue|1|4|12|-1
+BoolProperty|bTestStateStack|1|4|8|1120
 NameProperty|TestState|
 Function|IsInState|16|21|13|b 29 63 4 0 0 29 62 4 0 0 b 53 |1122
-BoolProperty|ReturnValue|
+BoolProperty|ReturnValue|1|4|16|-1
 NameProperty|TestParentState|
 NameProperty|TestState|
 Function|IsChildState|20|20|12|29 67 4 0 0 29 66 4 0 0 b 53 |1126
@@ -1131,7 +1131,7 @@ Function|GetStateName|8|2|2|b 53 |1128
 NameProperty|NewLabel|
 NameProperty|NewState|
 Function|PushState|16|21|13|b 29 6c 4 0 0 29 6b 4 0 0 b 53 |1131
-BoolProperty|bPopAll|
+BoolProperty|bPopAll|1|4|0|-1
 Function|PopState|4|12|8|b 29 6e 4 0 0 b 53 |1133
 Function|DumpStateStack|0|2|2|b 53 |-1
 NameProperty|PreviousStateName|
@@ -1155,107 +1155,107 @@ NameProperty|ValueName|
 ObjectProperty|E|
 Function|EnumFromString|20|20|12|29 83 4 0 0 29 82 4 0 0 b 53 |1154
 ObjectProperty|ReturnValue|
-BoolProperty|MayFail|
+BoolProperty|MayFail|1|4|24|1156
 ClassProperty|ObjectClass|
-StrProperty|ObjectName|
+StrProperty|ObjectName|1|16|0|1158
 Function|DynamicLoadObject|36|30|18|b 29 88 4 0 0 29 87 4 0 0 29 86 4 0 0 b 53 |1159
 ObjectProperty|ReturnValue|
 ClassProperty|ObjectClass|
-StrProperty|ObjectName|
+StrProperty|ObjectName|1|16|0|1162
 Function|FindObject|32|20|12|29 8c 4 0 0 29 8b 4 0 0 b 53 |1163
 Function|SaveConfig|0|2|2|b 53 |-1
 Function|StaticSaveConfig|0|2|2|b 53 |-1
-StrProperty|JSON|
-StrProperty|PropertyName|
+StrProperty|JSON|1|16|16|-1
+StrProperty|PropertyName|1|16|0|1167
 Function|ImportJSON|32|20|12|29 91 4 0 0 29 90 4 0 0 b 53 |1168
-StrProperty|out_SectionNames|
-BoolProperty|ReturnValue|
+StrProperty|out_SectionNames|1|16|0|-1
+BoolProperty|ReturnValue|1|4|36|-1
 IntProperty|MaxResults|1|4|32|1171
 ObjectProperty|ObjectOuter|
-ArrayProperty|out_SectionNames|
+ArrayProperty|out_SectionNames|1|16|8|1170
 ClassProperty|SearchClass|
 Function|GetPerObjectConfigSections|40|48|32|b 49 6 0 1d 0 4 0 0 15 29 98 4 0 0 29 97 4 0 0 29 96 4 0 0 29 95 4 0 0 b 53 |1175
-FloatProperty|ReturnValue|
-StructProperty|OutClosestPoint|
-StructProperty|Origin|
-StructProperty|Line|
-StructProperty|Point|
+FloatProperty|ReturnValue|1|4|48|-1
+StructProperty|OutClosestPoint|1|12|36|1177
+StructProperty|Origin|1|12|24|1178
+StructProperty|Line|1|12|12|1179
+StructProperty|Point|1|12|0|1180
 Function|PointDistToLine|52|39|23|b 29 9e 4 0 0 29 9d 4 0 0 29 9c 4 0 0 29 9b 4 0 0 b 53 |1181
-FloatProperty|ReturnValue|
-StructProperty|OutClosestPoint|
-StructProperty|EndPoint|
-StructProperty|StartPoint|
-StructProperty|Point|
+FloatProperty|ReturnValue|1|4|48|-1
+StructProperty|OutClosestPoint|1|12|36|1183
+StructProperty|EndPoint|1|12|24|1184
+StructProperty|StartPoint|1|12|12|1185
+StructProperty|Point|1|12|0|1186
 Function|PointDistToSegment|52|39|23|b 29 a4 4 0 0 29 a3 4 0 0 29 a2 4 0 0 29 a1 4 0 0 b 53 |1187
-FloatProperty|fProjDistToAxis|
-FloatProperty|fPointZ|
-StructProperty|OriginNoZ|
-StructProperty|PointNoZ|
-StructProperty|AxisZ|
-StructProperty|AxisY|
-StructProperty|AxisX|
-FloatProperty|ReturnValue|
-StructProperty|out_ClosestPoint|
-StructProperty|Origin|
-StructProperty|Orientation|
-StructProperty|Point|
+FloatProperty|fProjDistToAxis|1|4|116|-1
+FloatProperty|fPointZ|1|4|112|1189
+StructProperty|OriginNoZ|1|12|100|1190
+StructProperty|PointNoZ|1|12|88|1191
+StructProperty|AxisZ|1|12|76|1192
+StructProperty|AxisY|1|12|64|1193
+StructProperty|AxisX|1|12|52|1194
+FloatProperty|ReturnValue|1|4|48|1195
+StructProperty|out_ClosestPoint|1|12|36|1196
+StructProperty|Origin|1|12|24|1197
+StructProperty|Orientation|1|12|12|1198
+StructProperty|Point|1|12|0|1199
 Function|PointDistToPlane|120|300|184|b e5 0 b0 4 0 0 0 ac 4 0 0 0 ab 4 0 0 0 aa 4 0 0 16 f 0 a7 4 0 0 db 0 b1 4 0 0 0 aa 4 0 0 16 f 0 a9 4 0 0 d8 0 b1 4 0 0 d5 0 a7 4 0 0 0 aa 4 0 0 16 16 f 0 a8 4 0 0 d8 0 af 4 0 0 d5 db 0 af 4 0 0 0 aa 4 0 0 16 0 aa 4 0 0 16 16 f 0 a6 4 0 0 db d8 0 a9 4 0 0 0 a8 4 0 0 16 0 ac 4 0 0 16 f 48 ae 4 0 0 d7 d7 0 a8 4 0 0 d5 0 a6 4 0 0 0 ac 4 0 0 16 16 d5 0 a7 4 0 0 0 aa 4 0 0 16 16 4 e1 d8 48 ae 4 0 0 0 b1 4 0 0 16 16 4 3a ad 4 0 0 53 |1200
-StructProperty|ReturnValue|
-StructProperty|C|
-StructProperty|B|
-StructProperty|A|
-StructProperty|Point|
+StructProperty|ReturnValue|1|12|48|-1
+StructProperty|C|1|12|36|1202
+StructProperty|B|1|12|24|1203
+StructProperty|A|1|12|12|1204
+StructProperty|Point|1|12|0|1205
 Function|PointProjectToPlane|60|38|22|29 b7 4 0 0 29 b6 4 0 0 29 b5 4 0 0 29 b4 4 0 0 b 53 |1206
-BoolProperty|ReturnValue|
-StructProperty|AxisZ|
-StructProperty|AxisY|
-StructProperty|AxisX|
-StructProperty|Direction|
-StructProperty|OutDotDist|
+BoolProperty|ReturnValue|1|4|56|-1
+StructProperty|AxisZ|1|12|44|1208
+StructProperty|AxisY|1|12|32|1209
+StructProperty|AxisX|1|12|20|1210
+StructProperty|Direction|1|12|8|1211
+StructProperty|OutDotDist|1|8|0|1212
 Function|GetDotDistance|60|47|27|29 be 4 0 0 29 bd 4 0 0 29 bc 4 0 0 29 bb 4 0 0 29 ba 4 0 0 b 53 |1213
-BoolProperty|ReturnValue|
-StructProperty|AxisZ|
-StructProperty|AxisY|
-StructProperty|AxisX|
-StructProperty|Direction|
-StructProperty|OutAngularDist|
+BoolProperty|ReturnValue|1|4|56|-1
+StructProperty|AxisZ|1|12|44|1215
+StructProperty|AxisY|1|12|32|1216
+StructProperty|AxisX|1|12|20|1217
+StructProperty|Direction|1|12|8|1218
+StructProperty|OutAngularDist|1|8|0|1219
 Function|GetAngularDistance|60|47|27|29 c5 4 0 0 29 c4 4 0 0 29 c3 4 0 0 29 c2 4 0 0 29 c1 4 0 0 b 53 |1220
-StructProperty|DotDist|
-StructProperty|OutAngDist|
+StructProperty|DotDist|1|8|8|-1
+StructProperty|OutAngDist|1|8|0|1222
 Function|GetAngularFromDotDist|16|20|12|29 c8 4 0 0 29 c7 4 0 0 b 53 |1223
-StructProperty|OutFOV|
-Function|GetAngularDegreesFromRadians|8|131|83|f 35 cc 5 0 0 cd 5 0 0 0 1 48 ca 4 0 0 ab 35 cc 5 0 0 cd 5 0 0 0 0 48 ca 4 0 0 1e e1 2e 65 42 16 f 35 cb 5 0 0 cd 5 0 0 0 1 48 ca 4 0 0 ab 35 cb 5 0 0 cd 5 0 0 0 0 48 ca 4 0 0 1e e1 2e 65 42 16 4 b 53 |1225
-FloatProperty|Angle|
-FloatProperty|ReturnValue|
-StructProperty|Dir|
-Function|GetHeadingAngle|20|135|91|f 0 cc 4 0 0 1c 71 1 0 0 f6 35 9b 5 0 0 9c 5 0 0 0 0 0 ce 4 0 0 1e 0 0 80 bf 1e 0 0 80 3f 16 16 7 72 0 b0 35 9a 5 0 0 9c 5 0 0 0 0 0 ce 4 0 0 1e 0 0 0 0 16 b6 0 cc 4 0 0 1e 0 0 80 bf 16 4 0 cc 4 0 0 4 3a cd 4 0 0 53 |1229
-FloatProperty|Delta|
-FloatProperty|ReturnValue|
-FloatProperty|A2|
-FloatProperty|A1|
+StructProperty|OutFOV|1|8|0|-1
+Function|GetAngularDegreesFromRadians|8|131|83|f 35 d4 5 0 0 d5 5 0 0 0 1 48 ca 4 0 0 ab 35 d4 5 0 0 d5 5 0 0 0 0 48 ca 4 0 0 1e e1 2e 65 42 16 f 35 d3 5 0 0 d5 5 0 0 0 1 48 ca 4 0 0 ab 35 d3 5 0 0 d5 5 0 0 0 0 48 ca 4 0 0 1e e1 2e 65 42 16 4 b 53 |1225
+FloatProperty|Angle|1|4|16|-1
+FloatProperty|ReturnValue|1|4|12|1227
+StructProperty|Dir|1|12|0|1228
+Function|GetHeadingAngle|20|135|91|f 0 cc 4 0 0 1c 71 1 0 0 f6 35 a3 5 0 0 a4 5 0 0 0 0 0 ce 4 0 0 1e 0 0 80 bf 1e 0 0 80 3f 16 16 7 72 0 b0 35 a2 5 0 0 a4 5 0 0 0 0 0 ce 4 0 0 1e 0 0 0 0 16 b6 0 cc 4 0 0 1e 0 0 80 bf 16 4 0 cc 4 0 0 4 3a cd 4 0 0 53 |1229
+FloatProperty|Delta|1|4|12|-1
+FloatProperty|ReturnValue|1|4|8|1231
+FloatProperty|A2|1|4|4|1232
+FloatProperty|A1|1|4|0|1233
 Function|FindDeltaAngle|16|160|116|f 0 d0 4 0 0 af 0 d2 4 0 0 0 d3 4 0 0 16 7 55 0 b1 0 d0 4 0 0 1e db f 49 40 16 f 0 d0 4 0 0 af 0 d0 4 0 0 ab 1e db f 49 40 1e 0 0 0 40 16 16 6 8b 0 7 8b 0 b0 0 d0 4 0 0 a9 1e db f 49 40 16 16 f 0 d0 4 0 0 ae 0 d0 4 0 0 ab 1e db f 49 40 1e 0 0 0 40 16 16 4 0 d0 4 0 0 4 3a d1 4 0 0 53 |1234
-FloatProperty|ReturnValue|
-FloatProperty|A|
+FloatProperty|ReturnValue|1|4|4|-1
+FloatProperty|A|1|4|0|1236
 Function|UnwindHeading|8|113|89|7 2d 0 b1 0 d6 4 0 0 1e db f 49 40 16 b9 0 d6 4 0 0 ab 1e db f 49 40 1e 0 0 0 40 16 16 6 0 0 7 5c 0 b0 0 d6 4 0 0 a9 1e db f 49 40 16 16 b8 0 d6 4 0 0 ab 1e db f 49 40 1e 0 0 0 40 16 16 6 2d 0 4 0 d6 4 0 0 4 3a d5 4 0 0 53 |1237
-ByteProperty|ReturnValue|
-BoolProperty|bSigned|
-FloatProperty|inputFloat|
+ByteProperty|ReturnValue|1|1|8|-1
+BoolProperty|bSigned|1|4|4|1239
+FloatProperty|inputFloat|1|4|0|1240
 Function|FloatToByte|9|173|141|b 7 5d 0 2d 0 d9 4 0 0 7 27 0 b1 0 da 4 0 0 1e 48 e1 7a 3f 16 4 24 ff 6 5a 0 7 40 0 b0 0 da 4 0 0 1e 48 e1 7a bf 16 4 24 0 6 5a 0 4 38 43 ab ae 0 da 4 0 0 1e 0 0 80 3f 16 1e 0 0 0 43 16 6 a2 0 7 76 0 b1 0 da 4 0 0 1e 69 0 7f 3f 16 4 24 ff 6 a2 0 7 8f 0 b0 0 da 4 0 0 1e 6f 12 83 3b 16 4 24 0 6 a2 0 4 38 43 ab 0 da 4 0 0 1e 0 0 7f 43 16 4 3a d8 4 0 0 53 |1241
-FloatProperty|ReturnValue|
-BoolProperty|bSigned|
-ByteProperty|inputByte|
+FloatProperty|ReturnValue|1|4|8|-1
+BoolProperty|bSigned|1|4|4|1243
+ByteProperty|inputByte|1|1|0|1244
 Function|ByteToFloat|12|73|57|b 7 2b 0 2d 0 dd 4 0 0 4 af ac 38 3c 0 de 4 0 0 1e 0 0 0 43 16 1e 0 0 80 3f 16 6 3e 0 4 ac 38 3c 0 de 4 0 0 1e 0 0 7f 43 16 4 3a dc 4 0 0 53 |1245
-BoolProperty|ReturnValue|
+BoolProperty|ReturnValue|1|4|0|-1
 Function|IsPendingKill|4|2|2|b 53 |1247
 ObjectProperty|O|
 NameProperty|ReturnValue|
-Function|GetPackageName|16|132|84|f 0 e2 4 0 0 17 7 5a 0 77 19 0 e2 4 0 0 9 0 50 5 0 0 0 1 50 5 0 0 2a 16 f 0 e2 4 0 0 19 0 e2 4 0 0 9 0 50 5 0 0 0 1 50 5 0 0 6 b 0 4 19 0 e2 4 0 0 9 0 4f 5 0 0 0 1 4f 5 0 0 4 3a e3 4 0 0 53 |1250
-StructProperty|ReturnValue|
-BoolProperty|bInverse|
-StructProperty|SourceVector|
-StructProperty|SourceRotation|
+Function|GetPackageName|16|132|84|f 0 e2 4 0 0 17 7 5a 0 77 19 0 e2 4 0 0 9 0 58 5 0 0 0 1 58 5 0 0 2a 16 f 0 e2 4 0 0 19 0 e2 4 0 0 9 0 58 5 0 0 0 1 58 5 0 0 6 b 0 4 19 0 e2 4 0 0 9 0 57 5 0 0 0 1 57 5 0 0 4 3a e3 4 0 0 53 |1250
+StructProperty|ReturnValue|1|12|28|-1
+BoolProperty|bInverse|1|4|24|1252
+StructProperty|SourceVector|1|12|12|1253
+StructProperty|SourceRotation|1|12|0|1254
 Function|TransformVectorByRotation|40|30|18|b 29 e8 4 0 0 29 e7 4 0 0 29 e6 4 0 0 b 53 |1255
-StrProperty|ReturnValue|
+StrProperty|ReturnValue|1|16|0|-1
 Function|TimeStamp|16|2|2|b 53 |1257
 IntProperty|MSec|1|4|28|-1
 IntProperty|Sec|1|4|24|1259
@@ -1270,272 +1270,280 @@ IntProperty|ReturnValue|1|4|0|-1
 Function|GetEngineVersion|4|2|2|b 53 |1268
 IntProperty|ReturnValue|1|4|0|-1
 Function|GetBuildChangelistNumber|4|2|2|b 53 |1270
-FloatProperty|FreqList|
+FloatProperty|FreqList|1|4|0|-1
 IntProperty|Idx|1|4|28|-1
-FloatProperty|RandVal|
-FloatProperty|FreqSum|
+FloatProperty|RandVal|1|4|24|1273
+FloatProperty|FreqSum|1|4|20|1274
 IntProperty|ReturnValue|1|4|16|1275
-ArrayProperty|FreqList|
+ArrayProperty|FreqList|1|16|0|1272
 Function|GetRandomOptionSumFrequency|32|246|162|f 0 fa 4 0 0 25 7 4f 0 96 0 fa 4 0 0 36 48 fe 4 0 0 16 b8 0 fc 4 0 0 10 0 fa 4 0 0 48 fe 4 0 0 16 a5 0 fa 4 0 0 16 6 b 0 f 0 fb 4 0 0 ab c3 16 0 fc 4 0 0 16 f 0 fc 4 0 0 1e 0 0 0 0 f 0 fa 4 0 0 25 7 e5 0 96 0 fa 4 0 0 36 48 fe 4 0 0 16 b8 0 fc 4 0 0 10 0 fa 4 0 0 48 fe 4 0 0 16 7 d7 0 b0 0 fb 4 0 0 0 fc 4 0 0 16 4 0 fa 4 0 0 a5 0 fa 4 0 0 16 6 80 0 4 1d ff ff ff ff 4 3a fd 4 0 0 53 |1277
-StrProperty|ReturnValue|
+StrProperty|ReturnValue|1|16|0|-1
 Function|GetLanguage|16|2|2|b 53 |1279
-StructProperty|InGuid|
+StructProperty|InGuid|1|16|0|-1
 Function|InvalidateGuid|16|11|7|29 2 5 0 0 b 53 |1281
-BoolProperty|ReturnValue|
-StructProperty|InGuid|
+BoolProperty|ReturnValue|1|4|16|-1
+StructProperty|InGuid|1|16|0|1283
 Function|IsGuidValid|20|11|7|29 5 5 0 0 b 53 |1284
-StructProperty|ReturnValue|
+StructProperty|ReturnValue|1|16|0|-1
 Function|CreateGuid|16|2|2|b 53 |1286
-StructProperty|ReturnValue|
-StrProperty|InGuidString|
+StructProperty|ReturnValue|1|16|16|-1
+StrProperty|InGuidString|1|16|0|1288
 Function|GetGuidFromString|32|11|7|29 a 5 0 0 b 53 |1289
-StrProperty|ReturnValue|
-StructProperty|InGuid|
+StrProperty|ReturnValue|1|16|16|-1
+StructProperty|InGuid|1|16|0|1291
 Function|GetStringFromGuid|32|11|7|29 d 5 0 0 b 53 |1292
 IntProperty|ReturnValue|1|4|16|-1
-StrProperty|TimerName|
+StrProperty|TimerName|1|16|0|1294
 Function|ProfNodeStart|20|11|7|29 10 5 0 0 b 53 |1295
 IntProperty|AssumedTimerIndex|1|4|0|-1
 Function|ProfNodeStop|4|20|16|49 6 0 1d ff ff ff ff 15 29 12 5 0 0 b 53 |1297
-FloatProperty|Threshold|
+FloatProperty|Threshold|1|4|0|-1
 Function|ProfNodeSetTimeThresholdSeconds|4|11|7|29 14 5 0 0 b 53 |1299
 IntProperty|Depth|1|4|0|-1
 Function|ProfNodeSetDepthThreshold|4|11|7|29 16 5 0 0 b 53 |1301
-StrProperty|EventName|
+StrProperty|EventName|1|16|0|-1
 Function|ProfNodeEvent|16|11|7|29 18 5 0 0 b 53 |1303
-BoolProperty|ReturnValue|
+BoolProperty|ReturnValue|1|4|4|-1
 IntProperty|I|1|4|0|1305
 Function|JHQ_Check|8|24|16|4 97 0 1b 5 0 0 26 16 4 3a 1a 5 0 0 53 |1306
-IntProperty|i2|1|4|4|-1
-IntProperty|ReturnValue|1|4|0|1308
-Function|HelloJHQ0|8|86|62|f 0 1d 5 0 0 2c a 7 31 0 1b c3 1 0 0 0 0 0 0 0 1d 5 0 0 16 f 0 1d 5 0 0 2c 2 6 3d 0 f 0 1d 5 0 0 2c 3 4 92 0 1d 5 0 0 2c c 16 4 3a 1e 5 0 0 53 |1309
+IntProperty|total_array|1|4|0|-1
+ArrayProperty|total_array|1|16|8|1308
+IntProperty|i2|1|4|4|1309
+IntProperty|ReturnValue|1|4|0|1310
+Function|JHQ_ArrayTest|24|127|83|f 10 36 0 1e 5 0 0 0 1e 5 0 0 25 f 0 1f 5 0 0 25 7 5c 0 96 0 1f 5 0 0 2c a 16 f 10 0 1f 5 0 0 0 1e 5 0 0 0 1f 5 0 0 a3 0 1f 5 0 0 16 6 21 0 4 10 93 36 0 1e 5 0 0 26 16 0 1e 5 0 0 4 3a 20 5 0 0 53 |1311
+StrProperty|Msg|1|16|16|-1
+StrProperty|ReturnValue|1|16|0|1313
+Function|JHQ_StringTest|32|44|32|f 0 22 5 0 0 1f 48 65 6c 6c 6f 20 57 6f 72 6c 64 0 4 0 22 5 0 0 4 3a 23 5 0 0 53 |1314
+StructProperty|pos|1|16|16|-1
+StructProperty|ReturnValue|1|16|0|1316
+Function|JHQ_StructTest|32|157|101|f 35 d1 5 0 0 d2 5 0 0 0 1 0 25 5 0 0 1e 0 60 1f 45 f 35 d0 5 0 0 d2 5 0 0 0 1 0 25 5 0 0 1e 0 0 b4 44 f 35 cf 5 0 0 d2 5 0 0 0 1 0 25 5 0 0 1e 0 0 f0 44 f 35 ce 5 0 0 d2 5 0 0 0 1 0 25 5 0 0 1e 0 0 87 44 4 0 25 5 0 0 4 3a 26 5 0 0 53 |1317
 NameProperty|TemplateName|
 ClassProperty|TemplateOwnerClass|
 IntProperty|Dummy|1|4|0|-1
 ScriptStruct|Pointer|
-StructProperty|VfTable_FExec|
-StrProperty|HelpParamNames|
-StrProperty|HelpParamDescriptions|
-BoolProperty|ShowErrorCount|
-BoolProperty|LogToConsole|
-BoolProperty|IsEditor|
-BoolProperty|IsClient|
-BoolProperty|IsServer|
-ArrayProperty|HelpParamDescriptions|
-ArrayProperty|HelpParamNames|
-StrProperty|HelpWebLink|
-StrProperty|HelpUsage|
-StrProperty|HelpDescription|
+StructProperty|VfTable_FExec|1|8|96|-1
+StrProperty|HelpParamNames|1|16|0|-1
+StrProperty|HelpParamDescriptions|1|16|0|-1
+BoolProperty|ShowErrorCount|1|4|176|-1
+BoolProperty|LogToConsole|1|4|176|1326
+BoolProperty|IsEditor|1|4|176|1327
+BoolProperty|IsClient|1|4|176|1328
+BoolProperty|IsServer|1|4|176|1329
+ArrayProperty|HelpParamDescriptions|1|16|160|1325
+ArrayProperty|HelpParamNames|1|16|144|1324
+StrProperty|HelpWebLink|1|16|128|1332
+StrProperty|HelpUsage|1|16|112|1333
+StrProperty|HelpDescription|1|16|96|1334
 IntProperty|ReturnValue|1|4|16|-1
-StrProperty|Params|
-Function|Main|20|11|7|4 3a 31 5 0 0 53 |1329
+StrProperty|Params|1|16|0|1336
+Function|Main|20|11|7|4 3a 39 5 0 0 53 |1337
 Class|Commandlet|
 Commandlet|Default__Commandlet|
-BoolProperty|bIsDirty|
-BoolProperty|bCanBeBaked|
-StructProperty|VfTable_FCurveEdInterface|
+BoolProperty|bIsDirty|1|4|120|-1
+BoolProperty|bCanBeBaked|1|4|120|1341
+StructProperty|VfTable_FCurveEdInterface|1|8|112|1342
 ComponentProperty|Distribution|
 ScriptStruct|RawDistributionFloat|
-BoolProperty|bInMatinee|
-FloatProperty|MatineeValue|
+BoolProperty|bInMatinee|1|4|40|-1
+FloatProperty|MatineeValue|1|4|36|1346
 ScriptStruct|MatineeRawDistributionFloat|
-FloatProperty|ReturnValue|
-FloatProperty|F|
-Function|GetFloatValue|8|20|16|49 6 0 1e 0 0 0 0 15 29 3f 5 0 0 b 53 |1342
+FloatProperty|ReturnValue|1|4|4|-1
+FloatProperty|F|1|4|0|1349
+Function|GetFloatValue|8|20|16|49 6 0 1e 0 0 0 0 15 29 47 5 0 0 b 53 |1350
 Class|DistributionFloat|
 DistributionFloat|Default__DistributionFloat|
-BoolProperty|bIsDirty|
-BoolProperty|bCanBeBaked|
-StructProperty|VfTable_FCurveEdInterface|
+BoolProperty|bIsDirty|1|4|120|-1
+BoolProperty|bCanBeBaked|1|4|120|1354
+StructProperty|VfTable_FCurveEdInterface|1|8|112|1355
 Enum|EDistributionVectorLockFlags|
 Enum|EDistributionVectorMirrorFlags|
 ComponentProperty|Distribution|
 ScriptStruct|RawDistributionVector|
 IntProperty|B|1|4|4|-1
-IntProperty|A|1|4|0|1353
+IntProperty|A|1|4|0|1361
 ScriptStruct|QWord|
 ObjectProperty|ObjectArchetype|
 ClassProperty|Class|
 NameProperty|Name|
 ObjectProperty|Outer|
-IntProperty|NetIndex|1|4|60|1359
-IntProperty|ObjectInternalInteger|1|4|56|1360
-StructProperty|LinkerIndex|
+IntProperty|NetIndex|1|4|60|1367
+IntProperty|ObjectInternalInteger|1|4|56|1368
+StructProperty|LinkerIndex|1|8|48|1369
 ObjectProperty|Linker|
-StructProperty|StateFrame|
-StructProperty|HashOuterNext|
-StructProperty|ObjectFlags|
-StructProperty|HashNext|
-StructProperty|VfTableObject|
+StructProperty|StateFrame|1|8|32|1371
+StructProperty|HashOuterNext|1|8|24|1372
+StructProperty|ObjectFlags|1|8|16|1373
+StructProperty|HashNext|1|8|8|1374
+StructProperty|VfTableObject|1|8|0|1375
 IntProperty|B|1|4|4|-1
-IntProperty|A|1|4|0|1369
+IntProperty|A|1|4|0|1377
 ScriptStruct|Double|
 IntProperty|Value|1|4|0|-1
 ScriptStruct|ThreadSafeCounter|
 IntProperty|MaxBits|1|4|28|-1
-IntProperty|NumBits|1|4|24|1374
-IntProperty|InlineData|4|4|8|1375
-StructProperty|IndirectData|
+IntProperty|NumBits|1|4|24|1382
+IntProperty|InlineData|4|4|8|1383
+StructProperty|IndirectData|1|8|0|1384
 ScriptStruct|BitArray_Mirror|
 IntProperty|Elements|1|4|0|-1
 IntProperty|NumFreeIndices|1|4|52|-1
-IntProperty|FirstFreeIndex|1|4|48|1380
-StructProperty|AllocationFlags|
-ArrayProperty|Elements|
+IntProperty|FirstFreeIndex|1|4|48|1388
+StructProperty|AllocationFlags|1|32|16|1389
+ArrayProperty|Elements|1|16|0|1387
 ScriptStruct|SparseArray_Mirror|
 IntProperty|HashSize|1|4|68|-1
-StructProperty|Hash|
-IntProperty|InlineHash|1|4|56|1386
-StructProperty|Elements|
+StructProperty|Hash|1|8|60|1393
+IntProperty|InlineHash|1|4|56|1394
+StructProperty|Elements|1|56|0|1395
 ScriptStruct|Set_Mirror|
-StructProperty|Pairs|
+StructProperty|Pairs|1|72|0|-1
 ScriptStruct|Map_Mirror|
-StructProperty|Pairs|
+StructProperty|Pairs|1|72|0|-1
 ScriptStruct|MultiMap_Mirror|
 IntProperty|bShouldFreeOnEmpty|1|4|60|-1
-StructProperty|AttachedAr|
-IntProperty|LockStatus|1|4|48|1395
-StructProperty|BulkData|
-IntProperty|SavedBulkDataSizeOnDisk|1|4|36|1397
-IntProperty|SavedBulkDataOffsetInFile|1|4|32|1398
-IntProperty|SavedElementCount|1|4|28|1399
-IntProperty|SavedBulkDataFlags|1|4|24|1400
-IntProperty|BulkDataSizeOnDisk|1|4|20|1401
-IntProperty|BulkDataOffsetInFile|1|4|16|1402
-IntProperty|ElementCount|1|4|12|1403
-IntProperty|BulkDataFlags|1|4|8|1404
-StructProperty|VfTable|
+StructProperty|AttachedAr|1|8|52|1402
+IntProperty|LockStatus|1|4|48|1403
+StructProperty|BulkData|1|8|40|1404
+IntProperty|SavedBulkDataSizeOnDisk|1|4|36|1405
+IntProperty|SavedBulkDataOffsetInFile|1|4|32|1406
+IntProperty|SavedElementCount|1|4|28|1407
+IntProperty|SavedBulkDataFlags|1|4|24|1408
+IntProperty|BulkDataSizeOnDisk|1|4|20|1409
+IntProperty|BulkDataOffsetInFile|1|4|16|1410
+IntProperty|ElementCount|1|4|12|1411
+IntProperty|BulkDataFlags|1|4|8|1412
+StructProperty|VfTable|1|8|0|1413
 ScriptStruct|UntypedBulkData_Mirror|
 IntProperty|NumPendingFences|1|4|0|-1
 ScriptStruct|RenderCommandFence_Mirror|
 IntProperty|NumVertices|1|4|24|-1
-IntProperty|Stride|1|4|20|1410
-IntProperty|Data|1|4|16|1411
-StructProperty|VertexData|
-StructProperty|VfTable|
+IntProperty|Stride|1|4|20|1418
+IntProperty|Data|1|4|16|1419
+StructProperty|VertexData|1|8|8|1420
+StructProperty|VfTable|1|8|0|1421
 ScriptStruct|FColorVertexBuffer_Mirror|
 IntProperty|ArrayMax|1|4|12|-1
-IntProperty|ArrayNum|1|4|8|1416
-StructProperty|Data|
+IntProperty|ArrayNum|1|4|8|1424
+StructProperty|Data|1|8|0|1425
 ScriptStruct|IndirectArray_Mirror|
 IntProperty|ArrayMax|1|4|12|-1
-IntProperty|ArrayNum|1|4|8|1420
-StructProperty|Data|
+IntProperty|ArrayNum|1|4|8|1428
+StructProperty|Data|1|8|0|1429
 ScriptStruct|Array_Mirror|
-StructProperty|SecondaryData|
-StructProperty|InlineData|
+StructProperty|SecondaryData|1|16|8|-1
+StructProperty|InlineData|1|8|0|1432
 ScriptStruct|InlinePointerArray_Mirror|
 IntProperty|D|1|4|12|-1
-IntProperty|C|1|4|8|1427
-IntProperty|B|1|4|4|1428
-IntProperty|A|1|4|0|1429
+IntProperty|C|1|4|8|1435
+IntProperty|B|1|4|4|1436
+IntProperty|A|1|4|0|1437
 ScriptStruct|Guid|
-FloatProperty|Z|
-FloatProperty|Y|
-FloatProperty|X|
+FloatProperty|Z|1|4|8|-1
+FloatProperty|Y|1|4|4|1440
+FloatProperty|X|1|4|0|1441
 ScriptStruct|Vector|
-StructProperty|ReturnValue|
-IntProperty|LastExtreme|1|4|4|1436
-FloatProperty|F|
-Function|GetVectorValue|20|34|26|49 6 0 1e 0 0 0 0 15 49 2 0 25 15 29 9f 5 0 0 29 9e 5 0 0 b 53 |1438
+StructProperty|ReturnValue|1|12|8|-1
+IntProperty|LastExtreme|1|4|4|1444
+FloatProperty|F|1|4|0|1445
+Function|GetVectorValue|20|34|26|49 6 0 1e 0 0 0 0 15 49 2 0 25 15 29 a7 5 0 0 29 a6 5 0 0 b 53 |1446
 Class|DistributionVector|
 DistributionVector|Default__DistributionVector|
-StrProperty|Formats|
-StrProperty|ValidGameNames|
-ArrayProperty|ValidGameNames|
-IntProperty|AutoPriority|1|4|148|1444
-BoolProperty|bText|
-BoolProperty|bEditorImport|
-BoolProperty|bEditAfterNew|
-BoolProperty|bCreateNew|
-ArrayProperty|Formats|
-StrProperty|Description|
+StrProperty|Formats|1|16|0|-1
+StrProperty|ValidGameNames|1|16|0|-1
+ArrayProperty|ValidGameNames|1|16|152|1451
+IntProperty|AutoPriority|1|4|148|1452
+BoolProperty|bText|1|4|144|1453
+BoolProperty|bEditorImport|1|4|144|1454
+BoolProperty|bEditAfterNew|1|4|144|1455
+BoolProperty|bCreateNew|1|4|144|1456
+ArrayProperty|Formats|1|16|128|1450
+StrProperty|Description|1|16|112|1458
 ClassProperty|ContextClass|
 ClassProperty|SupportedClass|
 Class|Factory|
 Factory|Default__Factory|
 IntProperty|ReturnValue|1|4|16|-1
-StrProperty|Params|
-Function|Main|20|11|7|4 3a b1 5 0 0 53 |1457
+StrProperty|Params|1|16|0|1464
+Function|Main|20|11|7|4 3a b9 5 0 0 53 |1465
 Class|HelpCommandlet|
 HelpCommandlet|Default__HelpCommandlet|
 Enum|EInputEvent|
 Enum|EAspectRatioAxisConstraint|
-ByteProperty|A|
-ByteProperty|R|
-ByteProperty|G|
-ByteProperty|B|
+ByteProperty|A|1|1|3|-1
+ByteProperty|R|1|1|2|1471
+ByteProperty|G|1|1|1|1472
+ByteProperty|B|1|1|0|1473
 ScriptStruct|Color|
-FloatProperty|A|
-FloatProperty|B|
-FloatProperty|G|
-FloatProperty|R|
+FloatProperty|A|1|4|12|-1
+FloatProperty|B|1|4|8|1476
+FloatProperty|G|1|4|4|1477
+FloatProperty|R|1|4|0|1478
 ScriptStruct|LinearColor|
-StructProperty|Max|
-StructProperty|Min|
+StructProperty|Max|1|12|12|1484
+StructProperty|Min|1|12|0|1481
 ScriptStruct|Box|
-ByteProperty|IsValid|
-FloatProperty|W|
-FloatProperty|Z|
-FloatProperty|Y|
-FloatProperty|X|
+ByteProperty|IsValid|1|1|24|-1
+FloatProperty|W|1|4|12|-1
+FloatProperty|Z|1|4|8|1485
+FloatProperty|Y|1|4|4|1486
+FloatProperty|X|1|4|0|1487
 ScriptStruct|Vector4|
-FloatProperty|Y|
-FloatProperty|X|
+FloatProperty|Y|1|4|4|-1
+FloatProperty|X|1|4|0|1490
 ScriptStruct|Vector2D|
-StructProperty|v2|
-StructProperty|v1|
+StructProperty|v2|1|12|12|-1
+StructProperty|v1|1|12|0|1493
 ScriptStruct|TwoVectors|
-FloatProperty|W|
+FloatProperty|W|1|4|12|-1
 ScriptStruct|Plane|
 IntProperty|Roll|1|4|8|-1
-IntProperty|Yaw|1|4|4|1490
-IntProperty|Pitch|1|4|0|1491
+IntProperty|Yaw|1|4|4|1498
+IntProperty|Pitch|1|4|0|1499
 ScriptStruct|Rotator|
-FloatProperty|W|
-FloatProperty|Z|
-FloatProperty|Y|
-FloatProperty|X|
+FloatProperty|W|1|4|12|-1
+FloatProperty|Z|1|4|8|1502
+FloatProperty|Y|1|4|4|1503
+FloatProperty|X|1|4|0|1504
 ScriptStruct|Quat|
-ByteProperty|Z|
-ByteProperty|Y|
-ByteProperty|X|
+ByteProperty|Z|1|1|2|1511
+ByteProperty|Y|1|1|1|1507
+ByteProperty|X|1|1|0|1508
 ScriptStruct|PackedNormal|
-ByteProperty|W|
+ByteProperty|W|1|1|3|-1
 IntProperty|Y|1|4|4|-1
-IntProperty|X|1|4|0|1504
+IntProperty|X|1|4|0|1512
 ScriptStruct|IntPoint|
-FloatProperty|Padding|
-FloatProperty|V|
+FloatProperty|Padding|3|4|36|-1
+FloatProperty|V|9|4|0|1515
 ScriptStruct|SHVector|
-StructProperty|B|
-StructProperty|G|
-StructProperty|R|
+StructProperty|B|1|48|96|-1
+StructProperty|G|1|48|48|1518
+StructProperty|R|1|48|0|1519
 ScriptStruct|SHVectorRGB|
-FloatProperty|FOV|
-StructProperty|Rotation|
-StructProperty|Location|
+FloatProperty|FOV|1|4|24|-1
+StructProperty|Rotation|1|12|12|1522
+StructProperty|Location|1|12|0|1523
 ScriptStruct|TPOV|
 Enum|AlphaBlendType|
-FloatProperty|BlendTimeToGo|
-FloatProperty|BlendTime|
-FloatProperty|AlphaTarget|
-FloatProperty|AlphaOut|
-FloatProperty|AlphaIn|
+FloatProperty|BlendTimeToGo|1|4|16|1533
+FloatProperty|BlendTime|1|4|12|1527
+FloatProperty|AlphaTarget|1|4|8|1528
+FloatProperty|AlphaOut|1|4|4|1529
+FloatProperty|AlphaIn|1|4|0|1530
 ScriptStruct|TAlphaBlend|
-ByteProperty|BlendType|
-StructProperty|BoxExtent|
-StructProperty|Origin|
+ByteProperty|BlendType|1|1|20|-1
+StructProperty|BoxExtent|1|12|12|1537
+StructProperty|Origin|1|12|0|1534
 ScriptStruct|BoxSphereBounds|
-FloatProperty|SphereRadius|
-StructProperty|WPlane|
-StructProperty|ZPlane|
-StructProperty|YPlane|
-StructProperty|XPlane|
+FloatProperty|SphereRadius|1|4|24|-1
+StructProperty|WPlane|1|16|48|-1
+StructProperty|ZPlane|1|16|32|1538
+StructProperty|YPlane|1|16|16|1539
+StructProperty|XPlane|1|16|0|1540
 ScriptStruct|Matrix|
-FloatProperty|Radius|
+FloatProperty|Radius|1|4|0|1545
 ScriptStruct|Cylinder|
-FloatProperty|Height|
+FloatProperty|Height|1|4|4|-1
 MetaData|MetaData|
 TextBuffer|CppText|
 TextBuffer|ScriptText|
