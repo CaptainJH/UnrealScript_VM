@@ -3,6 +3,7 @@
 #include "Utils.h"
 #include "UnName.h"
 #include "FArray.h"
+#include "ReflectionInfo.h"
 #include <assert.h>
 #include <iostream>
 #include <array>
@@ -11,6 +12,35 @@ extern UProperty*	GProperty;
 extern BYTE*		GPropAddr;
 extern UObject*		GPropObject;
 extern std::array<Native, 1000> GNatives;
+
+void InitializePrivateStaticClass(class UClass* TClass_Super_StaticClass, class UClass* TClass_PrivateStaticClass/*, class UClass* TClass_WithinClass_StaticClass*/)
+{
+	/* No recursive ::StaticClass calls allowed. Setup extras. */
+	if (TClass_Super_StaticClass != TClass_PrivateStaticClass)
+	{
+		TClass_PrivateStaticClass->SuperStruct = TClass_Super_StaticClass;
+	}
+	else
+	{
+		TClass_PrivateStaticClass->SuperStruct = nullptr;
+	}
+	//TClass_PrivateStaticClass->ClassWithin = TClass_WithinClass_StaticClass;
+	//TClass_PrivateStaticClass->SetClass(UClass::StaticClass());
+
+	/* Perform UObject native registration. */
+	//if (TClass_PrivateStaticClass->GetInitialized() /*&& TClass_PrivateStaticClass->GetClass() == TClass_PrivateStaticClass->StaticClass()*/)
+	{
+		TClass_PrivateStaticClass->Register();
+	}
+}
+
+IMPLEMENT_CLASS(UObject)
+
+std::vector<UClass*> UObject::GObjObjects;
+void UObject::Register()
+{
+
+}
 
 //
 // Registering a native function.

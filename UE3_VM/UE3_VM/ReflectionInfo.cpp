@@ -14,6 +14,12 @@ INT UClass::GetDefaultsCount()
 	return GetPropertiesSize();
 }
 
+UClass::UClass(size_t InSize, size_t flag, size_t castFlag, const char* name)
+{
+	PropertiesSize = InSize;
+	Name = name;
+}
+
 void UProperty::CopySingleValue(void* Dest, void* Src)
 {
 	memcpy(Dest, Src, ElementSize);

@@ -1,6 +1,7 @@
 #pragma once
 
-typedef unsigned char BYTE;
+typedef unsigned char		BYTE;
+typedef wchar_t				TCHAR;
 typedef int	INT;
 typedef unsigned int        UINT;
 typedef float FLOAT;
@@ -18,6 +19,9 @@ typedef SQWORD				PTRINT;		// Integer large enough to hold a pointer.
 typedef WORD				CodeSkipSizeType;
 typedef	QWORD				ScriptPointerType;
 typedef WORD				VariableSizeType;
+
+#define TRUE 1
+#define FALSE 0
 
 //
 // UnrealScript intrinsic return value declaration.

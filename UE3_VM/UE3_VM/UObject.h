@@ -2,6 +2,48 @@
 #include <string>
 #include "Types.h"
 
+#define DECLARE_BASE_CLASS( TClass, TSuperClass, TStaticFlags, TStaticCastFlags) \
+public: \
+	/* Identification */ \
+	enum {StaticClassFlags=TStaticFlags}; \
+	enum {StaticClassCastFlags=TStaticCastFlags}; \
+	private: \
+	static UClass* PrivateStaticClass; \
+	public: \
+	typedef TSuperClass Super;\
+	typedef TClass ThisClass;\
+	static UClass* GetPrivateStaticClass##TClass(); \
+	static void InitializePrivateStaticClass##TClass(); \
+	static UClass* StaticClass() \
+	{ \
+		if (!PrivateStaticClass) \
+		{ \
+			PrivateStaticClass = GetPrivateStaticClass##TClass(); \
+			InitializePrivateStaticClass##TClass(); \
+		} \
+		return PrivateStaticClass; \
+	}
+
+#define IMPLEMENT_CLASS(TClass) \
+	UClass* TClass::PrivateStaticClass = nullptr; \
+	UClass* TClass::GetPrivateStaticClass##TClass() \
+	{ \
+		UClass* ReturnClass; \
+		ReturnClass = new UClass(sizeof(TClass), 0, 0, #TClass);\
+		return ReturnClass; \
+	} \
+	/* Called from ::StaticClass after GetPrivateStaticClass */ \
+	void TClass::InitializePrivateStaticClass##TClass() \
+	{ \
+		InitializePrivateStaticClass( TClass::Super::StaticClass(), TClass::PrivateStaticClass/*, TClass::WithinClass::StaticClass()*/ ); \
+	}
+
+
+/*
+* Shared function called from the various InitializePrivateStaticClass functions generated my the IMPLEMENT_CLASS macro.
+*/
+void InitializePrivateStaticClass(class UClass* TClass_Super_StaticClass, class UClass* TClass_PrivateStaticClass/*, class UClass* TClass_WithinClass_StaticClass*/);
+
 
 struct FFrame;
 class FName;
@@ -9,6 +51,8 @@ class UFunction;
 
 class UObject
 {
+	DECLARE_BASE_CLASS(UObject, UObject, 0, 0)
+
 public:
 	virtual ~UObject() {}
 
@@ -120,5 +164,13 @@ public:
 
 	/** Main script execution stack. */
 	FFrame*					StateFrame;
-	
+
+	void Register();
+	static std::vector<UClass*> GObjObjects;
+
+	std::string Name;
+	UClass* GetClass() const
+	{
+		return StaticClass();
+	}
 };
