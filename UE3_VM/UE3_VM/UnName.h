@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "Types.h"
 
 // Define a message as an enumeration.
 #ifndef REGISTER_NAME
@@ -596,8 +597,18 @@ enum EName
 class FName
 {
 public:
-	FName(int idx=0);
+	FName(int idx = 0);
 	std::string ToString();
+
+	UBOOL operator==(const FName& Other) const
+	{
+		return index == Other.index && number == Other.number;
+	}
+
+	UBOOL operator!=(const FName& Other) const
+	{
+		return index != Other.index || number != Other.number;
+	}
 
 private:
 	int index;

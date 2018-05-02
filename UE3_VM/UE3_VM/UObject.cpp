@@ -1610,3 +1610,15 @@ void UObject::ProcessInternal(FFrame& Stack, RESULT_DECL)
 	Stack.Code++;
 	Stack.Step(Stack.Object, Result);
 }
+
+FString FScriptDelegate::ToString(const UObject* OwnerObject) const
+{
+	const UObject* DelegateObject = Object;
+	if (DelegateObject == NULL)
+	{
+		DelegateObject = OwnerObject;
+	}
+
+	//return DelegateObject->GetPathName() + TEXT(".") + FunctionName.ToString();
+	return "TODO";
+}

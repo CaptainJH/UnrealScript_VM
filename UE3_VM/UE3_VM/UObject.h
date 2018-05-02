@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
+#include <vector>
 #include "Types.h"
+#include "UnName.h"
 
 #define DECLARE_BASE_CLASS( TClass, TSuperClass, TStaticFlags, TStaticCastFlags) \
 public: \
@@ -47,6 +49,7 @@ void InitializePrivateStaticClass(class UClass* TClass_Super_StaticClass, class 
 
 struct FFrame;
 class FName;
+class FString;
 class UFunction;
 
 class UObject
@@ -168,9 +171,61 @@ public:
 	void Register();
 	static std::vector<UClass*> GObjObjects;
 
-	std::string Name;
 	UClass* GetClass() const
 	{
 		return StaticClass();
+	}
+};
+
+enum EEventParm { EC_EventParm };
+/*-----------------------------------------------------------------------------
+FScriptDelegate.
+-----------------------------------------------------------------------------*/
+struct FScriptDelegate
+{
+	UObject* Object;
+	FName FunctionName;
+
+	/** Constructors */
+	/** Default ctor - doesn't initialize any members */
+	FScriptDelegate() {}
+
+	/** Event parm ctor - zeros all members */
+	FScriptDelegate(EEventParm)
+		: Object(NULL), FunctionName(NAME_None)
+	{}
+
+	inline UBOOL IsCallable(const UObject* OwnerObject) const
+	{
+		// if Object is NULL, it means that the delegate was assigned to a member function through defaultproperties; in this case, OwnerObject
+		// will be the object that contains the function referenced by FunctionName.
+		return FunctionName != NAME_None /*&& (Object != NULL ? !Object->IsPendingKill() : (OwnerObject != NULL && !OwnerObject->IsPendingKill()))*/;
+	}
+
+	FString ToString(const UObject* OwnerObject) const;
+
+	//friend FArchive& operator<<(FArchive& Ar, FScriptDelegate& D)
+	//{
+	//	// if the delegate object is cleared by GC, clear the delegate name as well
+	//	//@FIXME: delegates shouldn't work if there is no Object, which would make this code unnecessary
+	//	//			currently this behavior is required by delegates in default properties, which don't set Object correctly
+	//	UBOOL bCheckReferenceElimination = (GIsGarbageCollecting && D.Object != NULL && Ar.IsAllowingReferenceElimination() && D.Object->HasAnyFlags(RF_PendingKill));
+	//	Ar << D.Object << D.FunctionName;
+	//	if (bCheckReferenceElimination && D.Object == NULL)
+	//	{
+	//		D.FunctionName = NAME_None;
+	//	}
+	//	return Ar;
+	//}
+
+	/** Comparison operators */
+	UBOOL operator==(const FScriptDelegate& Other) const
+	{
+		return Object == Other.Object && FunctionName == Other.FunctionName;
+	}
+
+	UBOOL operator!=(const FScriptDelegate& Other) const
+	{
+		return Object != Other.Object || FunctionName != Other.FunctionName;
 	}
 };
