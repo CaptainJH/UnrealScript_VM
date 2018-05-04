@@ -8,7 +8,9 @@
 #include "FArray.h"
 
 extern std::array<Native, 1000> GNatives;
+extern std::array<Native, 1000> GCasts;
 INT GNativeDuplicate = 0;
+INT GCastDuplicate = 0;
 
 UProperty*				GProperty = NULL;
 BYTE*					GPropAddr = NULL;						/* Property address for UnrealScript interpreter */
@@ -36,6 +38,24 @@ BYTE GRegisterNative(INT iNative, const Native& Func)
 		if (iNative<0U || (unsigned int)iNative > GNatives.size() || GNatives[iNative] != &UObject::execUndefined)
 			GNativeDuplicate = iNative;
 		GNatives[iNative] = Func;
+	}
+	return 0;
+}
+
+BYTE GRegisterCast(INT CastCode, const Native& Func)
+{
+	static int Initialized = 0;
+	if (!Initialized)
+	{
+		Initialized = 1;
+		for (DWORD i = 0; i<(GCasts.size()); i++)
+			GCasts[i] = &UObject::execUndefined;
+	}
+	if (CastCode != INDEX_NONE)
+	{
+		if (CastCode<0 || (DWORD)CastCode>(GCasts.size()) || GCasts[CastCode] != &UObject::execUndefined)
+			GCastDuplicate = CastCode;
+		GCasts[CastCode] = Func;
 	}
 	return 0;
 }

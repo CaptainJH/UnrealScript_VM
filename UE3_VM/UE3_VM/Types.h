@@ -2,6 +2,7 @@
 
 typedef unsigned char		BYTE;
 typedef wchar_t				TCHAR;
+typedef wchar_t				UNICHAR;
 typedef int	INT;
 typedef unsigned int        UINT;
 typedef float FLOAT;

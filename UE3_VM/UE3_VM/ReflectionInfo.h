@@ -76,6 +76,8 @@
 
 #define CPF_AllFlags				DECLARE_UINT64(0xFFFFFFFFFFFFFFFF)
 
+class UProperty;
+
 class UField : public UObject
 {
 public:
@@ -99,6 +101,13 @@ public:
 	UStruct*			SuperStruct;
 
 	UField*				Children = nullptr;
+
+	UProperty*			ConstructorLink;
+
+	UStruct* GetSuperStruct() const
+	{
+		return SuperStruct;
+	}
 };
 
 class UScriptStruct : public UStruct
@@ -114,6 +123,14 @@ public:
 
 	INT GetDefaultsCount();
 
+	UBOOL IsChildOf(const UStruct* SomeBase) const
+	{
+		for (const UStruct* Struct = this; Struct; Struct = Struct->GetSuperStruct())
+			if (Struct == SomeBase)
+				return 1;
+		return 0;
+	}
+
 };
 
 class UFunction : public UStruct
@@ -123,6 +140,8 @@ public:
 	int ParamSize;
 	int ReturnValueOffset;
 	int BytecodeScriptSize;
+
+	UProperty* GetReturnProperty();
 };
 
 class UEnum : public UField
@@ -139,6 +158,9 @@ public:
 	INT ElementSize;
 
 	int PropertySize;
+
+	QWORD PropertyFlags;
+	UProperty*	ConstructorLinkNext;
 
 	virtual void CopySingleValue(void* Dest, void* Src);
 	virtual void CopyCompleteValue(void* Dest, void* Src); 
@@ -192,4 +214,17 @@ class UStructProperty : public UProperty
 {
 public:
 
+};
+
+class UDelegateProperty : public UProperty
+{
+public:
+	/** Function this delegate is mapped to */
+	UFunction* Function;
+
+	/**
+	* If this DelegateProperty corresponds to an actual delegate variable (as opposed to the hidden property the script compiler creates when you declare a delegate function)
+	* points to the source delegate function (the function declared with the delegate keyword) used in the declaration of this delegate property.
+	*/
+	UFunction* SourceDelegate;
 };

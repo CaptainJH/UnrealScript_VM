@@ -12,6 +12,7 @@ extern UProperty*	GProperty;
 extern BYTE*		GPropAddr;
 extern UObject*		GPropObject;
 extern std::array<Native, 1000> GNatives;
+extern std::array<Native, 1000> GCasts;
 
 void InitializePrivateStaticClass(class UClass* TClass_Super_StaticClass, class UClass* TClass_PrivateStaticClass/*, class UClass* TClass_WithinClass_StaticClass*/)
 {
@@ -49,10 +50,21 @@ void UObject::Register()
 	extern "C" { Native int##cls##func = (Native)&cls::func; } \
 	static BYTE cls##func##Temp = GRegisterNative( num, int##cls##func );
 
-#define P_GET_INT(var)                     INT   var=0;                                            Stack.Step( Stack.Object, &var    );
+#define IMPLEMENT_CAST_FUNCTION(cls,num,func) \
+		IMPLEMENT_FUNCTION(cls,-1,func); \
+		static BYTE cls##func##CastTemp = GRegisterCast( num, int##cls##func );
+
+#define INIT_OPTX_EVAL GRuntimeUCFlags&=~RUC_SkippedOptionalParm;
+
+#define P_GET_INT(var)                     INT   var=0;												Stack.Step( Stack.Object, &var    );
 #define P_GET_NAME(var)                    FName var(-1);											Stack.Step( Stack.Object, &var    );
 #define P_FINISH                           Stack.Code++;
-#define P_GET_INT_REF(var)                 INT   var##T=0; GPropAddr=0;                            Stack.Step( Stack.Object, &var##T ); INT*     p##var = (INT    *)GPropAddr; INT&     var = GPropAddr ? *(INT    *)GPropAddr:var##T;
+#define P_GET_INT_REF(var)                 INT   var##T=0; GPropAddr=0;								Stack.Step( Stack.Object, &var##T ); INT*     p##var = (INT    *)GPropAddr; INT&     var = GPropAddr ? *(INT    *)GPropAddr:var##T;
+
+#define P_GET_DELEGATE(var)                FScriptDelegate var(EC_EventParm);						Stack.Step( Stack.Object, &var    );
+#define P_GET_DELEGATE_OPTX(var,def)       FScriptDelegate var=def;                 INIT_OPTX_EVAL	Stack.Step( Stack.Object, &var    );
+#define P_GET_DELEGATE_REF(var)            FScriptDelegate var##T(EC_EventParm); GPropAddr=0;		Stack.Step( Stack.Object, &var##T ); FScriptDelegate* p##var = (FScriptDelegate*)GPropAddr; FScriptDelegate& var = GPropAddr ? *(FScriptDelegate*)GPropAddr:var##T;
+#define P_GET_DELEGATE_OPTX_REF(var,def)   FScriptDelegate var##T=def; GPropAddr=0; INIT_OPTX_EVAL	Stack.Step( Stack.Object, &var##T ); FScriptDelegate* p##var = (FScriptDelegate*)GPropAddr; FScriptDelegate& var = GPropAddr ? *(FScriptDelegate*)GPropAddr:var##T;
 
 //
 // Iterator macros.
@@ -908,6 +920,18 @@ void UObject::execStringConst(FFrame& Stack, RESULT_DECL)
 }
 IMPLEMENT_FUNCTION(UObject, EX_StringConst, execStringConst);
 
+void UObject::execUnicodeStringConst(FFrame& Stack, RESULT_DECL)
+{
+	*(FString*)Result = FString((UNICHAR*)Stack.Code);
+
+	while (*(WORD*)Stack.Code)
+	{
+		Stack.Code += sizeof(WORD);
+	}
+	Stack.Code += sizeof(WORD);
+}
+IMPLEMENT_FUNCTION(UObject, EX_UnicodeStringConst, execUnicodeStringConst);
+
 
 void UObject::execObjectConst(FFrame& Stack, RESULT_DECL)
 {
@@ -1562,6 +1586,192 @@ void UObject::execAddAdd_PreInt(FFrame& Stack, RESULT_DECL)
 }
 IMPLEMENT_FUNCTION(UObject, 163, execAddAdd_PreInt);
 
+/////////////////////////
+// Delegate comparison //
+/////////////////////////
+void UObject::execEqualEqual_DelegateDelegate(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_DELEGATE(A);
+	P_GET_DELEGATE(B);
+	P_FINISH;			// required because the compiler emits a EX_EndFunctionParms token for this bytecode
+	if (A.Object == NULL && A.FunctionName != NAME_None)
+	{
+		A.Object = this;
+	}
+	if (B.Object == NULL && B.FunctionName != NAME_None)
+	{
+		B.Object = this;
+	}
+	*(UBOOL*)Result = (A == B);
+}
+IMPLEMENT_FUNCTION(UObject, EX_EqualEqual_DelDel, execEqualEqual_DelegateDelegate);
+
+void UObject::execNotEqual_DelegateDelegate(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_DELEGATE(A);
+	P_GET_DELEGATE(B);
+	P_FINISH;			// required because the compiler emits a EX_EndFunctionParms token for this bytecode
+	if (A.Object == NULL && A.FunctionName != NAME_None)
+	{
+		A.Object = this;
+	}
+	if (B.Object == NULL && B.FunctionName != NAME_None)
+	{
+		B.Object = this;
+	}
+	*(UBOOL*)Result = (A != B);
+}
+IMPLEMENT_FUNCTION(UObject, EX_NotEqual_DelDel, execNotEqual_DelegateDelegate);
+
+void UObject::execEqualEqual_DelegateFunction(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_DELEGATE(A);
+	P_GET_DELEGATE(B);
+	P_FINISH;			// required because the compiler emits a EX_EndFunctionParms token for this bytecode
+	if (A.Object == NULL && A.FunctionName != NAME_None)
+	{
+		A.Object = this;
+	}
+	if (B.Object == NULL && B.FunctionName != NAME_None)
+	{
+		B.Object = this;
+	}
+	*(UBOOL*)Result = (A == B);
+}
+IMPLEMENT_FUNCTION(UObject, EX_EqualEqual_DelFunc, execEqualEqual_DelegateFunction);
+
+void UObject::execNotEqual_DelegateFunction(FFrame& Stack, RESULT_DECL)
+{
+	P_GET_DELEGATE(A);
+	P_GET_DELEGATE(B);
+	P_FINISH;			// required because the compiler emits a EX_EndFunctionParms token for this bytecode
+	if (A.Object == NULL && A.FunctionName != NAME_None)
+	{
+		A.Object = this;
+	}
+	if (B.Object == NULL && B.FunctionName != NAME_None)
+	{
+		B.Object = this;
+	}
+	*(UBOOL*)Result = (A != B);
+}
+IMPLEMENT_FUNCTION(UObject, EX_NotEqual_DelFunc, execNotEqual_DelegateFunction);
+
+void UObject::execEmptyDelegate(FFrame& Stack, RESULT_DECL)
+{
+	((FScriptDelegate*)Result)->Object = NULL;
+	((FScriptDelegate*)Result)->FunctionName = NAME_None;
+}
+IMPLEMENT_FUNCTION(UObject, EX_EmptyDelegate, execEmptyDelegate);
+
+
+///////////////////////
+// Delegates         //
+///////////////////////
+
+void UObject::execDelegateFunction(FFrame& Stack, RESULT_DECL)
+{
+	BYTE bLocalProp = *(BYTE*)Stack.Code;
+	Stack.Code += sizeof(BYTE);
+
+	// Look up delegate property.
+	UDelegateProperty* DelegateProperty = (UDelegateProperty*)Stack.ReadObject();
+	assert(DelegateProperty);
+	//assert(DelegateProperty->IsA(UDelegateProperty::StaticClass()));
+
+	// read the delegate info
+	FScriptDelegate* Delegate = NULL;
+	if (bLocalProp)
+	{
+		// read off the stack 
+		Delegate = (FScriptDelegate*)(Stack.Locals + DelegateProperty->Offset);
+	}
+	else
+	{
+		// read off the object
+		Delegate = (FScriptDelegate*)((BYTE*)this + DelegateProperty->Offset);
+	}
+	FName DelegateName = Stack.ReadName();
+	if (Delegate->Object /*&& Delegate->Object->IsPendingKill()*/)
+	{
+		// disallow delegates being called on deleted objects
+		Delegate->Object = NULL;
+		Delegate->FunctionName = NAME_None;
+	}
+	if (Delegate->Object != NULL)
+	{
+		// attempt to call the delegate in the specified object
+		Delegate->Object->CallFunction(Stack, Result, Delegate->Object->FindFunctionChecked(Delegate->FunctionName));
+	}
+	else if (Delegate->FunctionName != NAME_None)
+	{
+		// attempt to call the delegate in this object
+		CallFunction(Stack, Result, FindFunctionChecked(Delegate->FunctionName));
+	}
+	// if we are calling a delegate function (not a delegate property), invoke the default implementation
+	else if (DelegateProperty->SourceDelegate == NULL)
+	{
+		// default to the original default delegate
+		CallFunction(Stack, Result, FindFunctionChecked(DelegateName));
+	}
+	else
+	{
+		// attempt to call a function through a delegate property, but the value is NULL
+		// technically, we could call the default implementation if the property is using a delegate function
+		// declared in this class's heirarchy, but the difference would likely be confusing and cause unexpected bugs,
+		// so we always fail instead
+		//Stack.Logf(NAME_ScriptWarning, TEXT("Attempt to call None through delegate property '%s'"), *DelegateProperty->GetName());
+		SkipFunction(Stack, Result, DelegateProperty->SourceDelegate);
+	}
+}
+IMPLEMENT_FUNCTION(UObject, EX_DelegateFunction, execDelegateFunction);
+
+void UObject::execDelegateProperty(FFrame& Stack, RESULT_DECL)
+{
+	FName FunctionName = Stack.ReadName();
+	UDelegateProperty* DelegateProp = (UDelegateProperty*)Stack.ReadObject();
+	assert(DelegateProp == NULL /*|| DelegateProp->IsA(UDelegateProperty::StaticClass())*/);
+
+	// if DelegateProp != NULL, we're assigning a delegate to another delegate
+	// in this case, if the source delegate has a function assigned already, assign that function to the destination delegate as well
+	// otherwise, assign the source delegate's default body to the destination delegate
+	if (DelegateProp != NULL && ((FScriptDelegate*)((BYTE*)this + DelegateProp->Offset))->IsCallable(NULL))
+	{
+		*(FScriptDelegate*)Result = *(FScriptDelegate*)((BYTE*)this + DelegateProp->Offset);
+	}
+	else
+	{
+		((FScriptDelegate*)Result)->FunctionName = FunctionName;
+		((FScriptDelegate*)Result)->Object = (FunctionName == NAME_None) ? NULL : this;
+	}
+}
+IMPLEMENT_FUNCTION(UObject, EX_DelegateProperty, execDelegateProperty);
+
+void UObject::execLetDelegate(FFrame& Stack, RESULT_DECL)
+{
+	// Get variable address.
+	GPropAddr = NULL;
+	GProperty = NULL;
+	GPropObject = NULL;
+	Stack.Step(Stack.Object, NULL); // Variable.
+	FScriptDelegate* DelegateAddr = (FScriptDelegate*)GPropAddr;
+	FScriptDelegate Delegate;
+	Stack.Step(Stack.Object, &Delegate);
+	if (DelegateAddr)
+	{
+		DelegateAddr->FunctionName = Delegate.FunctionName;
+		DelegateAddr->Object = Delegate.Object;
+	}
+}
+IMPLEMENT_FUNCTION(UObject, EX_LetDelegate, execLetDelegate);
+
+void UObject::execInstanceDelegate(FFrame& Stack, RESULT_DECL)
+{
+	((FScriptDelegate*)Result)->FunctionName = Stack.ReadName();
+	((FScriptDelegate*)Result)->Object = this;
+}
+IMPLEMENT_FUNCTION(UObject, EX_InstanceDelegate, execInstanceDelegate);
+
 void UObject::CallFunction(FFrame& Stack, RESULT_DECL, UFunction* Function)
 {
 	// Make new stack frame in the current context.
@@ -1592,12 +1802,77 @@ void UObject::CallFunction(FFrame& Stack, RESULT_DECL, UFunction* Function)
 	ProcessInternal(NewStack, Result);
 }
 
-UFunction* UObject::FindFunction(FName& name)
+void UObject::execDebugInfo(FFrame& Stack, RESULT_DECL) //DEBUGGER
+{
+	INT DebugToken = Stack.ReadInt();
+
+	// We check for this to guarantee that we don't attempt to call GDebugger->DebugInfo in situations where
+	// the next byte in the stream happened to be the same value as EX_DebugInfo, even though it isn't a real
+	// debug opcode.  This often happens when running with release mode script where the next byte in the stream
+	// is part of e.g. a pointer address.
+	if (DebugToken != 100)
+	{
+		Stack.Code -= sizeof(INT);
+		Stack.Code--;
+		return;
+	}
+
+	INT LineNumber = Stack.ReadInt();
+	INT InputPos = Stack.ReadInt();
+	BYTE OpCode = *Stack.Code++;
+
+	// Only valid when the debugger is running.
+	assert(false);
+	//if (GDebugger != NULL)
+	//	GDebugger->DebugInfo(this, &Stack, OpCode, LineNumber, InputPos);
+}
+IMPLEMENT_FUNCTION(UObject, EX_DebugInfo, execDebugInfo);
+
+
+void UObject::execMetaCast(FFrame& Stack, RESULT_DECL)
+{
+	UClass* MetaClass = (UClass*)Stack.ReadObject();
+
+	// Compile actor expression.
+	UObject* Castee = NULL;
+	Stack.Step(Stack.Object, &Castee);
+	*(UObject**)Result = (Castee && Castee->IsA(UClass::StaticClass()) && ((UClass*)Castee)->IsChildOf(MetaClass)) ? Castee : NULL;
+}
+IMPLEMENT_FUNCTION(UObject, EX_MetaCast, execMetaCast);
+
+
+void UObject::execPrimitiveCast(FFrame& Stack, RESULT_DECL)
+{
+	INT B = *(Stack.Code)++;
+	(Stack.Object->*GCasts[B])(Stack, Result);
+}
+IMPLEMENT_FUNCTION(UObject, EX_PrimitiveCast, execPrimitiveCast);
+
+
+void UObject::execByteToInt(FFrame& Stack, RESULT_DECL)
+{
+	BYTE B = 0;
+	Stack.Step(Stack.Object, &B);
+	*(INT*)Result = B;
+}
+IMPLEMENT_CAST_FUNCTION(UObject, CST_ByteToInt, execByteToInt);
+
+UFunction* UObject::FindFunction(FName name, UBOOL Global) const
 {
 	auto id = ScriptRuntimeContext::Get()->FindIndex(name.ToString());
 	auto ret = static_cast<UFunction*>(ScriptRuntimeContext::Get()->IndexToObject(id));
 	ret->Script = ScriptSerialize(ret->ScriptStorage, ret->BytecodeScriptSize);
 	return ret;
+}
+
+UFunction* UObject::FindFunctionChecked(FName InName, UBOOL Global) const
+{
+	UFunction* Result = FindFunction(InName, Global);
+	if (!Result)
+	{
+		//appErrorf(TEXT("Failed to find function %s in %s"), *InName.ToString(), *GetFullName());
+	}
+	return Result;
 }
 
 void UObject::ProcessInternal(FFrame& Stack, RESULT_DECL)
@@ -1609,6 +1884,79 @@ void UObject::ProcessInternal(FFrame& Stack, RESULT_DECL)
 		Stack.Step(Stack.Object, Buffer);
 	Stack.Code++;
 	Stack.Step(Stack.Object, Result);
+}
+
+
+/** advances Stack's code past the parameters to the given Function and if the function has a return value, copies the zero value for that property to the memory for the return value
+* @param Stack the script stack frame
+* @param Result pointer to where the return value should be written
+* @param Function the function being called
+*/
+void UObject::SkipFunction(FFrame& Stack, RESULT_DECL, UFunction* Function)
+{
+	// allocate temporary memory on the stack for evaluating parameters
+	BYTE* Frame = (BYTE*)malloc(Function->PropertiesSize);
+	memset(Frame, 0, Function->PropertiesSize);
+	for (UProperty* Property = (UProperty*)Function->Children; *Stack.Code != EX_EndFunctionParms; Property = (UProperty*)Property->Next)
+	{
+		GPropAddr = NULL;
+		GPropObject = NULL;
+		// evaluate the expression into our temporary memory space
+		// it'd be nice to be able to skip the copy, but most native functions assume a non-NULL Result pointer
+		// so we can only do that if we know the expression is an l-value (out parameter)
+		Stack.Step(Stack.Object, (Property->PropertyFlags & CPF_OutParm) ? NULL : Frame + Property->Offset);
+	}
+	// advance the code past EX_EndFunctionParms
+	Stack.Code++;
+#if !CONSOLE // no script debugger on console
+	// check for debug info
+	if (*Stack.Code == EX_DebugInfo)
+	{
+		Stack.Step(Stack.Object, NULL);
+	}
+#endif
+	// destruct properties requiring it for which we had to use our temporary memory 
+	// @warning: conditions for skipping DestroyValue() here must match conditions for passing NULL to Stack.Step() above
+	for (UProperty* Destruct = Function->ConstructorLink; Destruct; Destruct = Destruct->ConstructorLinkNext)
+	{
+		if (!(Destruct->PropertyFlags & CPF_OutParm))
+		{
+			Destruct->DestroyValue(Frame + Destruct->Offset);
+		}
+	}
+
+	UProperty* ReturnProp = Function->GetReturnProperty();
+	if (ReturnProp != NULL)
+	{
+		// destroy old value if necessary
+		if (ReturnProp->PropertyFlags & CPF_NeedCtorLink)
+		{
+			ReturnProp->DestroyValue(Result);
+		}
+		// copy zero value for return property into Result
+		memset(Result, 0, ReturnProp->ArrayDim * ReturnProp->ElementSize);
+	}
+}
+
+/**
+* @return	TRUE if this object is of the specified type.
+*/
+inline UBOOL UObject::IsA(const UClass* SomeBase) const
+{
+	if (SomeBase == NULL)
+	{
+		return TRUE;
+	}
+
+	for (UClass* TempClass = Class; TempClass; TempClass = static_cast<UClass*>(TempClass->SuperStruct))
+	{
+		if (TempClass == SomeBase)
+		{
+			return TRUE;
+		}
+	}
+
+	return FALSE;
 }
 
 FString FScriptDelegate::ToString(const UObject* OwnerObject) const

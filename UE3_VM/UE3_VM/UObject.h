@@ -114,6 +114,7 @@ public:
 	DECLARE_FUNCTION(execNoObject);
 	DECLARE_FUNCTION(execNameConst);
 	DECLARE_FUNCTION(execStringConst);
+	DECLARE_FUNCTION(execUnicodeStringConst);
 
 	DECLARE_FUNCTION(execBoolVariable);
 
@@ -159,11 +160,47 @@ public:
 	DECLARE_FUNCTION(execSubtractEqual_IntInt);
 	DECLARE_FUNCTION(execAddAdd_PreInt);
 
+	DECLARE_FUNCTION(execEqualEqual_DelegateDelegate);
+	DECLARE_FUNCTION(execNotEqual_DelegateDelegate);
+	DECLARE_FUNCTION(execEqualEqual_DelegateFunction);
+	DECLARE_FUNCTION(execNotEqual_DelegateFunction);
+	DECLARE_FUNCTION(execEmptyDelegate);
+	DECLARE_FUNCTION(execDelegateFunction);
+	DECLARE_FUNCTION(execDelegateProperty);
+	DECLARE_FUNCTION(execLetDelegate);
+
+	DECLARE_FUNCTION(execInstanceDelegate);
+
+	DECLARE_FUNCTION(execDebugInfo);
+
+	DECLARE_FUNCTION(execMetaCast);
+	DECLARE_FUNCTION(execPrimitiveCast);
+
+	DECLARE_FUNCTION(execByteToInt);
+
 	void CallFunction(FFrame& Stack, RESULT_DECL, UFunction* Function); 
-	UFunction* FindFunction(FName& name);
+	UFunction* FindFunction(FName name, UBOOL Global = 0) const;
+	UFunction* FindFunctionChecked(FName InName, UBOOL Global = 0) const;
 	void ProcessInternal(FFrame& Stack, RESULT_DECL);
 
+
+	/** advances Stack's code past the parameters to the given Function and if the function has a return value, copies the zero value for that property to the memory for the return value
+	* @param Stack the script stack frame
+	* @param Result pointer to where the return value should be written
+	* @param Function the function being called
+	*/
+	void SkipFunction(FFrame& Stack, RESULT_DECL, UFunction* Function);
+
+
+	/**
+	* @return	TRUE if this object is of the specified type.
+	*/
+	UBOOL IsA(const UClass* SomeBaseClass) const;
+
 	std::string Name;
+
+	/** Class the object belongs to. */
+	UClass*		Class;
 
 	/** Main script execution stack. */
 	FFrame*					StateFrame;

@@ -31,7 +31,7 @@ enum EExprToken
 		EX_DynArrayElement = 0x10, // Dynamic array element.!! 
 		EX_New = 0x11, //? New object allocation.
 		EX_ClassContext = 0x12, //? Class default metaobject context.
-		EX_MetaCast = 0x13, //? Metaclass cast.
+		EX_MetaCast = 0x13, // Metaclass cast.
 		EX_LetBool = 0x14, // Let boolean variable.
 		EX_EndParmValue = 0x15,	// end of default value for optional function parameter
 		EX_EndFunctionParms = 0x16,	// End of function call parameters.
@@ -64,30 +64,30 @@ enum EExprToken
 		EX_IteratorNext = 0x31, // Go to next iteration.
 		EX_StructCmpEq = 0x32,	// Struct binary compare-for-equal.
 		EX_StructCmpNe = 0x33,	// Struct binary compare-for-unequal.
-		EX_UnicodeStringConst = 0x34, //? Unicode string constant.
+		EX_UnicodeStringConst = 0x34, // Unicode string constant.
 		EX_StructMember = 0x35, // Struct member.
 		EX_DynArrayLength = 0x36,	// A dynamic array length for setting/getting
 		EX_GlobalFunction = 0x37, // Call non-state version of a function.
-		EX_PrimitiveCast = 0x38,	//? A casting operator for primitives which reads the type as the subsequent byte
+		EX_PrimitiveCast = 0x38,	// A casting operator for primitives which reads the type as the subsequent byte
 		EX_DynArrayInsert = 0x39,	// Inserts into a dynamic array
 		EX_ReturnNothing = 0x3A, // failsafe for functions that return a value - returns the zero value for a property and logs that control reached the end of a non-void function
-		EX_EqualEqual_DelDel = 0x3B,	//? delegate comparison for equality
-		EX_NotEqual_DelDel = 0x3C, //? delegate comparison for inequality
-		EX_EqualEqual_DelFunc = 0x3D,	//? delegate comparison for equality against a function
-		EX_NotEqual_DelFunc = 0x3E,	//? delegate comparison for inequality against a function
-		EX_EmptyDelegate = 0x3F,	//? delegate 'None'
+		EX_EqualEqual_DelDel = 0x3B,	// delegate comparison for equality
+		EX_NotEqual_DelDel = 0x3C, // delegate comparison for inequality
+		EX_EqualEqual_DelFunc = 0x3D,	// delegate comparison for equality against a function
+		EX_NotEqual_DelFunc = 0x3E,	// delegate comparison for inequality against a function
+		EX_EmptyDelegate = 0x3F,	// delegate 'None'
 		EX_DynArrayRemove = 0x40,	// Removes from a dynamic array
-		EX_DebugInfo = 0x41,	//?DEBUGGER Debug information
-		EX_DelegateFunction = 0x42, //? Call to a delegate function
-		EX_DelegateProperty = 0x43, //? Delegate expression
-		EX_LetDelegate = 0x44, //? Assignment to a delegate
+		EX_DebugInfo = 0x41,	//DEBUGGER Debug information
+		EX_DelegateFunction = 0x42, // Call to a delegate function
+		EX_DelegateProperty = 0x43, // Delegate expression
+		EX_LetDelegate = 0x44, // Assignment to a delegate
 		EX_Conditional = 0x45, // tertiary operator support
 		EX_DynArrayFind = 0x46, // dynarray search for item index
 		EX_DynArrayFindStruct = 0x47, //? dynarray<struct> search for item index
 		EX_LocalOutVariable = 0x48, // local out (pass by reference) function parameter
 		EX_DefaultParmValue = 0x49,	// default value of optional function parameter
 		EX_EmptyParmValue = 0x4A,	// unspecified value for optional function parameter
-		EX_InstanceDelegate = 0x4B,	//? const reference to a delegate or normal function object
+		EX_InstanceDelegate = 0x4B,	// const reference to a delegate or normal function object
 
 
 
@@ -107,6 +107,50 @@ enum EExprToken
 			EX_ExtendedNative = 0x60,
 			EX_FirstNative = 0x70,
 			EX_Max = 0x1000,
+};
+
+enum ECastToken
+{
+	CST_InterfaceToObject = 0x36,
+	CST_InterfaceToString = 0x37,
+	CST_InterfaceToBool = 0x38,
+	CST_RotatorToVector = 0x39,
+	CST_ByteToInt = 0x3A,
+	CST_ByteToBool = 0x3B,
+	CST_ByteToFloat = 0x3C,
+	CST_IntToByte = 0x3D,
+	CST_IntToBool = 0x3E,
+	CST_IntToFloat = 0x3F,
+	CST_BoolToByte = 0x40,
+	CST_BoolToInt = 0x41,
+	CST_BoolToFloat = 0x42,
+	CST_FloatToByte = 0x43,
+	CST_FloatToInt = 0x44,
+	CST_FloatToBool = 0x45,
+	CST_ObjectToInterface = 0x46,
+	CST_ObjectToBool = 0x47,
+	CST_NameToBool = 0x48,
+	CST_StringToByte = 0x49,
+	CST_StringToInt = 0x4A,
+	CST_StringToBool = 0x4B,
+	CST_StringToFloat = 0x4C,
+	CST_StringToVector = 0x4D,
+	CST_StringToRotator = 0x4E,
+	CST_VectorToBool = 0x4F,
+	CST_VectorToRotator = 0x50,
+	CST_RotatorToBool = 0x51,
+	CST_ByteToString = 0x52,
+	CST_IntToString = 0x53,
+	CST_BoolToString = 0x54,
+	CST_FloatToString = 0x55,
+	CST_ObjectToString = 0x56,
+	CST_NameToString = 0x57,
+	CST_VectorToString = 0x58,
+	CST_RotatorToString = 0x59,
+	CST_DelegateToString = 0x5A,
+	// 	CST_StringToDelegate	= 0x5B,
+	CST_StringToName = 0x60,
+	CST_Max = 0xFF,
 };
 
 enum EPropertyType
@@ -133,6 +177,8 @@ enum EPropertyType
 };
 
 BYTE GRegisterNative(INT iNative, const Native& Func);
+
+BYTE GRegisterCast(INT CastCode, const Native& Func);
 
 std::vector<BYTE> ScriptSerialize(std::vector<BYTE>& scriptIn, size_t BytecodeSize);
 

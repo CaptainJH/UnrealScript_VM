@@ -1,4 +1,5 @@
 #include "ReflectionInfo.h"
+#include <assert.h>
 
 INT UStruct::GetPropertiesSize() const
 {
@@ -18,6 +19,19 @@ UClass::UClass(size_t InSize, size_t flag, size_t castFlag, const char* name)
 {
 	PropertiesSize = InSize;
 	Name = name;
+}
+
+UProperty* UFunction::GetReturnProperty()
+{
+	assert(false);
+	//for (TFieldIterator<UProperty> It(this); It && (It->PropertyFlags & CPF_Parm); ++It)
+	//{
+	//	if (It->PropertyFlags & CPF_ReturnParm)
+	//	{
+	//		return *It;
+	//	}
+	//}
+	return NULL;
 }
 
 void UProperty::CopySingleValue(void* Dest, void* Src)

@@ -6,6 +6,7 @@
 #include "UnScript.h"
 
 std::array<Native, 1000> GNatives;
+std::array<Native, 1000> GCasts;
 
 FFrame::FFrame(UObject* InObject)
 	: Node(nullptr)

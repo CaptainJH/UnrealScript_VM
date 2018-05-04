@@ -116,6 +116,7 @@ class FString : public TArray<char>
 public:
 	FString();
 	FString(const char* In);
+	FString(const TCHAR* In);
 
 	std::string ToStdString() const;
 };
